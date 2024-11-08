@@ -4,5 +4,6 @@ module com.example.sdaprojectsocialmediaapp {
 
 
     opens com.example.sdaprojectsocialmediaapp to javafx.fxml;
-    exports com.example.sdaprojectsocialmediaapp;
+//    exports com.example.sdaprojectsocialmediaapp.Frontend;
+    exports com.example.sdaprojectsocialmediaapp.models;
 }
