@@ -1,6 +1,6 @@
 package com.example.sdaprojectsocialmediaapp.models;
 
-import com.example.sdaprojectsocialmediaapp.controllers.RegisterCont;
+import com.example.sdaprojectsocialmediaapp.controllers.LoginCont;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,16 +11,16 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class RegisterApp extends Application {
+public class LoginApp extends Application {
     private final String styles;
     private final Image logo;
     private final FXMLLoader loader;
-    private RegisterCont controller;
+    private LoginCont controller;
 
-    public RegisterApp() throws IOException {
+    public LoginApp() throws IOException {
         this.styles = Objects.requireNonNull(this.getClass().getResource("/css/register.css")).toExternalForm();
         logo = new Image(Objects.requireNonNull(this.getClass().getResource("/images/logo.png")).toExternalForm());
-        this.loader = new FXMLLoader(getClass().getResource("/fxml/register.fxml"));
+        this.loader = new FXMLLoader(this.getClass().getResource("/fxml/login.fxml"));
         controller = null;
     }
 

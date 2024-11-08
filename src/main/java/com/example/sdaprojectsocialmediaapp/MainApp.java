@@ -1,4 +1,5 @@
 package com.example.sdaprojectsocialmediaapp;
+import com.example.sdaprojectsocialmediaapp.models.LoginApp;
 import com.example.sdaprojectsocialmediaapp.models.RegisterApp;
 import javafx.application.Application;
 
