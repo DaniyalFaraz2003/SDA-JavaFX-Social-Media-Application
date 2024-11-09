@@ -1,0 +1,50 @@
+/*--blue: #00a2ff;*/
+/*--darkBlue: #0088d6;*/
+
+#sideBar {
+    -fx-background-color: #00a2ff;
+    -fx-padding: 20px;
+}
+
+#pageTitle {
+    -fx-text-fill: white;
+    -fx-font-size: 34px;
+    -fx-font-weight: 700;
+    -fx-alignment: center;
+    -fx-pref-width: 390;
+    -fx-font-family: "Roboto Light";
+}
+
+#form {
+    -fx-padding: 50px;
+}
+
+#formTitle {
+    -fx-font-family: "Roboto Light";
+    -fx-font-weight: bold;
+    -fx-font-size: 30px;
+}
+
+#regBtn {
+    -fx-background-color: #00a2ff;
+    -fx-padding: 10px 20px;
+    -fx-font-size: 16px;
+}
+
+#regBtn:hover {
+    -fx-background-color: #0088d6;
+}
+
+.inputLabel,
+.linkLabel {
+    -fx-font-size: 14px;
+}
+
+#sideBarTagline {
+    -fx-font-size: 16px;
+    -fx-font-weight: 700;
+}
+
+.input {
+    -fx-font-size: 14px;
+}

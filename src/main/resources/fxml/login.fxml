@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaprojectsocialmediaapp.controllers.LoginCont">
+   <children>
+      <Pane id="sideBar" prefHeight="750.0" prefWidth="390.0" stylesheets="@../css/register.css">
+         <children>
+            <Label id="pageTitle" layoutY="341.0" stylesheets="@../css/register.css" text="Welcome To FASTBook">
+               <font>
+                  <Font name="Bodoni MT" size="6.0" />
+               </font>
+            </Label>
+            <Label id="sideBarTagline" layoutX="9.0" layoutY="416.0" stylesheets="@../css/register.css" text="&quot;Connect, Share, and Explore with FAST’s Finest!&quot;" textFill="WHITE" />
+            <ImageView fitHeight="258.0" fitWidth="308.0" layoutX="66.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/logo.png" />
+               </image>
+               <effect>
+                  <DropShadow blurType="GAUSSIAN" height="44.45" radius="21.725" width="44.45">
+                     <color>
+                        <Color red="0.43421053886413574" green="0.43421053886413574" blue="0.43421053886413574" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane id="form" layoutX="390.0" prefHeight="750.0" prefWidth="910.0" stylesheets="@../css/register.css">
+         <children>
+            <Label id="formTitle" layoutX="14.0" layoutY="14.0" stylesheets="@../css/register.css" text="Welcome Back! Log In to Reconnect with FASTBook." underline="true" />
+            <Label layoutX="318.0" layoutY="235.0" styleClass="inputLabel" stylesheets="@../css/register.css" text="Username:" />
+            <Label layoutX="321.0" layoutY="315.0" styleClass="inputLabel" stylesheets="@../css/register.css" text="Password:" />
+            <TextField fx:id="i_username" layoutX="391.0" layoutY="230.0" styleClass="input" />
+            <Button id="regBtn" fx:id="loginbtn" layoutX="768.0" layoutY="663.0" mnemonicParsing="false" onMouseClicked="#login" stylesheets="@../css/register.css" text="Login" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label layoutX="47.0" layoutY="676.0" styleClass="linkLabel" stylesheets="@../css/register.css" text="Don't have an account?" />
+            <Label id="loginLabel" fx:id="regLink" layoutX="200.0" layoutY="676.0" onMouseClicked="#goToRegisterPage" styleClass="linkLabel" stylesheets="@../css/register.css" text="Register Now" textFill="#00a2ff" underline="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <PasswordField fx:id="i_password" layoutX="389.0" layoutY="310.0" styleClass="input" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
