@@ -13,9 +13,6 @@
     -fx-font-weight: 700;
 }
 
-#navbar {
-}
-
 .navlink {
     -fx-font-size: 20px;
     -fx-text-fill: white;
@@ -24,5 +21,33 @@
 }
 
 .navlink:hover {
+    -fx-underline: true;
+}
+
+#dashboardTitle,
+#username {
+    -fx-font-size: 36px;
+    -fx-font-weight: 700;
+    -fx-underline: true;
+}
+
+#username {
+    -fx-font-size: 20px;
+}
+
+#searchBar,
+#filterBox {
+    -fx-font-size: 16px;
+}
+
+.filters {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-color: #00a2ff;
+    -fx-cursor: hand;
+}
+
+.filters:focused {
+    -fx-background-color: #0088d6;
     -fx-underline: true;
 }
