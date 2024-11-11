@@ -7,8 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import com.example.sdaprojectsocialmediaapp.models.Student;
-import com.example.sdaprojectsocialmediaapp.models.HomePage;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -43,10 +41,17 @@ public class LoginCont {
     }
 
     @FXML
-    void login(MouseEvent event) {
+    void login(MouseEvent event) throws IOException {
         String username = i_username.getText();
         String password = i_password.getText();
         // Further session begins
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/homepage.fxml"));
+        String styles = Objects.requireNonNull(this.getClass().getResource("/css/homepage.css")).toExternalForm();
+        Scene scene = new Scene((Parent) loader.load());
+        scene.getStylesheets().add(styles);
+        HomepageCont controller = loader.getController();
+        controller.setStage(stage);
+        stage.setScene(scene);
     }
 
 }
