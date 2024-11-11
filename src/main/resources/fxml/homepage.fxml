@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -155,7 +157,6 @@
             <Label id="username" stylesheets="@../css/homepage.css" text="Unsatisfying Prince" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <ComboBox id="filterBox" fx:id="comboBox" layoutX="974.0" layoutY="112.0" prefWidth="150.0" promptText="Sort Posts By" stylesheets="@../css/homepage.css" visibleRowCount="5" />
       <HBox layoutX="280.0" layoutY="163.0" prefHeight="31.0" prefWidth="358.0" spacing="10.0">
          <children>
             <ToggleButton mnemonicParsing="false" styleClass="filters" stylesheets="@../css/homepage.css" text="All" />
@@ -164,5 +165,18 @@
             <ToggleButton mnemonicParsing="false" styleClass="filters" stylesheets="@../css/homepage.css" text="Questions" />
          </children>
       </HBox>
+      <TitledPane id="filterBox" animated="false" layoutX="1036.0" layoutY="118.0" prefHeight="163.0" prefWidth="202.0" stylesheets="@../css/homepage.css" text="Sort The Posts by: ">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <CheckBox layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Date" />
+                  <CheckBox layoutX="14.0" layoutY="39.0" mnemonicParsing="false" text="Reactions" />
+                  <CheckBox layoutX="14.0" layoutY="64.0" mnemonicParsing="false" text="Comments" />
+                  <CheckBox layoutX="14.0" layoutY="90.0" mnemonicParsing="false" text="Answers" />
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+      <ScrollPane layoutX="280.0" layoutY="229.0" prefHeight="502.0" prefWidth="733.0" />
    </children>
 </AnchorPane>

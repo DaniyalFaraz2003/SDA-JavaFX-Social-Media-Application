@@ -33,7 +33,6 @@ public class HomePageApp extends Application {
         stage.setTitle("FASTBook Social Media Application");
         stage.getIcons().add(logo);
         stage.setScene(scene);
-        controller.setComboBox();
         controller.setStage(stage);
         stage.show();
     }
