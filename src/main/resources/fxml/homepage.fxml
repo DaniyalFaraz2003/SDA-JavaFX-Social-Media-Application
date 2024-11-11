@@ -28,6 +28,8 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
                   <ImageView fitHeight="31.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
@@ -57,7 +59,7 @@
                   </ImageView>
                   <ImageView fitHeight="38.0" fitWidth="31.0" layoutX="10.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
                      <image>
-                        <Image url="@../images/setting.png" />
+                        <Image url="@../images/addition.png" />
                      </image>
                   </ImageView>
                   <Label styleClass="navlink" text="Home" GridPane.columnIndex="1">
@@ -85,11 +87,31 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Label>
-                  <Label layoutX="52.0" layoutY="355.0" styleClass="navlink" text="Setting" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <Label layoutX="52.0" layoutY="355.0" styleClass="navlink" text="My Posts" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Label>
+                  <Label layoutX="52.0" layoutY="325.0" styleClass="navlink" text="My Activity Posts" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+                  <Label layoutX="52.0" layoutY="385.0" styleClass="navlink" text="My Questions" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+                  <ImageView fitHeight="38.0" fitWidth="31.0" layoutX="10.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="6">
+                     <image>
+                        <Image url="@../images/activity-feed.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="38.0" fitWidth="31.0" layoutX="10.0" layoutY="385.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="7">
+                     <image>
+                        <Image url="@../images/help.png" />
+                     </image>
+                  </ImageView>
                </children>
             </GridPane>
             <ImageView fitHeight="31.0" fitWidth="31.0" layoutX="212.0" layoutY="708.0" pickOnBounds="true" preserveRatio="true">
