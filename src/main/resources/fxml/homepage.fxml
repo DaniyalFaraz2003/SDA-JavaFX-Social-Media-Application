@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaprojectsocialmediaapp.controllers.HomepageCont">
    <children>
@@ -177,6 +177,9 @@
             </AnchorPane>
         </content>
       </TitledPane>
-      <ScrollPane layoutX="280.0" layoutY="229.0" prefHeight="502.0" prefWidth="733.0" />
+      <ScrollPane layoutX="280.0" layoutY="229.0" prefHeight="502.0" prefWidth="733.0">
+         <content>
+            <VBox fx:id="container" prefHeight="500.0" prefWidth="731.0" spacing="20.0" />
+         </content></ScrollPane>
    </children>
 </AnchorPane>
