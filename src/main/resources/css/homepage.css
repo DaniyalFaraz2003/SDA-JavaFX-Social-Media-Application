@@ -1,0 +1,53 @@
+/*--blue: #00a2ff;*/
+/*--darkBlue: #0088d6;*/
+
+#sidebar {
+    -fx-background-color: #00a2ff;
+}
+
+#sidebarTitle {
+    -fx-font-size: 26px;
+    -fx-text-fill: white;
+    -fx-pref-width: 250;
+    -fx-alignment: center;
+    -fx-font-weight: 700;
+}
+
+.navlink {
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+    -fx-font-weight: 700;
+    -fx-padding: 0 0 0 10px;
+}
+
+.navlink:hover {
+    -fx-underline: true;
+}
+
+#dashboardTitle,
+#username {
+    -fx-font-size: 36px;
+    -fx-font-weight: 700;
+    -fx-underline: true;
+}
+
+#username {
+    -fx-font-size: 20px;
+}
+
+#searchBar,
+#filterBox {
+    -fx-font-size: 16px;
+}
+
+.filters {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-color: #00a2ff;
+    -fx-cursor: hand;
+}
+
+.filters:focused {
+    -fx-background-color: #0088d6;
+    -fx-underline: true;
+}
