@@ -50,7 +50,7 @@ public class LoginCont {
         Scene scene = new Scene((Parent) loader.load());
         scene.getStylesheets().add(styles);
         HomepageCont controller = loader.getController();
-        controller.setStage(stage);
+        controller.initialize(stage);
         stage.setScene(scene);
     }
 

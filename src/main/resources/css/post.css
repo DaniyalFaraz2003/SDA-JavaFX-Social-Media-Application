@@ -1,0 +1,38 @@
+.postContainer {
+    -fx-padding: 0 0 10px 0;
+}
+
+.postTitle {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.postDesc {
+    -fx-font-size: 16px;
+    -fx-pref-width: 731px;
+    -fx-wrap-text: true;
+    -fx-padding: 0 5px 0 0;
+}
+
+.postMeta {
+    -fx-font-size: 12px;
+    -fx-text-fill: grey;
+}
+
+/*.postType {*/
+/*    -fx-font-size: 12px;*/
+/*}*/
+
+.postButton {
+    -fx-font-size: 14px;
+    /*-fx-border-width: 1px;*/
+    /*-fx-border-color: black;*/
+    /*-fx-border-radius: 20px;*/
+    -fx-text-fill: white;
+    -fx-background-color: #00a2ff;
+    -fx-cursor: hand;
+}
+
+.postButton:hover {
+    -fx-background-color: #0088d6;
+}
