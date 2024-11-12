@@ -1,6 +1,7 @@
 package com.example.sdaprojectsocialmediaapp;
 import com.example.sdaprojectsocialmediaapp.models.HomePageApp;
 import com.example.sdaprojectsocialmediaapp.models.RegisterApp;
+
 import javafx.application.Application;
 
 public class MainApp {
