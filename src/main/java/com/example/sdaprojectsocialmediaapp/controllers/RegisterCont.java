@@ -18,16 +18,10 @@ import java.util.Objects;
 public class RegisterCont {
 
     @FXML
-    private TextArea i_address;
+    private TextField i_name;
 
     @FXML
     private TextField i_email;
-
-    @FXML
-    private TextField i_firstName;
-
-    @FXML
-    private TextField i_lastName;
 
     @FXML
     private PasswordField i_password;
@@ -61,7 +55,7 @@ public class RegisterCont {
 
     @FXML
     void register(MouseEvent event) throws IOException {
-        Student student = new Student(i_firstName.getText(), i_lastName.getText(), i_username.getText(), i_password.getText(), i_email.getText(), i_phone.getText());
+        Student student = new Student(i_name.getText(), i_username.getText(), i_password.getText(), i_email.getText(), i_phone.getText());
         System.out.println(student.toString());
         openLoginPage();
     }

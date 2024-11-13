@@ -85,8 +85,22 @@ public class HomepageCont {
 
 
     @FXML
-    void filterQuestions(MouseEvent event) {
+    void filterQuestions(MouseEvent event) throws IOException {
+        if (questionFilterBtn.isSelected()) {
+            container.getChildren().forEach((child) -> {
+                Pane postPane = (Pane) child;
+                Label postTypeLabel = (Label) postPane.lookup("#postType"); // Find the label by fx:id
 
+                // Check if the postType label exists and its text matches "Question"
+                if (postTypeLabel != null && "Question".equals(postTypeLabel.getText())) {
+                    postPane.setDisable(true);  // Show the post if it's a Question
+                } else {
+                    postPane.setDisable(false); // Hide the post otherwise
+                }
+            });
+        } else {
+            displayPosts(); // Display all posts if the filter is not active
+        }
     }
 
     @FXML
