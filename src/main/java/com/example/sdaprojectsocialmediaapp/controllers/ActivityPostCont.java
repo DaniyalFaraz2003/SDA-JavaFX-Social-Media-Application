@@ -2,6 +2,7 @@ package com.example.sdaprojectsocialmediaapp.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.input.MouseEvent;
 

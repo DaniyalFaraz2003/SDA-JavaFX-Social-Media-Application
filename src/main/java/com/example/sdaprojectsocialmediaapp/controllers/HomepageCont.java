@@ -1,9 +1,7 @@
 package com.example.sdaprojectsocialmediaapp.controllers;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -12,8 +10,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ToggleButton;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class HomepageCont {
     @FXML
@@ -49,7 +45,7 @@ public class HomepageCont {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/simple_post.fxml"));
             Pane pane = loader.load();
             SimplePostCont controller = loader.getController();
-            controller.set();
+            controller.set("/images/postImage.jpeg");
             container.getChildren().add(pane);
         }
         // Loading Questions
@@ -62,14 +58,15 @@ public class HomepageCont {
         }
     }
 
-    private void filterPostsBy(String type) throws IOException {
+    private void filterPostsBy(String type) {
         container.getChildren().forEach((child) -> {
             Pane postPane = (Pane) child;
             Label postTypeLabel = (Label) postPane.lookup("#postType"); // Find the label by fx:id
             // Check if the postType label exists and its text matches type
             // Hide the post otherwise
             boolean matchesType = postTypeLabel != null && type.equals(postTypeLabel.getText());
-            postPane.setVisible(matchesType);  // Show the post if it matches the type
+            // Show the post if it matches the type
+            postPane.setVisible(matchesType);
             postPane.setManaged(matchesType);
         });
     }
@@ -82,16 +79,19 @@ public class HomepageCont {
     @FXML
     void filterActivityPosts(MouseEvent event) throws IOException {
         if (activityPostFilterBtn.isSelected()) {
+            this.simplePostFilterBtn.setSelected(false);
+            this.questionFilterBtn.setSelected(false);
             filterPostsBy("Activity Post");
         } else {
             displayPosts(); // Display all posts if the filter is not active
         }
     }
 
-
     @FXML
     void filterQuestions(MouseEvent event) throws IOException {
         if (questionFilterBtn.isSelected()) {
+            this.simplePostFilterBtn.setSelected(false);
+            this.activityPostFilterBtn.setSelected(false);
             filterPostsBy("Question");
         } else {
             displayPosts(); // Display all posts if the filter is not active
@@ -101,6 +101,8 @@ public class HomepageCont {
     @FXML
     void filterSimplePosts(MouseEvent event) throws IOException {
         if (simplePostFilterBtn.isSelected()) {
+            this.questionFilterBtn.setSelected(false);
+            this.activityPostFilterBtn.setSelected(false);
             filterPostsBy("Simple Post");
         } else {
             displayPosts(); // Display all posts if the filter is not active

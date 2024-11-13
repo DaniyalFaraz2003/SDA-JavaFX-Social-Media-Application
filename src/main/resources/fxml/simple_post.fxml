@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
 <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="731.0" styleClass="postContainer" stylesheets="@../css/post.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaprojectsocialmediaapp.controllers.SimplePostCont">
    <children>
       <Label layoutX="5.0" layoutY="5.0" styleClass="postTitle" text="Escape into Nature: Morning Hike Experience" />
       <Label layoutX="5.0" layoutY="49.0" styleClass="postDesc" text="Took some time today to unwind with a novel I’ve been meaning to read. There’s something so calming about getting lost in a good story, with nothing but the sound of pages turning. Definitely planning to make this a regular habit." />
+      <ImageView fx:id="postImage" fitHeight="237.0" fitWidth="484.0" layoutX="5.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="postType" layoutX="652.0" layoutY="10.0" styleClass="postMeta" text="Simple Post" />
-      <Label layoutX="5.0" layoutY="166.0" styleClass="postMeta" text="By: Hammad Ali" />
-      <ToggleButton fx:id="reactBtn" layoutX="630.0" layoutY="168.0" mnemonicParsing="false" onMouseClicked="#handleReaction" styleClass="postButton" text="React" />
-      <Label fx:id="reactionCount" layoutX="700.0" layoutY="169.0" styleClass="postTitle" text="0" />
+      <ToggleButton fx:id="reactBtn" layoutX="630.0" layoutY="380.0" mnemonicParsing="false" onMouseClicked="#handleReaction" styleClass="postButton" text="React" />
+      <Label fx:id="reactionCount" layoutX="694.0" layoutY="382.0" styleClass="postTitle" text="0" />
+      <Label layoutX="190.0" layoutY="395.0" styleClass="postMeta" text="By: Hammad Ali" />
+      <Label layoutX="5.0" layoutY="395.0" styleClass="postMeta" text="Posted On: 2024-11-12 08:35:12" />
+      <Button layoutX="541.0" layoutY="380.0" mnemonicParsing="false" onMouseClicked="#handleAnswer" styleClass="postButton" text="Comment" />
    </children>
 </Pane>
