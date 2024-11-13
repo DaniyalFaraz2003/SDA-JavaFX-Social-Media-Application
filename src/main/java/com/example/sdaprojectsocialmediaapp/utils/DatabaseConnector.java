@@ -4,7 +4,7 @@ import java.sql.*;
 public class DatabaseConnector {
     private static final String URL = "jdbc:mysql://localhost:3306/fastbook";  // Change to your DB name
     private static final String USER = "root";  // Change to your DB username
-    private static final String PASSWORD = "daniyalmysql";  // Change to your DB password
+    private static final String PASSWORD = "amna308";  // Change to your DB password
 
     // Method to establish a connection
     public Connection getConnection() {

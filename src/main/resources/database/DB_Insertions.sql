@@ -81,16 +81,16 @@ INSERT INTO Friend (student_id_from, student_id_to, status) VALUES
     (10, 1, TRUE);
 
 INSERT INTO Message (student_id_from, student_id_to, text, time_stamp) VALUES
-    (1, 2, 'Hey Hammad, how was your weekend trip?', NOW()),
-    (2, 3, 'Daniyal, I just finished reading that book you recommended!', NOW()),
-    (3, 4, 'Abeer, I really liked your travel photos. They were amazing!', NOW()),
-    (4, 5, 'Ahmed, how do you manage to stay so productive? I need tips!', NOW()),
-    (5, 6, 'Ali, I started my fitness routine this week. It has been tough!', NOW()),
-    (6, 7, 'Ali Mustafa, have you tried the new coding challenge on Codeforces?', NOW()),
-    (7, 8, 'Abdullah, your cooking experiment looked amazing! I need the recipe.', NOW()),
-    (8, 9, 'Sheharyar, I loved your review of the book! It was insightful.', NOW()),
-    (9, 10, 'Muneeb, how is your puppy doing? I saw some cute pictures!', NOW()),
-    (10, 1, 'Amna, I adopted a new puppy today! He is so cute!', NOW());
+   (1, 2, 'Hey Hammad, how was your weekend trip?', NOW()),
+   (2, 3, 'Daniyal, I just finished reading that book you recommended!', NOW()),
+   (3, 4, 'Abeer, I really liked your travel photos. They were amazing!', NOW()),
+   (4, 5, 'Ahmed, how do you manage to stay so productive? I need tips!', NOW()),
+   (5, 6, 'Ali, I started my fitness routine this week. It has been tough!', NOW()),
+   (6, 7, 'Ali Mustafa, have you tried the new coding challenge on Codeforces?', NOW()),
+   (7, 8, 'Abdullah, your cooking experiment looked amazing! I need the recipe.', NOW()),
+   (8, 9, 'Sheharyar, I loved your review of the book! It was insightful.', NOW()),
+   (9, 10, 'Muneeb, how is your puppy doing? I saw some cute pictures!', NOW()),
+   (10, 1, 'Amna, I adopted a new puppy today! He is so cute!', NOW());
 
 
 
