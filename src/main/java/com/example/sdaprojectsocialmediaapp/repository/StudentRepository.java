@@ -5,6 +5,7 @@ import com.example.sdaprojectsocialmediaapp.utils.DatabaseConnector;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
@@ -21,7 +22,7 @@ public class StudentRepository {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             // Set parameters for the prepared statement
-            pstmt.setString(1, student.getFirstName() + " " + student.getLastName());
+            pstmt.setString(1, student.getName());
             pstmt.setString(2, student.getUserName());
             pstmt.setString(3, student.getPhone());
             pstmt.setString(4, student.getEmail());
@@ -37,5 +38,23 @@ public class StudentRepository {
         }
     }
 
+    public boolean checkStudentExists(String username) {
+        String sql = "SELECT * FROM Student WHERE username = ?";
+
+        try (Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            // Set parameters for the prepared statement
+            pstmt.setString(1, username);
+
+            try(ResultSet rs = pstmt.executeQuery()) {
+                return rs.next();
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error checking if Student Exists" + e.getMessage());
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 }
