@@ -21,7 +21,7 @@ public class StudentRepository {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             // Set parameters for the prepared statement
-            pstmt.setString(1, student.getFirstName() + " " + student.getLastName());
+            pstmt.setString(1, student.getName());
             pstmt.setString(2, student.getUserName());
             pstmt.setString(3, student.getPhone());
             pstmt.setString(4, student.getEmail());
