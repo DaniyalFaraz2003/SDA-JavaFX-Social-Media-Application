@@ -40,17 +40,15 @@
       <Pane id="form" layoutX="390.0" prefHeight="750.0" prefWidth="910.0" stylesheets="@../css/register.css">
          <children>
             <Label id="formTitle" layoutX="14.0" layoutY="14.0" stylesheets="@../css/register.css" text="Become a Part of the FAST Community on FASTBook!" underline="true" />
-            <Label layoutX="310.0" layoutY="155.0" styleClass="inputLabel" stylesheets="@../css/register.css" text="First Name: " />
-            <Label layoutX="310.0" layoutY="205.0" styleClass="inputLabel" stylesheets="@../css/register.css" text="Last Name:" />
-            <TextField fx:id="i_firstName" layoutX="390.0" layoutY="150.0" styleClass="input" stylesheets="@../css/register.css" />
-            <TextField fx:id="i_lastName" layoutX="390.0" layoutY="200.0" styleClass="input" stylesheets="@../css/register.css" />
-            <Label layoutX="344.0" layoutY="255.0" styleClass="inputLabel" stylesheets="@../css/register.css" text="Email:" />
-            <Label layoutX="334.0" layoutY="305.0" styleClass="inputLabel" stylesheets="@../css/register.css" text="Phone:" />
-            <TextField fx:id="i_email" layoutX="390.0" layoutY="250.0" prefHeight="25.0" prefWidth="182.0" styleClass="input" stylesheets="@../css/register.css" />
-            <TextField fx:id="i_phone" layoutX="390.0" layoutY="300.0" styleClass="input" stylesheets="@../css/register.css" />
-            <Label layoutX="314.0" layoutY="355.0" styleClass="inputLabel" stylesheets="@../css/register.css" text="Username:" />
-            <Label layoutX="316.0" layoutY="405.0" styleClass="inputLabel" stylesheets="@../css/register.css" text="Password:" />
-            <TextField fx:id="i_username" layoutX="390.0" layoutY="350.0" styleClass="input" />
+            <Label layoutX="340.0" layoutY="155.0" styleClass="inputLabel" stylesheets="@../css/register.css" text="Name: " />
+            <TextField fx:id="i_name" layoutX="390.0" layoutY="150.0" styleClass="input" stylesheets="@../css/register.css" />
+            <Label layoutX="344.0" layoutY="205.0" styleClass="inputLabel" stylesheets="@../css/register.css" text="Email:" />
+            <Label layoutX="334.0" layoutY="255.0" styleClass="inputLabel" stylesheets="@../css/register.css" text="Phone:" />
+            <TextField fx:id="i_email" layoutX="390.0" layoutY="200.0" prefHeight="25.0" prefWidth="182.0" styleClass="input" stylesheets="@../css/register.css" />
+            <TextField fx:id="i_phone" layoutX="390.0" layoutY="250.0" styleClass="input" stylesheets="@../css/register.css" />
+            <Label layoutX="314.0" layoutY="305.0" styleClass="inputLabel" stylesheets="@../css/register.css" text="Username:" />
+            <Label layoutX="316.0" layoutY="355.0" styleClass="inputLabel" stylesheets="@../css/register.css" text="Password:" />
+            <TextField fx:id="i_username" layoutX="390.0" layoutY="300.0" styleClass="input" />
             <Button id="regBtn" layoutX="768.0" layoutY="663.0" mnemonicParsing="false" onMouseClicked="#register" stylesheets="@../css/register.css" text="Register" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -62,7 +60,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <PasswordField fx:id="i_password" layoutX="390.0" layoutY="400.0" styleClass="input" />
+            <PasswordField fx:id="i_password" layoutX="390.0" layoutY="350.0" styleClass="input" />
          </children>
       </Pane>
    </children>
