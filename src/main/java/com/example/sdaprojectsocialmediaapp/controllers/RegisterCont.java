@@ -1,5 +1,6 @@
 package com.example.sdaprojectsocialmediaapp.controllers;
 
+import com.example.sdaprojectsocialmediaapp.Router;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -40,24 +41,14 @@ public class RegisterCont {
         this.stage = stage;
     }
 
-    void openLoginPage() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
-        String styles = Objects.requireNonNull(this.getClass().getResource("/css/register.css")).toExternalForm();
-        Scene scene = new Scene((Parent) loader.load());
-        scene.getStylesheets().add(styles);
-        LoginCont controller = loader.getController();
-        controller.setStage(stage);
-        stage.setScene(scene);
-    }
-
     @FXML
-    void goToLoginPage(MouseEvent event) throws IOException { openLoginPage(); }
+    void goToLoginPage(MouseEvent event) throws IOException { Router.navigateTo("Login"); }
 
     @FXML
     void register(MouseEvent event) throws IOException {
         Student student = new Student(i_name.getText(), i_username.getText(), i_password.getText(), i_email.getText(), i_phone.getText());
         System.out.println(student.toString());
-        openLoginPage();
+        Router.navigateTo("Login");
     }
 
 }

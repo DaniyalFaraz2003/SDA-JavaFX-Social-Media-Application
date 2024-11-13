@@ -1,5 +1,6 @@
 package com.example.sdaprojectsocialmediaapp.controllers;
 
+import com.example.sdaprojectsocialmediaapp.Router;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -34,23 +35,23 @@ public class HomepageCont {
         container.getChildren().clear();
         // Loading Activity Posts
         for (int i = 0; i < 3; i++) {
-            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/activity_post.fxml"));
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/activity_post/activity_post.fxml"));
             Pane pane = loader.load();
             ActivityPostCont controller = loader.getController();
-            controller.set();
+            controller.initialize();
             container.getChildren().add(pane);
         }
         // Loading Simple Posts
         for (int i = 0; i < 3; i++) {
-            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/simple_post.fxml"));
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/simple_post/simple_post.fxml"));
             Pane pane = loader.load();
             SimplePostCont controller = loader.getController();
-            controller.set("/images/postImage.jpeg");
+            controller.set("/post_images/postImage.jpeg");
             container.getChildren().add(pane);
         }
         // Loading Questions
         for (int i = 0; i < 3; i++) {
-            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/question.fxml"));
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/question/question.fxml"));
             Pane pane = loader.load();
             QuestionCont controller = loader.getController();
             controller.set();
@@ -69,6 +70,46 @@ public class HomepageCont {
             postPane.setVisible(matchesType);
             postPane.setManaged(matchesType);
         });
+    }
+
+    @FXML
+    void openActivityPosts(MouseEvent event) throws IOException {
+        Router.navigateTo("Activity Post Page");
+    }
+
+    @FXML
+    void openChatPage(MouseEvent event) throws IOException {
+        Router.navigateTo("Chat Page");
+    }
+
+    @FXML
+    void openDashboard(MouseEvent event) throws IOException {
+        Router.navigateTo("Homepage");
+    }
+
+    @FXML
+    void openFriendsPage(MouseEvent event) throws IOException {
+        Router.navigateTo("Friends Page");
+    }
+
+    @FXML
+    void openProfilePage(MouseEvent event) throws IOException {
+        Router.navigateTo("Profile Page");
+    }
+
+    @FXML
+    void openQuestions(MouseEvent event) throws IOException {
+        Router.navigateTo("Question Page");
+    }
+
+    @FXML
+    void openRequests(MouseEvent event) throws IOException {
+        Router.navigateTo("Friend Request Page");
+    }
+
+    @FXML
+    void openSimplePosts(MouseEvent event) throws IOException {
+        Router.navigateTo("Simple Post Page");
     }
 
     @FXML
