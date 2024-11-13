@@ -9,6 +9,6 @@ public class MainApp {
     public static void main(String[] args) {
         DatabaseConnector conn = new DatabaseConnector();
         conn.getConnection();
-        Application.launch(HomePageApp.class, args);
+        Application.launch(RegisterApp.class, args);
     }
 }

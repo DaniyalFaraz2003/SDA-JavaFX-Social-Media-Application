@@ -9,17 +9,15 @@ public class Student {
     private String userName;
     private String password;
     private String email;
-    private String address;
     private String phone;
     private ArrayList<Student> friends;
 
-    public Student(String firstName, String lastName, String userName, String password, String email, String address, String phone) {
+    public Student(String firstName, String lastName, String userName, String password, String email, String phone) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
         this.email = email;
-        this.address = address;
         this.phone = phone;
     }
 
@@ -71,14 +69,6 @@ public class Student {
         this.email = email;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -115,7 +105,6 @@ public class Student {
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
                 ", friends=[" + friendsList.toString() + "]" +
                 '}';
