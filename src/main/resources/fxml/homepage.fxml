@@ -159,10 +159,10 @@
       </GridPane>
       <HBox layoutX="280.0" layoutY="163.0" prefHeight="31.0" prefWidth="358.0" spacing="10.0">
          <children>
-            <ToggleButton mnemonicParsing="false" styleClass="filters" stylesheets="@../css/homepage.css" text="All" />
-            <ToggleButton mnemonicParsing="false" styleClass="filters" stylesheets="@../css/homepage.css" text="Activity Posts" />
-            <ToggleButton mnemonicParsing="false" styleClass="filters" stylesheets="@../css/homepage.css" text="Simple Posts" />
-            <ToggleButton mnemonicParsing="false" styleClass="filters" stylesheets="@../css/homepage.css" text="Questions" />
+            <ToggleButton fx:id="allFilterBtn" mnemonicParsing="false" onMouseClicked="#displayAllPosts" styleClass="filters" stylesheets="@../css/homepage.css" text="All" />
+            <ToggleButton fx:id="activityPostFilterBtn" mnemonicParsing="false" onMouseClicked="#filterActivityPosts" styleClass="filters" stylesheets="@../css/homepage.css" text="Activity Posts" />
+            <ToggleButton fx:id="simplePostFilterBtn" mnemonicParsing="false" onMouseClicked="#filterSimplePosts" styleClass="filters" stylesheets="@../css/homepage.css" text="Simple Posts" />
+            <ToggleButton fx:id="questionFilterBtn" mnemonicParsing="false" onMouseClicked="#filterQuestions" styleClass="filters" stylesheets="@../css/homepage.css" text="Questions" />
          </children>
       </HBox>
       <TitledPane id="filterBox" animated="false" layoutX="1036.0" layoutY="118.0" prefHeight="163.0" prefWidth="202.0" stylesheets="@../css/homepage.css" text="Sort The Posts by: ">

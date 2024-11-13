@@ -61,7 +61,7 @@ public class RegisterCont {
 
     @FXML
     void register(MouseEvent event) throws IOException {
-        Student student = new Student(i_firstName.getText(), i_username.getText(), i_password.getText(), i_email.getText(), i_phone.getText());
+        Student student = new Student(i_firstName.getText(), i_lastName.getText(), i_username.getText(), i_password.getText(), i_email.getText(), i_phone.getText());
         System.out.println(student.toString());
         openLoginPage();
     }
