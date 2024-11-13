@@ -23,6 +23,9 @@ public class HomepageCont {
     private ToggleButton activityPostFilterBtn;
 
     @FXML
+    private ToggleButton simplePostFilterBtn;
+
+    @FXML
     private ToggleButton allFilterBtn;
 
     @FXML
@@ -59,6 +62,18 @@ public class HomepageCont {
         }
     }
 
+    private void filterPostsBy(String type) throws IOException {
+        container.getChildren().forEach((child) -> {
+            Pane postPane = (Pane) child;
+            Label postTypeLabel = (Label) postPane.lookup("#postType"); // Find the label by fx:id
+            // Check if the postType label exists and its text matches type
+            // Hide the post otherwise
+            boolean matchesType = postTypeLabel != null && type.equals(postTypeLabel.getText());
+            postPane.setVisible(matchesType);  // Show the post if it matches the type
+            postPane.setManaged(matchesType);
+        });
+    }
+
     @FXML
     void displayAllPosts(MouseEvent event) throws IOException {
         displayPosts();
@@ -67,17 +82,7 @@ public class HomepageCont {
     @FXML
     void filterActivityPosts(MouseEvent event) throws IOException {
         if (activityPostFilterBtn.isSelected()) {
-            container.getChildren().forEach((child) -> {
-                Pane postPane = (Pane) child;
-                Label postTypeLabel = (Label) postPane.lookup("#postType"); // Find the label by fx:id
-
-                // Check if the postType label exists and its text matches "Activity Post"
-                if (postTypeLabel != null && "Activity Post".equals(postTypeLabel.getText())) {
-                    postPane.setVisible(true);  // Show the post if it's an Activity Post
-                } else {
-                    postPane.setVisible(false); // Hide the post otherwise
-                }
-            });
+            filterPostsBy("Activity Post");
         } else {
             displayPosts(); // Display all posts if the filter is not active
         }
@@ -87,25 +92,19 @@ public class HomepageCont {
     @FXML
     void filterQuestions(MouseEvent event) throws IOException {
         if (questionFilterBtn.isSelected()) {
-            container.getChildren().forEach((child) -> {
-                Pane postPane = (Pane) child;
-                Label postTypeLabel = (Label) postPane.lookup("#postType"); // Find the label by fx:id
-
-                // Check if the postType label exists and its text matches "Question"
-                if (postTypeLabel != null && "Question".equals(postTypeLabel.getText())) {
-                    postPane.setDisable(true);  // Show the post if it's a Question
-                } else {
-                    postPane.setDisable(false); // Hide the post otherwise
-                }
-            });
+            filterPostsBy("Question");
         } else {
             displayPosts(); // Display all posts if the filter is not active
         }
     }
 
     @FXML
-    void filterSimplePosts(MouseEvent event) {
-
+    void filterSimplePosts(MouseEvent event) throws IOException {
+        if (simplePostFilterBtn.isSelected()) {
+            filterPostsBy("Simple Post");
+        } else {
+            displayPosts(); // Display all posts if the filter is not active
+        }
     }
 
     @FXML
