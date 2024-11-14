@@ -92,7 +92,7 @@ public class Router extends Application {
                 root = fxmlLoader.load();
                 ActivityPostCont activityCont = fxmlLoader.getController();
                 scene = new Scene(root);
-                activityCont.initialize();
+                activityCont.initializePage();
                 break;
         }
         stage.setScene(scene);

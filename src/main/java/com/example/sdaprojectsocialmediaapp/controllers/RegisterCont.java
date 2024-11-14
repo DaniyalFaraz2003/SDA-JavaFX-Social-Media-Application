@@ -17,7 +17,7 @@ import javafx.scene.control.Label;
 import java.io.IOException;
 import java.util.Objects;
 
-public class RegisterCont {
+public class RegisterCont extends MainController {
 
     @FXML
     private Label emailErr;

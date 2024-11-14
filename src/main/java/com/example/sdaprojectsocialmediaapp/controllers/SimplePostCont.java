@@ -10,7 +10,7 @@ import javafx.scene.layout.Pane;
 
 import java.util.Objects;
 
-public class SimplePostCont {
+public class SimplePostCont extends MainController {
     @FXML
     private Pane pane;
 
@@ -46,10 +46,20 @@ public class SimplePostCont {
     }
 
     @FXML
-    public void set(String imageUrl) {
+    public void initializePost(String imageUrl) {
         String resolvedPath = Objects.requireNonNull(getClass().getResource(imageUrl)).toExternalForm();
         Image image = new Image(resolvedPath);
         postImage.setImage(image);
+    }
+
+    @FXML
+    public void initializePage() {
+        // Fetch data to populate page
+    }
+
+    @FXML
+    public void initializeForm() {
+        // Fetch data to populate form
     }
 
 }
