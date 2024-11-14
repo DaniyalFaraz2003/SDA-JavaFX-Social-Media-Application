@@ -10,6 +10,7 @@ import java.sql.SQLException;
 
 
 public class StudentRepository {
+
     private final DatabaseConnector dbConnector;
     public StudentRepository() {
         dbConnector = new DatabaseConnector();

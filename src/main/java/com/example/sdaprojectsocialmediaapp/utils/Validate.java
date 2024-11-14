@@ -30,7 +30,39 @@ public class Validate {
         Pattern pattern = Pattern.compile(nameRegex);
 
         // Match the email against the pattern
+        System.out.println(name);
+        System.out.println(pattern.matcher(nameRegex).matches());
         return pattern.matcher(nameRegex).matches();
+    }
+
+    public static boolean isValidPhone(String phone) {
+        if (phone == null || phone.isEmpty()) {
+            return false;
+        }
+
+        // Define the phone regex pattern (for example, to allow a 10-digit number)
+        String phoneRegex = "^[0-9]{10}$"; // Adjust this regex as per the required phone format
+
+        // Compile the regex into a pattern
+        Pattern pattern = Pattern.compile(phoneRegex);
+
+        // Match the phone number against the pattern
+        return pattern.matcher(phone).matches();
+    }
+
+    public static boolean isValidUsername(String username) {
+        if (username == null || username.isEmpty()) {
+            return false;
+        }
+
+        // Define the username regex pattern
+        String usernameRegex = "^i(21|22|23|24)[0-9]$";
+
+        // Compile the regex into a pattern
+        Pattern pattern = Pattern.compile(usernameRegex);
+
+        // Match the username against the pattern
+        return pattern.matcher(username).matches();
     }
 
 }
