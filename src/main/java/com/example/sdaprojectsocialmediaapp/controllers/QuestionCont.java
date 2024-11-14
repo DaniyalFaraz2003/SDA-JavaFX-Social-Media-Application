@@ -7,7 +7,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.input.MouseEvent;
 
 
-public class QuestionCont {
+public class QuestionCont extends MainController {
     @FXML
     private Pane pane;
 
@@ -41,8 +41,17 @@ public class QuestionCont {
     }
 
     @FXML
-    public void set() {
-//        pane.setMinHeight(150);
-//        pane.setMinWidth(731);
+    public void initializePost() {
+        // Fetch data to populate post
+    }
+
+    @FXML
+    public void initializePage() {
+        // Fetch data to populate page
+    }
+
+    @FXML
+    public void initializeForm() {
+        // Fetch data to populate form
     }
 }
