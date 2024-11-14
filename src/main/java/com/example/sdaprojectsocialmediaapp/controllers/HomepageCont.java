@@ -1,9 +1,8 @@
 package com.example.sdaprojectsocialmediaapp.controllers;
 
-import javafx.collections.ObservableList;
+import com.example.sdaprojectsocialmediaapp.Router;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -12,8 +11,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ToggleButton;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class HomepageCont {
     @FXML
@@ -38,23 +35,23 @@ public class HomepageCont {
         container.getChildren().clear();
         // Loading Activity Posts
         for (int i = 0; i < 3; i++) {
-            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/activity_post.fxml"));
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/activity_post/activity_post.fxml"));
             Pane pane = loader.load();
             ActivityPostCont controller = loader.getController();
-            controller.set();
+            controller.initialize();
             container.getChildren().add(pane);
         }
         // Loading Simple Posts
         for (int i = 0; i < 3; i++) {
-            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/simple_post.fxml"));
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/simple_post/simple_post.fxml"));
             Pane pane = loader.load();
             SimplePostCont controller = loader.getController();
-            controller.set();
+            controller.set("/post_images/postImage.jpeg");
             container.getChildren().add(pane);
         }
         // Loading Questions
         for (int i = 0; i < 3; i++) {
-            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/question.fxml"));
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/question/question.fxml"));
             Pane pane = loader.load();
             QuestionCont controller = loader.getController();
             controller.set();
@@ -62,16 +59,57 @@ public class HomepageCont {
         }
     }
 
-    private void filterPostsBy(String type) throws IOException {
+    private void filterPostsBy(String type) {
         container.getChildren().forEach((child) -> {
             Pane postPane = (Pane) child;
             Label postTypeLabel = (Label) postPane.lookup("#postType"); // Find the label by fx:id
             // Check if the postType label exists and its text matches type
             // Hide the post otherwise
             boolean matchesType = postTypeLabel != null && type.equals(postTypeLabel.getText());
-            postPane.setVisible(matchesType);  // Show the post if it matches the type
+            // Show the post if it matches the type
+            postPane.setVisible(matchesType);
             postPane.setManaged(matchesType);
         });
+    }
+
+    @FXML
+    void openActivityPosts(MouseEvent event) throws IOException {
+        Router.navigateTo("Activity Post Page");
+    }
+
+    @FXML
+    void openChatPage(MouseEvent event) throws IOException {
+        Router.navigateTo("Chat Page");
+    }
+
+    @FXML
+    void openDashboard(MouseEvent event) throws IOException {
+        Router.navigateTo("Homepage");
+    }
+
+    @FXML
+    void openFriendsPage(MouseEvent event) throws IOException {
+        Router.navigateTo("Friends Page");
+    }
+
+    @FXML
+    void openProfilePage(MouseEvent event) throws IOException {
+        Router.navigateTo("Profile Page");
+    }
+
+    @FXML
+    void openQuestions(MouseEvent event) throws IOException {
+        Router.navigateTo("Question Page");
+    }
+
+    @FXML
+    void openRequests(MouseEvent event) throws IOException {
+        Router.navigateTo("Friend Request Page");
+    }
+
+    @FXML
+    void openSimplePosts(MouseEvent event) throws IOException {
+        Router.navigateTo("Simple Post Page");
     }
 
     @FXML
@@ -82,16 +120,19 @@ public class HomepageCont {
     @FXML
     void filterActivityPosts(MouseEvent event) throws IOException {
         if (activityPostFilterBtn.isSelected()) {
+            this.simplePostFilterBtn.setSelected(false);
+            this.questionFilterBtn.setSelected(false);
             filterPostsBy("Activity Post");
         } else {
             displayPosts(); // Display all posts if the filter is not active
         }
     }
 
-
     @FXML
     void filterQuestions(MouseEvent event) throws IOException {
         if (questionFilterBtn.isSelected()) {
+            this.simplePostFilterBtn.setSelected(false);
+            this.activityPostFilterBtn.setSelected(false);
             filterPostsBy("Question");
         } else {
             displayPosts(); // Display all posts if the filter is not active
@@ -101,6 +142,8 @@ public class HomepageCont {
     @FXML
     void filterSimplePosts(MouseEvent event) throws IOException {
         if (simplePostFilterBtn.isSelected()) {
+            this.questionFilterBtn.setSelected(false);
+            this.activityPostFilterBtn.setSelected(false);
             filterPostsBy("Simple Post");
         } else {
             displayPosts(); // Display all posts if the filter is not active

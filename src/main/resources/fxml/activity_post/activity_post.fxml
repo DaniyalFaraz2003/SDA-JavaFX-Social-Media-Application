@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="731.0" styleClass="postContainer" stylesheets="@../css/post.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaprojectsocialmediaapp.controllers.ActivityPostCont">
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="731.0" styleClass="postContainer" stylesheets="@../../css/post.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaprojectsocialmediaapp.controllers.ActivityPostCont">
    <children>
       <Label layoutX="5.0" layoutY="5.0" styleClass="postTitle" text="Escape into Nature: Morning Hike Experience" />
       <Label layoutX="5.0" layoutY="49.0" styleClass="postDesc" text="Spent the early hours exploring new trails and enjoying the fresh air. The stillness of the morning, the sounds of nature, and the sense of accomplishment after reaching the top made it all worthwhile. Starting the day like this really puts everything into perspective. Looking forward to more days like these." />
       <Label fx:id="postType" layoutX="652.0" layoutY="10.0" styleClass="postMeta" text="Activity Post" />
-      <Label layoutX="5.0" layoutY="155.0" styleClass="postMeta" text="By: Hammad Ali">
-         <padding>
-            <Insets top="20.0" />
-         </padding>
-      </Label>
-      <Button layoutX="665.0" layoutY="174.0" mnemonicParsing="false" onMouseClicked="#handleReply" styleClass="postButton" text="Reply" />
+      <Button layoutX="664.0" layoutY="165.0" mnemonicParsing="false" onMouseClicked="#handleReply" styleClass="postButton" text="Reply" />
+      <Label layoutX="190.0" layoutY="180.0" styleClass="postMeta" text="By: Hammad Ali" />
+      <Label layoutX="5.0" layoutY="180.0" styleClass="postMeta" text="Posted On: 2024-11-12 08:35:12" />
    </children>
 </Pane>
