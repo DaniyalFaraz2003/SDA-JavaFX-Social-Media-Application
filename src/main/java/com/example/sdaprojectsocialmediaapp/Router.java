@@ -1,9 +1,6 @@
 package com.example.sdaprojectsocialmediaapp;
 
-import com.example.sdaprojectsocialmediaapp.controllers.ActivityPostCont;
-import com.example.sdaprojectsocialmediaapp.controllers.HomepageCont;
-import com.example.sdaprojectsocialmediaapp.controllers.LoginCont;
-import com.example.sdaprojectsocialmediaapp.controllers.RegisterCont;
+import com.example.sdaprojectsocialmediaapp.controllers.*;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -93,6 +90,41 @@ public class Router extends Application {
                 ActivityPostCont activityCont = fxmlLoader.getController();
                 scene = new Scene(root);
                 activityCont.initializePage();
+                break;
+            case "Activity Post Form":
+                fxmlLoader = new FXMLLoader(Router.class.getResource("/fxml/activity_post/activity_post_form.fxml"));
+                root = fxmlLoader.load();
+                activityCont = fxmlLoader.getController();
+                scene = new Scene(root);
+                activityCont.initializeForm();
+                break;
+            case "Simple Post Page":
+                fxmlLoader = new FXMLLoader(Router.class.getResource("/fxml/simple_post/simple_post_page.fxml"));
+                root = fxmlLoader.load();
+                SimplePostCont postCont = fxmlLoader.getController();
+                scene = new Scene(root);
+                postCont.initializePage();
+                break;
+            case "Simple Post Form":
+                fxmlLoader = new FXMLLoader(Router.class.getResource("/fxml/simple_post/simple_post_form.fxml"));
+                root = fxmlLoader.load();
+                postCont = fxmlLoader.getController();
+                scene = new Scene(root);
+                postCont.initializeForm();
+                break;
+            case "Question Page":
+                fxmlLoader = new FXMLLoader(Router.class.getResource("/fxml/question/question_page.fxml"));
+                root = fxmlLoader.load();
+                QuestionCont questCont = fxmlLoader.getController();
+                scene = new Scene(root);
+                questCont.initializePage();
+                break;
+            case "Question Form":
+                fxmlLoader = new FXMLLoader(Router.class.getResource("/fxml/question/question_form.fxml"));
+                root = fxmlLoader.load();
+                questCont = fxmlLoader.getController();
+                scene = new Scene(root);
+                questCont.initializeForm();
                 break;
         }
         stage.setScene(scene);

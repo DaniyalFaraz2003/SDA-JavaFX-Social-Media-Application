@@ -1,9 +1,14 @@
 package com.example.sdaprojectsocialmediaapp.controllers;
 
+import com.example.sdaprojectsocialmediaapp.Router;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.input.MouseEvent;
+
+import java.io.IOException;
 
 public class ActivityPostCont extends MainController {
     @FXML
@@ -13,6 +18,12 @@ public class ActivityPostCont extends MainController {
     private Label postType;
 
     @FXML
+    private TextArea postContent;
+
+    @FXML
+    private TextField postTitle;
+
+    @FXML
     public String getPostType() {
         return postType.getText();
     }
@@ -20,6 +31,22 @@ public class ActivityPostCont extends MainController {
     @FXML
     void handleReply(MouseEvent event) {
         // Will display a text area to get reply
+    }
+
+    @FXML
+    void createNewPost(MouseEvent event) throws IOException {
+        // Routing to the post creation page
+        Router.navigateTo("Activity Post Form");
+    }
+
+    @FXML
+    void submit(MouseEvent event) throws IOException {
+        // Create an activity post object
+
+        // Insert post data to database
+
+        // Return back to Activity posts page
+        Router.navigateTo("Activity Post Page");
     }
 
     @FXML
