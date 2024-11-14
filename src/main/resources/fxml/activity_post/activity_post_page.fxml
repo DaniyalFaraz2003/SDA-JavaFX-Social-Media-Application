@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -158,5 +159,6 @@
             <VBox fx:id="container" prefHeight="500.0" prefWidth="731.0" spacing="20.0" />
          </content>
       </ScrollPane>
+      <Button layoutX="1112.0" layoutY="667.0" mnemonicParsing="false" stylesheets="@../../css/postpage.css" text="Create New Post" />
    </children>
 </AnchorPane>

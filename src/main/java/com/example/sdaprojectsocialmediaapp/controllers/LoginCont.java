@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 
-public class LoginCont {
+public class LoginCont extends MainController {
 
     @FXML
     private PasswordField i_password;

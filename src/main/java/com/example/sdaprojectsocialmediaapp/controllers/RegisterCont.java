@@ -15,6 +15,7 @@ import java.io.IOException;
 
 public class RegisterCont {
     StudentRepository studentRepository = new StudentRepository();
+public class RegisterCont extends MainController {
 
     @FXML
     private Label emailErr;
