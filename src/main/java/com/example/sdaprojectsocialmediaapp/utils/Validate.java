@@ -24,15 +24,13 @@ public class Validate {
             return false;
         }
 
-        String nameRegex = "^[A-Za-z ]{3,}$";
+        String nameRegex = "^[A-Za-z]+( [A-Za-z]+)*$";
 
         // Compile the regex into a pattern
         Pattern pattern = Pattern.compile(nameRegex);
 
         // Match the email against the pattern
-        System.out.println(name);
-        System.out.println(pattern.matcher(nameRegex).matches());
-        return pattern.matcher(nameRegex).matches();
+        return pattern.matcher(name).matches();
     }
 
     public static boolean isValidPhone(String phone) {
@@ -56,7 +54,7 @@ public class Validate {
         }
 
         // Define the username regex pattern
-        String usernameRegex = "^i(21|22|23|24)[0-9]$";
+        String usernameRegex = "^i(21|22|23|24)[0-9]{4}$";
 
         // Compile the regex into a pattern
         Pattern pattern = Pattern.compile(usernameRegex);
