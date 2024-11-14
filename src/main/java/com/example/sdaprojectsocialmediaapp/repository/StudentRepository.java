@@ -39,13 +39,14 @@ public class StudentRepository {
         }
     }
 
-    public boolean checkStudentExists(String username) {
-        String sql = "SELECT * FROM Student WHERE username = ?";
+    public boolean checkStudentExists(String username, String password) {
+        String sql = "SELECT * FROM Student WHERE username = ? and password = ?";
 
         try (Connection conn = dbConnector.getConnection()) {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             // Set parameters for the prepared statement
             pstmt.setString(1, username);
+            pstmt.setString(2, password);
 
             try(ResultSet rs = pstmt.executeQuery()) {
                 return rs.next();
