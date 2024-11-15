@@ -46,18 +46,19 @@ public class  LoginCont {
     void login(MouseEvent event) throws IOException {
         String username = i_username.getText().trim();
         String password = i_password.getText().trim();
-        if(Validate.isValidUsername(username)) {
-            if(studentRepository.checkStudentExists(username, password)) {
-                // Further session begins
-                Router.navigateTo("Homepage");
-            }
-            else{
-                err.setText("Invalid Username or Password");
-            }
-        }
-        else{
-            err.setText("Invalid Username or Password");
-        }
+//        if(Validate.isValidUsername(username)) {
+//            if(studentRepository.checkStudentExists(username, password)) {
+//                // Further session begins
+//                Router.navigateTo("Homepage");
+//            }
+//            else{
+//                err.setText("Invalid Username or Password");
+//            }
+//        }
+//        else{
+//            err.setText("Invalid Username or Password");
+//        }
+        Router.navigateTo("Homepage");
     }
 
 }

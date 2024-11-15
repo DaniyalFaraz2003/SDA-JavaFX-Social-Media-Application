@@ -126,6 +126,13 @@ public class Router extends Application {
                 scene = new Scene(root);
                 questCont.initializeForm();
                 break;
+            case "Profile Page":
+                fxmlLoader = new FXMLLoader(Router.class.getResource("/fxml/profile/profile_page.fxml"));
+                root = fxmlLoader.load();
+                ProfileCont profileCont = fxmlLoader.getController();
+                scene = new Scene(root);
+                profileCont.initializePage();
+                break;
         }
         stage.setScene(scene);
     }

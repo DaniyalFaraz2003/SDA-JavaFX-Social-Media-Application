@@ -2,7 +2,7 @@ package com.example.sdaprojectsocialmediaapp.models.posts;
 
 import java.sql.Timestamp;
 
-public class Post {
+public abstract class Post {
     private int id;
     private String title;
     private String description;
@@ -67,5 +67,4 @@ public class Post {
         this.date = date;
     }
 
-    
 }
