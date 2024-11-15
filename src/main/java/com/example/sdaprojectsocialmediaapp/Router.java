@@ -133,6 +133,13 @@ public class Router extends Application {
                 scene = new Scene(root);
                 profileCont.initializePage();
                 break;
+            case "Profile Update Form":
+                fxmlLoader = new FXMLLoader(Router.class.getResource("/fxml/profile/profile_form.fxml"));
+                root = fxmlLoader.load();
+                profileCont = fxmlLoader.getController();
+                scene = new Scene(root);
+                profileCont.initializeForm();
+                break;
         }
         stage.setScene(scene);
     }
