@@ -2,6 +2,10 @@ package com.example.sdaprojectsocialmediaapp;
 
 import com.example.sdaprojectsocialmediaapp.controllers.*;
 import com.example.sdaprojectsocialmediaapp.controllers.friend_request.FriendRequestCont;
+import com.example.sdaprojectsocialmediaapp.controllers.friends.FriendPageCont;
+import com.example.sdaprojectsocialmediaapp.controllers.posts.ActivityPostCont;
+import com.example.sdaprojectsocialmediaapp.controllers.posts.QuestionCont;
+import com.example.sdaprojectsocialmediaapp.controllers.posts.SimplePostCont;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -147,6 +151,13 @@ public class Router extends Application {
                 FriendRequestCont friendRequestCont = fxmlLoader.getController();
                 scene = new Scene(root);
                 friendRequestCont.initializePage();
+                break;
+            case "Friends Page":
+                fxmlLoader = new FXMLLoader(Router.class.getResource("/fxml/friend/friends_page.fxml"));
+                root = fxmlLoader.load();
+                FriendPageCont friendPageCont = fxmlLoader.getController();
+                scene = new Scene(root);
+                friendPageCont.initializePage();
                 break;
         }
         stage.setScene(scene);

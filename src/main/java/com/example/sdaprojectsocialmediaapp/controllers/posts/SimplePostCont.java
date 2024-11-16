@@ -1,6 +1,7 @@
-package com.example.sdaprojectsocialmediaapp.controllers;
+package com.example.sdaprojectsocialmediaapp.controllers.posts;
 
 import com.example.sdaprojectsocialmediaapp.Router;
+import com.example.sdaprojectsocialmediaapp.controllers.MainController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;

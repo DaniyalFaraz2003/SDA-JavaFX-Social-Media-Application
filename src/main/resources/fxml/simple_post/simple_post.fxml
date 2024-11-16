@@ -6,7 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="731.0" styleClass="postContainer" stylesheets="@../../css/post.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaprojectsocialmediaapp.controllers.SimplePostCont">
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="731.0" styleClass="postContainer" stylesheets="@../../css/post.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaprojectsocialmediaapp.controllers.posts.SimplePostCont">
    <children>
       <Label layoutX="5.0" layoutY="5.0" styleClass="postTitle" text="Escape into Nature: Morning Hike Experience" />
       <Label layoutX="5.0" layoutY="49.0" styleClass="postDesc" text="Took some time today to unwind with a novel I’ve been meaning to read. There’s something so calming about getting lost in a good story, with nothing but the sound of pages turning. Definitely planning to make this a regular habit." />

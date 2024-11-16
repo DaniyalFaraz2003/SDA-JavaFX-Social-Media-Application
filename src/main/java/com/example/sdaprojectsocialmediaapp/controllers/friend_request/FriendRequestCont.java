@@ -35,16 +35,17 @@ public class FriendRequestCont extends MainController {
         friendRequests.add(new FriendRequestComp("Bob Brown", new Timestamp(System.currentTimeMillis() - 24 * 3600 * 1000))); // 1 day ago
         friendRequests.add(new FriendRequestComp("Charlie Wilson", new Timestamp(System.currentTimeMillis() - 2 * 24 * 3600 * 1000))); // 2 days ago
         friendRequests.add(new FriendRequestComp("Diana Green", new Timestamp(System.currentTimeMillis() - 7 * 24 * 3600 * 1000))); // 1 week ago
-        requestCount.setText(Integer.toString(friendRequests.size()) + " requests");
     }
 
     @FXML
     public void initializePage() throws IOException {
         // get array list of friend request component
         populateFriendRequests();
-        container.getChildren().clear();
-        // get friend requests from database and populate the page
         int size = friendRequests.size();
+        container.getChildren().clear();
+        // setting the request count
+        requestCount.setText(Integer.toString(size) + " requests");
+        // populating the page
         for (int i = 0; i < size; i++) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/friend_request/friend_req_component.fxml"));
             pane = loader.load();

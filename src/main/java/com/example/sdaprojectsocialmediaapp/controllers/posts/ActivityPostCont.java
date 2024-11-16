@@ -1,16 +1,17 @@
-package com.example.sdaprojectsocialmediaapp.controllers;
+package com.example.sdaprojectsocialmediaapp.controllers.posts;
 
 import com.example.sdaprojectsocialmediaapp.Router;
+import com.example.sdaprojectsocialmediaapp.controllers.MainController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
-
-public class QuestionCont extends MainController {
+public class ActivityPostCont extends MainController {
     @FXML
     private Pane pane;
 
@@ -18,10 +19,10 @@ public class QuestionCont extends MainController {
     private Label postType;
 
     @FXML
-    private Label votes;
+    private TextArea postContent;
 
     @FXML
-    private ToggleButton voteButton;
+    private TextField postTitle;
 
     @FXML
     public String getPostType() {
@@ -29,24 +30,14 @@ public class QuestionCont extends MainController {
     }
 
     @FXML
-    void handleUpVote(MouseEvent event) {
-        int votes = Integer.parseInt(this.votes.getText());
-        if (voteButton.isSelected()) {
-            this.votes.setText(Integer.toString(votes + 1));
-        }
-        else
-            this.votes.setText(Integer.toString(votes - 1));
+    void handleReply(MouseEvent event) {
+        // Will display a text area to get reply
     }
 
     @FXML
-    void handleAnswer(MouseEvent event) {
-        // Will show a text area to get answer
-    }
-
-    @FXML
-    void createNewQuestion(MouseEvent event) throws IOException {
+    void createNewPost(MouseEvent event) throws IOException {
         // Routing to the post creation page
-        Router.navigateTo("Question Form");
+        Router.navigateTo("Activity Post Form");
     }
 
     @FXML
@@ -56,7 +47,7 @@ public class QuestionCont extends MainController {
         // Insert post data to database
 
         // Return back to Activity posts page
-        Router.navigateTo("Question Page");
+        Router.navigateTo("Activity Post Page");
     }
 
     @FXML

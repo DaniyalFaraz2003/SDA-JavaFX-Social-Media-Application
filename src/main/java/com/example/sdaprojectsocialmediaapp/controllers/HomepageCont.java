@@ -1,5 +1,8 @@
 package com.example.sdaprojectsocialmediaapp.controllers;
 
+import com.example.sdaprojectsocialmediaapp.controllers.posts.ActivityPostCont;
+import com.example.sdaprojectsocialmediaapp.controllers.posts.QuestionCont;
+import com.example.sdaprojectsocialmediaapp.controllers.posts.SimplePostCont;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;

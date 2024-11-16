@@ -5,7 +5,7 @@
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="731.0" styleClass="postContainer" stylesheets="@../../css/post.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaprojectsocialmediaapp.controllers.QuestionCont">
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="731.0" styleClass="postContainer" stylesheets="@../../css/post.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaprojectsocialmediaapp.controllers.posts.QuestionCont">
    <children>
       <Label layoutX="5.0" layoutY="5.0" styleClass="postTitle" text="How to Prevent Auto-Focus on TextField in JavaFX?" />
       <Label layoutX="5.0" layoutY="49.0" styleClass="postDesc" text="I'm working on a JavaFX app where the search bar (TextField) is auto-focused when the app starts, causing the placeholder to disappear. How can I make it so the TextField only gets focused when clicked, and the placeholder stays visible initially?" />
