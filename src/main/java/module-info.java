@@ -9,5 +9,6 @@ module com.example.sdaprojectsocialmediaapp {
     opens com.example.sdaprojectsocialmediaapp.controllers to javafx.fxml;
     exports com.example.sdaprojectsocialmediaapp;
     exports com.example.sdaprojectsocialmediaapp.models;
+    opens com.example.sdaprojectsocialmediaapp.controllers.friend_request to javafx.fxml;
 
 }

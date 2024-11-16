@@ -1,6 +1,7 @@
 package com.example.sdaprojectsocialmediaapp;
 
 import com.example.sdaprojectsocialmediaapp.controllers.*;
+import com.example.sdaprojectsocialmediaapp.controllers.friend_request.FriendRequestCont;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
