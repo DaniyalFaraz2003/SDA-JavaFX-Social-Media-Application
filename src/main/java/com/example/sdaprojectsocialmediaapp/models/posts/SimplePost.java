@@ -11,8 +11,8 @@ public class SimplePost extends Post {
     private int numberOfComments;
     private ArrayList<Comment> comments;
 
-    public SimplePost(int id, String title, String description, String author, int authorId, Timestamp date, String postImageUrl, int numberOfLikes, ArrayList<Comment> comments) {
-        super(id, title, description, author, authorId, date);
+    public SimplePost(int id, String title, String description, int authorId, Timestamp date, String postImageUrl, int numberOfLikes, ArrayList<Comment> comments) {
+        super(id, title, description, authorId, date);
         this.postImageUrl = postImageUrl;
         this.numberOfLikes = numberOfLikes;
         this.numberOfComments = comments.size();
