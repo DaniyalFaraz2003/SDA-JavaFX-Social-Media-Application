@@ -13,9 +13,10 @@ import javafx.scene.control.Label;
 
 import java.io.IOException;
 
-public class RegisterCont {
-    StudentRepository studentRepository = new StudentRepository();
+
 public class RegisterCont extends MainController {
+
+    StudentRepository studentRepository = new StudentRepository();
 
     @FXML
     private Label emailErr;
