@@ -1,6 +1,9 @@
 package com.example.sdaprojectsocialmediaapp.models.posts;
 
+import com.example.sdaprojectsocialmediaapp.models.engagements.Reply;
+
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 public abstract class Post {
     private int id;
