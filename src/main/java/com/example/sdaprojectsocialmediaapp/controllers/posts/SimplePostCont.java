@@ -27,6 +27,18 @@ public class SimplePostCont extends MainController {
     private Label postType;
 
     @FXML
+    private Label postTitle;
+
+    @FXML
+    private Label postDescription;
+
+    @FXML
+    private Label timestamp;
+
+    @FXML
+    private Label author;
+
+    @FXML
     private ImageView postImage;
 
     @FXML
