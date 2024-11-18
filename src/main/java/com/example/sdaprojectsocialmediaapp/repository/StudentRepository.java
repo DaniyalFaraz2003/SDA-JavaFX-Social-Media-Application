@@ -17,7 +17,7 @@ public class StudentRepository {
     }
 
     public void saveStudent(Student student) {
-        String sql = "INSERT INTO Student (name, username, phone, email, password) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Student (name, username, phone_number, email, password) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = dbConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -57,6 +57,53 @@ public class StudentRepository {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public boolean checkUsernameTaken(String username) {
+        String sql = "SELECT * FROM Student WHERE username = ?";
+
+        try (Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            //Set parameters
+            pstmt.setString(1, username);
+
+            try(ResultSet rs = pstmt.executeQuery()){
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            System.out.println("Error checking if Student Exists" + e.getMessage());
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public Student getStudent(String username) {
+        String sql = "SELECT * FROM Student WHERE username = ?";
+
+        try (Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            //Set parameters
+            pstmt.setString(1, username);
+
+            try(ResultSet rs = pstmt.executeQuery()){
+                if(rs.next()){
+                    int id = rs.getInt("ID");
+                    String user = rs.getString("username");
+                    String password = rs.getString("password");
+                    String name = rs.getString("name");
+                    String email = rs.getString("email");
+                    String phone = rs.getString("phone_number");
+                    Student student = new Student(name, user, password, email, phone);
+                    student.setId(id);
+                    return student;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error checking if Student Exists" + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 }

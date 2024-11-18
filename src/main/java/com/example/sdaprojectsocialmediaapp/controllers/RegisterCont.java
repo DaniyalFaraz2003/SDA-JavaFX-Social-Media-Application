@@ -4,7 +4,11 @@ import com.example.sdaprojectsocialmediaapp.Router;
 import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
 import com.example.sdaprojectsocialmediaapp.utils.Validate;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import com.example.sdaprojectsocialmediaapp.models.Student;
@@ -12,12 +16,10 @@ import javafx.stage.Stage;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
-
+import java.util.Objects;
 
 public class RegisterCont extends MainController {
-
     StudentRepository studentRepository = new StudentRepository();
-
     @FXML
     private Label emailErr;
 
@@ -71,12 +73,15 @@ public class RegisterCont extends MainController {
             if (Validate.isValidEmail(student.getEmail())) {
                 if (Validate.isValidPhone(student.getPhone())) {
                     if (Validate.isValidUsername(student.getUserName())) {
-                        if (!student.getPassword().isEmpty()) {
-                            studentRepository.saveStudent(student);
-                            Router.navigateTo("Login");
-                        }
-                        else {
-                            passErr.setText("Please enter a valid password");
+                        if(!studentRepository.checkUsernameTaken(student.getUserName())) {
+                            if (!student.getPassword().isEmpty()) {
+                                studentRepository.saveStudent(student);
+                                Router.navigateTo("Login");
+                            } else {
+                                passErr.setText("Please enter a valid password");
+                            }
+                        } else {
+                            usernameErr.setText("Username already taken");
                         }
                     }
                     else {

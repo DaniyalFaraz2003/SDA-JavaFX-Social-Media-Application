@@ -1,7 +1,9 @@
 package com.example.sdaprojectsocialmediaapp.controllers;
 
 import com.example.sdaprojectsocialmediaapp.Router;
+import com.example.sdaprojectsocialmediaapp.models.Student;
 import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
+import com.example.sdaprojectsocialmediaapp.services.Session;
 import com.example.sdaprojectsocialmediaapp.utils.Validate;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -46,18 +48,20 @@ public class  LoginCont {
     void login(MouseEvent event) throws IOException {
         String username = i_username.getText().trim();
         String password = i_password.getText().trim();
-//        if(Validate.isValidUsername(username)) {
-//            if(studentRepository.checkStudentExists(username, password)) {
-//                // Further session begins
-//                Router.navigateTo("Homepage");
-//            }
-//            else{
-//                err.setText("Invalid Username or Password");
-//            }
-//        }
-//        else{
-//            err.setText("Invalid Username or Password");
-//        }
+        if(Validate.isValidUsername(username)) {
+            if(studentRepository.checkStudentExists(username, password)) {
+                // Further session begins
+                Session.maintainSession(studentRepository.getStudent(username));
+                System.out.println(studentRepository.getStudent(username));
+                Router.navigateTo("Homepage");
+            }
+            else{
+                err.setText("Invalid Username or Password");
+            }
+        }
+        else{
+            err.setText("Invalid Username or Password");
+        }
         Router.navigateTo("Homepage");
     }
 
