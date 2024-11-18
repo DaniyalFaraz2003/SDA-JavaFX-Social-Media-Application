@@ -1,6 +1,7 @@
 package com.example.sdaprojectsocialmediaapp.repository;
 
 import com.example.sdaprojectsocialmediaapp.models.Student;
+import com.example.sdaprojectsocialmediaapp.models.posts.ActivityPost;
 import com.example.sdaprojectsocialmediaapp.utils.DatabaseConnector;
 import com.example.sdaprojectsocialmediaapp.models.posts.Post;
 
@@ -90,5 +91,35 @@ public class PostRepository {
 
         return null;
     }
+
+    public ActivityPost getActivityPost(int postID){
+        String sql = "Select * from activity_post where post_id = ?";
+        String sql2 = "Select * from post where ID = ?";
+
+        try(Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+
+            pstmt.setInt(1, postID);
+            pstmt2.setInt(1, postID);
+            ResultSet rs1 = pstmt.executeQuery();
+            ResultSet rs2 = pstmt2.executeQuery();
+
+            while (rs1.next()) {
+                int id = rs2.getInt("ID");
+                int author_id = rs2.getInt("student_id");
+
+                String title = rs2.getString("title");
+                String description = rs2.getString("description");
+
+                ActivityPost post = new ActivityPost();
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error finding posts" + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
 
 }
