@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#submit" prefHeight="750.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaprojectsocialmediaapp.controllers.posts.SimplePostCont">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaprojectsocialmediaapp.controllers.posts.SimplePostCont">
    <children>
       <Pane id="sidebar" prefHeight="750.0" prefWidth="250.0" stylesheets="@../../css/homepage.css">
          <children>
@@ -144,11 +144,12 @@
             <Label id="username" stylesheets="@../../css/homepage.css" text="Unsatisfying Prince" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <Button layoutX="548.0" layoutY="576.0" mnemonicParsing="false" onMouseClicked="#submit" stylesheets="@../../css/postpage.css" text="Submit" />
-      <Label layoutX="460.0" layoutY="224.0" stylesheets="@../../css/postpage.css" text="Post Title:" />
-      <Label layoutX="433.0" layoutY="289.0" stylesheets="@../../css/postpage.css" text="Post Content:" />
-      <TextField fx:id="postTitle" layoutX="548.0" layoutY="219.0" prefHeight="25.0" prefWidth="381.0" stylesheets="@../../css/postpage.css" />
-      <TextArea fx:id="postContent" layoutX="548.0" layoutY="289.0" prefHeight="173.0" prefWidth="528.0" />
-      <Label layoutX="367.0" layoutY="492.0" stylesheets="@../../css/postpage.css" text="Post Image (optional):" />
+      <Button layoutX="541.0" layoutY="513.0" mnemonicParsing="false" onMouseClicked="#submit" stylesheets="@../../css/postpage.css" text="Submit" />
+      <Label layoutX="453.0" layoutY="155.0" stylesheets="@../../css/postpage.css" text="Post Title:" />
+      <Label layoutX="426.0" layoutY="220.0" stylesheets="@../../css/postpage.css" text="Post Content:" />
+      <TextField fx:id="postTitle" layoutX="541.0" layoutY="150.0" prefHeight="25.0" prefWidth="381.0" stylesheets="@../../css/postpage.css" />
+      <TextArea fx:id="postContent" layoutX="541.0" layoutY="220.0" prefHeight="173.0" prefWidth="528.0" />
+      <Label layoutX="360.0" layoutY="423.0" stylesheets="@../../css/postpage.css" text="Post Image (optional):" />
+      <Button fx:id="uploadBtn" layoutX="541.0" layoutY="418.0" mnemonicParsing="false" onMouseClicked="#uploadImage" stylesheets="@../../css/postpage.css" text="Upload" />
    </children>
 </AnchorPane>

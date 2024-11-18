@@ -5,10 +5,7 @@ import com.example.sdaprojectsocialmediaapp.models.posts.ActivityPost;
 import com.example.sdaprojectsocialmediaapp.utils.DatabaseConnector;
 import com.example.sdaprojectsocialmediaapp.models.posts.Post;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class PostRepository {
@@ -111,14 +108,16 @@ public class PostRepository {
                 String title = rs2.getString("title");
                 String description = rs2.getString("description");
                 String time_stamp = rs2.getString("time_stamp");
-
-                ActivityPost post = new ActivityPost(id, title, description, author_id, time_stamp);
+                Timestamp time = Timestamp.valueOf(time_stamp);
+                ActivityPost post = new ActivityPost(id, title, description, author_id, time, null);
+                return post;
             }
 
         } catch (SQLException e) {
             System.out.println("Error finding posts" + e.getMessage());
             e.printStackTrace();
         }
+        return null;
     }
 
 
