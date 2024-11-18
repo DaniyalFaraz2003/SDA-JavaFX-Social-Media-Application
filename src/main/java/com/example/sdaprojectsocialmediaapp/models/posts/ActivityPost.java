@@ -9,8 +9,8 @@ public class ActivityPost extends Post {
     private ArrayList<Reply> replies;
     private int size;
 
-    public ActivityPost(int id, String title, String description, String author, int authorId, Timestamp date, ArrayList<Reply> replies) {
-        super(id, title, description, author, authorId, date);
+    public ActivityPost(int id, String title, String description, int authorId, Timestamp date, ArrayList<Reply> replies) {
+        super(id, title, description, authorId, date);
         this.replies = replies;
         this.size = replies.size();
     }

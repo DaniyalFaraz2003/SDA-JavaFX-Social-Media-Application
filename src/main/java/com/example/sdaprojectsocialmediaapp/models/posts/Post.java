@@ -9,11 +9,10 @@ public abstract class Post {
     private int id;
     private String title;
     private String description;
-    private String author;
     private int authorId;
     private Timestamp date;
 
-    public Post(int id, String title, String description, String author, int authorId, Timestamp date) {
+    public Post(int id, String title, String description, int authorId, Timestamp date) {
         this.id = id;
         this.title = title;
         this.description = description;

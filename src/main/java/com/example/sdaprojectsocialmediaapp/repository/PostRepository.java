@@ -108,11 +108,11 @@ public class PostRepository {
             while (rs1.next()) {
                 int id = rs2.getInt("ID");
                 int author_id = rs2.getInt("student_id");
-
                 String title = rs2.getString("title");
                 String description = rs2.getString("description");
+                String time_stamp = rs2.getString("time_stamp");
 
-                ActivityPost post = new ActivityPost();
+                ActivityPost post = new ActivityPost(id, title, description, author_id, time_stamp);
             }
 
         } catch (SQLException e) {

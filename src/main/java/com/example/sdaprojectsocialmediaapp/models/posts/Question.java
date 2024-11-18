@@ -10,8 +10,8 @@ public class Question extends Post {
     private int size;
     private int upVotes;
 
-    public Question(int id, String title, String description, String author, int authorId, Timestamp date, ArrayList<Answer> answers, int upVotes) {
-        super(id, title, description, author, authorId, date);
+    public Question(int id, String title, String description, int authorId, Timestamp date, ArrayList<Answer> answers, int upVotes) {
+        super(id, title, description, authorId, date);
         this.answers = answers;
         this.size = answers.size();
         this.upVotes = upVotes;

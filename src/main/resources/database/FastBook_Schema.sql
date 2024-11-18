@@ -70,12 +70,21 @@ create table Comment(
 create table Reply(
                       id int auto_increment primary key,
                       post_id int,
-                      student_id int,
                       text text,
-                      time_stamp timestamp,
 
-                      foreign key (post_id) references Activity_Post (post_id),
-                      foreign key (student_id) references Student (id)
+                      foreign key (post_id) references Activity_Post (post_id)
+);
+
+create table Student_ActivityReply(
+                                      id int auto_increment primary key,
+                                      reply_id int,
+                                      post_id int,
+                                      student_id int,
+                                      time_stamp timestamp,
+
+                                      foreign key (post_id) references Activity_Post (post_id),
+                                      foreign key (reply_id) references Reply (id),
+                                      foreign key (student_id) references Student (id)
 );
 
 create table Friend(
