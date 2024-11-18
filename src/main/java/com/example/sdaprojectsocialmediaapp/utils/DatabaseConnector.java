@@ -14,7 +14,7 @@ public class DatabaseConnector {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Step 2: Establish the connection
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            connection = DriverManager.getConnection(URL, USER, "admin");
             System.out.println("Database connection successful!");
 
         } catch (SQLException e) {

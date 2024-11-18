@@ -1,0 +1,41 @@
+/*--blue: #00a2ff;*/
+/*--darkBlue: #0088d6;*/
+
+.title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.studentName {
+    -fx-font-size: 16px;
+    -fx-font-style: italic;
+}
+
+.profileViewBtn,
+.acceptBtn,
+.rejectBtn {
+    -fx-background-color: #00a2ff;
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+
+.acceptBtn {
+    -fx-background-color: #21db00;
+}
+
+.rejectBtn {
+    -fx-background-color: red;
+}
+
+.profileViewBtn:hover {
+    -fx-background-color: #0088d6;
+}
+
+.acceptBtn:hover {
+    -fx-background-color: #1db402;
+}
+
+.rejectBtn:hover {
+    -fx-background-color: #c60000;
+}

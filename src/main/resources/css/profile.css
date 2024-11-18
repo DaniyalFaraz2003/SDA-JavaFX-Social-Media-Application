@@ -1,6 +1,16 @@
 /*--blue: #00a2ff;*/
 /*--darkBlue: #0088d6;*/
 
+.labelHeading {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.labelData {
+    -fx-font-size: 16px;
+    -fx-font-style: italic;
+}
+
 .button {
     -fx-background-color: #00a2ff;
     -fx-text-fill: white;
@@ -11,13 +21,4 @@
 
 .button:hover {
     -fx-background-color: #0088d6;
-}
-
-.label {
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-}
-
-.text-field {
-    -fx-font-size: 16px;
 }

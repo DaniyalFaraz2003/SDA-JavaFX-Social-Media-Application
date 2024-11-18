@@ -1,5 +1,7 @@
-package com.example.sdaprojectsocialmediaapp.controllers;
+package com.example.sdaprojectsocialmediaapp.controllers.posts;
 
+import com.example.sdaprojectsocialmediaapp.Router;
+import com.example.sdaprojectsocialmediaapp.controllers.MainController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
@@ -8,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
+import java.io.IOException;
 import java.util.Objects;
 
 public class SimplePostCont extends MainController {
@@ -43,6 +46,22 @@ public class SimplePostCont extends MainController {
     @FXML
     void handleAnswer(MouseEvent event) {
         // Will Handle Answers
+    }
+
+    @FXML
+    void createNewPost(MouseEvent event) throws IOException {
+        // Routing to the post creation page
+        Router.navigateTo("Simple Post Form");
+    }
+
+    @FXML
+    void submit(MouseEvent event) throws IOException {
+        // Create an activity post object
+
+        // Insert post data to database
+
+        // Return back to Activity posts page
+        Router.navigateTo("Simple Post Page");
     }
 
     @FXML

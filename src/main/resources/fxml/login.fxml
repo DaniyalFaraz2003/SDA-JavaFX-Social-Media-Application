@@ -13,7 +13,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaprojectsocialmediaapp.controllers.LoginCont">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/22.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaprojectsocialmediaapp.controllers.LoginCont">
    <children>
       <Pane id="sideBar" prefHeight="750.0" prefWidth="390.0" stylesheets="@../css/register.css">
          <children>
@@ -37,11 +37,11 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane id="form" layoutX="390.0" prefHeight="750.0" prefWidth="910.0" stylesheets="@../css/register.css">
+      <Pane id="form" fx:id="usernameErr" layoutX="390.0" prefHeight="750.0" prefWidth="910.0" stylesheets="@../css/register.css">
          <children>
             <Label id="formTitle" layoutX="14.0" layoutY="14.0" stylesheets="@../css/register.css" text="Welcome Back! Log In to Reconnect with FASTBook." underline="true" />
             <Label layoutX="318.0" layoutY="235.0" styleClass="inputLabel" stylesheets="@../css/register.css" text="Username:" />
-            <Label layoutX="321.0" layoutY="315.0" styleClass="inputLabel" stylesheets="@../css/register.css" text="Password:" />
+            <Label layoutX="318.0" layoutY="278.0" styleClass="inputLabel" stylesheets="@../css/register.css" text="Password:" />
             <TextField fx:id="i_username" layoutX="391.0" layoutY="230.0" styleClass="input" />
             <Button id="regBtn" fx:id="loginbtn" layoutX="768.0" layoutY="663.0" mnemonicParsing="false" onMouseClicked="#login" stylesheets="@../css/register.css" text="Login" textFill="WHITE">
                <cursor>
@@ -54,7 +54,8 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <PasswordField fx:id="i_password" layoutX="389.0" layoutY="310.0" styleClass="input" />
+            <PasswordField fx:id="i_password" layoutX="391.0" layoutY="273.0" prefHeight="30.0" prefWidth="173.0" styleClass="input" />
+            <Label fx:id="err" layoutX="386.0" layoutY="315.0" prefHeight="17.0" prefWidth="173.0" textFill="#e43b3b" />
          </children>
       </Pane>
    </children>

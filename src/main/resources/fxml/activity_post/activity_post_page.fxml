@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaprojectsocialmediaapp.controllers.ActivityPostCont">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaprojectsocialmediaapp.controllers.posts.ActivityPostCont">
    <children>
       <Pane id="sidebar" prefHeight="750.0" prefWidth="250.0" stylesheets="@../../css/homepage.css">
          <children>
@@ -159,6 +159,6 @@
             <VBox fx:id="container" prefHeight="500.0" prefWidth="731.0" spacing="20.0" />
          </content>
       </ScrollPane>
-      <Button layoutX="1112.0" layoutY="667.0" mnemonicParsing="false" stylesheets="@../../css/postpage.css" text="Create New Post" />
+      <Button layoutX="1112.0" layoutY="667.0" mnemonicParsing="false" onMouseClicked="#createNewPost" stylesheets="@../../css/postpage.css" text="Create New Post" />
    </children>
 </AnchorPane>

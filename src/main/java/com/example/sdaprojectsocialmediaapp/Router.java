@@ -1,9 +1,11 @@
 package com.example.sdaprojectsocialmediaapp;
 
-import com.example.sdaprojectsocialmediaapp.controllers.ActivityPostCont;
-import com.example.sdaprojectsocialmediaapp.controllers.HomepageCont;
-import com.example.sdaprojectsocialmediaapp.controllers.LoginCont;
-import com.example.sdaprojectsocialmediaapp.controllers.RegisterCont;
+import com.example.sdaprojectsocialmediaapp.controllers.*;
+import com.example.sdaprojectsocialmediaapp.controllers.friend_request.FriendRequestCont;
+import com.example.sdaprojectsocialmediaapp.controllers.friends.FriendPageCont;
+import com.example.sdaprojectsocialmediaapp.controllers.posts.ActivityPostCont;
+import com.example.sdaprojectsocialmediaapp.controllers.posts.QuestionCont;
+import com.example.sdaprojectsocialmediaapp.controllers.posts.SimplePostCont;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -93,6 +95,69 @@ public class Router extends Application {
                 ActivityPostCont activityCont = fxmlLoader.getController();
                 scene = new Scene(root);
                 activityCont.initializePage();
+                break;
+            case "Activity Post Form":
+                fxmlLoader = new FXMLLoader(Router.class.getResource("/fxml/activity_post/activity_post_form.fxml"));
+                root = fxmlLoader.load();
+                activityCont = fxmlLoader.getController();
+                scene = new Scene(root);
+                activityCont.initializeForm();
+                break;
+            case "Simple Post Page":
+                fxmlLoader = new FXMLLoader(Router.class.getResource("/fxml/simple_post/simple_post_page.fxml"));
+                root = fxmlLoader.load();
+                SimplePostCont postCont = fxmlLoader.getController();
+                scene = new Scene(root);
+                postCont.initializePage();
+                break;
+            case "Simple Post Form":
+                fxmlLoader = new FXMLLoader(Router.class.getResource("/fxml/simple_post/simple_post_form.fxml"));
+                root = fxmlLoader.load();
+                postCont = fxmlLoader.getController();
+                scene = new Scene(root);
+                postCont.initializeForm();
+                break;
+            case "Question Page":
+                fxmlLoader = new FXMLLoader(Router.class.getResource("/fxml/question/question_page.fxml"));
+                root = fxmlLoader.load();
+                QuestionCont questCont = fxmlLoader.getController();
+                scene = new Scene(root);
+                questCont.initializePage();
+                break;
+            case "Question Form":
+                fxmlLoader = new FXMLLoader(Router.class.getResource("/fxml/question/question_form.fxml"));
+                root = fxmlLoader.load();
+                questCont = fxmlLoader.getController();
+                scene = new Scene(root);
+                questCont.initializeForm();
+                break;
+            case "Profile Page":
+                fxmlLoader = new FXMLLoader(Router.class.getResource("/fxml/profile/profile_page.fxml"));
+                root = fxmlLoader.load();
+                ProfileCont profileCont = fxmlLoader.getController();
+                scene = new Scene(root);
+                profileCont.initializePage();
+                break;
+            case "Profile Update Form":
+                fxmlLoader = new FXMLLoader(Router.class.getResource("/fxml/profile/profile_form.fxml"));
+                root = fxmlLoader.load();
+                profileCont = fxmlLoader.getController();
+                scene = new Scene(root);
+                profileCont.initializeForm();
+                break;
+            case "Friend Request Page":
+                fxmlLoader = new FXMLLoader(Router.class.getResource("/fxml/friend_request/friend_req_page.fxml"));
+                root = fxmlLoader.load();
+                FriendRequestCont friendRequestCont = fxmlLoader.getController();
+                scene = new Scene(root);
+                friendRequestCont.initializePage();
+                break;
+            case "Friends Page":
+                fxmlLoader = new FXMLLoader(Router.class.getResource("/fxml/friend/friends_page.fxml"));
+                root = fxmlLoader.load();
+                FriendPageCont friendPageCont = fxmlLoader.getController();
+                scene = new Scene(root);
+                friendPageCont.initializePage();
                 break;
         }
         stage.setScene(scene);

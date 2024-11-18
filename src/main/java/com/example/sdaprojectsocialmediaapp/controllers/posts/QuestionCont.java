@@ -1,10 +1,14 @@
-package com.example.sdaprojectsocialmediaapp.controllers;
+package com.example.sdaprojectsocialmediaapp.controllers.posts;
 
+import com.example.sdaprojectsocialmediaapp.Router;
+import com.example.sdaprojectsocialmediaapp.controllers.MainController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.input.MouseEvent;
+
+import java.io.IOException;
 
 
 public class QuestionCont extends MainController {
@@ -38,6 +42,22 @@ public class QuestionCont extends MainController {
     @FXML
     void handleAnswer(MouseEvent event) {
         // Will show a text area to get answer
+    }
+
+    @FXML
+    void createNewQuestion(MouseEvent event) throws IOException {
+        // Routing to the post creation page
+        Router.navigateTo("Question Form");
+    }
+
+    @FXML
+    void submit(MouseEvent event) throws IOException {
+        // Create an activity post object
+
+        // Insert post data to database
+
+        // Return back to Activity posts page
+        Router.navigateTo("Question Page");
     }
 
     @FXML
