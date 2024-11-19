@@ -117,7 +117,8 @@ public class PostRepository {
                     while (rs4.next()){
                         int replyID = rs4.getInt("reply_id");
                         int stdID = rs4.getInt("student_id");
-                        StudentActivityReply reply = new StudentActivityReply(stdID, replyID);
+                        Timestamp timeStamp = rs4.getTimestamp("time_stamp");
+                        StudentActivityReply reply = new StudentActivityReply(stdID, replyID, postID, timeStamp);
 
                         studentReply.add(reply);
                     }
