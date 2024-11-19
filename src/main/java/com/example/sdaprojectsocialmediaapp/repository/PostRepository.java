@@ -429,4 +429,25 @@ public class PostRepository {
         return null;
     }
 
+    public String getReplyFromId(int replyId) {
+        String sql = "Select text from reply where id = ?";
+
+        try(Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, replyId);
+            ResultSet rs1 = pstmt.executeQuery();
+
+            if (rs1.next()) {
+                String text = rs1.getString("text");
+                return text;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error finding posts" + e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
