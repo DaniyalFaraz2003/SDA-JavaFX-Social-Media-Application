@@ -80,6 +80,11 @@ public class SimplePostCont extends MainController {
     }
 
     @FXML
+    void handleAnswer(MouseEvent event) {
+
+    }
+
+    @FXML
     void createNewPost(MouseEvent event) throws IOException {
         // Routing to the post creation page
         Router.navigateTo("Simple Post Form");
