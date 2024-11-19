@@ -3,15 +3,19 @@ package com.example.sdaprojectsocialmediaapp.controllers.posts;
 import com.example.sdaprojectsocialmediaapp.Router;
 import com.example.sdaprojectsocialmediaapp.controllers.MainController;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.StandardCopyOption;
 import java.util.Objects;
+import java.nio.file.Files;
 
 public class SimplePostCont extends MainController {
     @FXML
@@ -27,7 +31,19 @@ public class SimplePostCont extends MainController {
     private Label postType;
 
     @FXML
-    private Label postTitle;
+    private TextField postTitle;
+
+    @FXML
+    private Label postHeading;
+
+    @FXML
+    private TextField commentBox;
+
+    @FXML
+    private ScrollPane comments;
+
+    @FXML
+    private TextArea postContent;
 
     @FXML
     private Label postDescription;
@@ -40,6 +56,9 @@ public class SimplePostCont extends MainController {
 
     @FXML
     private ImageView postImage;
+
+    @FXML
+    private Button uploadBtn;
 
     @FXML
     public String getPostType() {
@@ -56,7 +75,7 @@ public class SimplePostCont extends MainController {
     }
 
     @FXML
-    void handleAnswer(MouseEvent event) {
+    void handleComment(MouseEvent event) {
         // Will Handle Answers
     }
 
@@ -64,6 +83,46 @@ public class SimplePostCont extends MainController {
     void createNewPost(MouseEvent event) throws IOException {
         // Routing to the post creation page
         Router.navigateTo("Simple Post Form");
+    }
+
+    @FXML
+    void uploadImage(MouseEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select an Image");
+
+        // Filter only image file types (e.g., .png, .jpg, .jpeg)
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+        );
+
+        // Show open file dialog
+        File file = fileChooser.showOpenDialog(new Stage());
+        if (file != null) {
+            try {
+                // Define the target directory (post_images in resources)
+                String targetDirPath = "src/main/resources/post_images";
+                File targetDir = new File(targetDirPath);
+                if (!targetDir.exists()) {
+                    targetDir.mkdirs(); // Create the directory if it doesn't exist
+                }
+
+                // Find the next available file name (1.jpeg, 2.jpeg, etc.)
+                int fileIndex = 1;
+                File targetFile;
+                do {
+                    targetFile = new File(targetDir, fileIndex + ".jpeg");
+                    fileIndex++;
+                } while (targetFile.exists());
+
+                // Copy the file to the target directory with the new name
+                Files.copy(file.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+                System.out.println("File saved as: " + targetFile.getAbsolutePath());
+                uploadBtn.setDisable(true);
+            } catch (IOException e) {
+                System.out.println("Error saving the file: " + e.getMessage());
+            }
+        }
     }
 
     @FXML
@@ -92,5 +151,4 @@ public class SimplePostCont extends MainController {
     public void initializeForm() {
         // Fetch data to populate form
     }
-
 }

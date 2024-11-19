@@ -3,9 +3,11 @@ package com.example.sdaprojectsocialmediaapp.controllers.posts;
 import com.example.sdaprojectsocialmediaapp.Router;
 import com.example.sdaprojectsocialmediaapp.controllers.MainController;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.input.MouseEvent;
 
@@ -23,6 +25,12 @@ public class ActivityPostCont extends MainController {
 
     @FXML
     private TextField postTitle;
+
+    @FXML
+    private HBox replyButtonBox;
+
+    @FXML
+    private TextField replyContent;
 
     @FXML
     public String getPostType() {
@@ -51,8 +59,18 @@ public class ActivityPostCont extends MainController {
     }
 
     @FXML
+    void addReplyButton(MouseEvent event) {
+        Button button = new Button(replyContent.getText());
+        replyContent.setText("");
+        button.getStyleClass().add("postButton");
+        replyButtonBox.getChildren().add(button);
+        replyContent.setDisable(replyButtonBox.getChildren().size() == 3);
+    }
+
+    @FXML
     public void initializePost() {
         // Fetch data to populate post
+        // set replyBox layout-y to 528
     }
 
     @FXML

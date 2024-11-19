@@ -35,6 +35,7 @@ public class HomepageCont extends MainController {
 
     private void displayPosts() throws IOException {
         container.getChildren().clear();
+
         // Loading Activity Posts
         for (int i = 0; i < 3; i++) {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/activity_post/activity_post.fxml"));
