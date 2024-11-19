@@ -1,16 +1,30 @@
 package com.example.sdaprojectsocialmediaapp.controllers;
 
 import com.example.sdaprojectsocialmediaapp.Router;
+import com.example.sdaprojectsocialmediaapp.controllers.posts.ActivityPostCont;
+import com.example.sdaprojectsocialmediaapp.controllers.posts.QuestionCont;
+import com.example.sdaprojectsocialmediaapp.controllers.posts.SimplePostCont;
+import com.example.sdaprojectsocialmediaapp.models.Student;
+import com.example.sdaprojectsocialmediaapp.models.posts.ActivityPost;
+import com.example.sdaprojectsocialmediaapp.models.posts.Question;
+import com.example.sdaprojectsocialmediaapp.models.posts.SimplePost;
+import com.example.sdaprojectsocialmediaapp.repository.PostRepository;
+import com.example.sdaprojectsocialmediaapp.services.Session;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ProfileCont extends MainController {
+
+    private PostRepository postRepo = new PostRepository();
 
     @FXML
     private VBox container;
@@ -58,22 +72,59 @@ public class ProfileCont extends MainController {
 
     @FXML
     void updateProfile(MouseEvent event) throws IOException {
+        // update user's profile in database
         Router.navigateTo("Profile Page");
     }
 
     @FXML
-    public void initializePage() {
-        // Initializes labels and post VBox
+    public void initializePage() throws IOException {
+        // populating profile data
+        Student student = Session.getSessionVariable();
+        name.setText(student.getName());
+        phone.setText(student.getPhone());
+        email.setText(student.getEmail());
+        username.setText(student.getUserName());
+        password.setText(student.getPassword());
+
+//        // populating the posts
+//        container.getChildren().clear();
+//        ArrayList<SimplePost> simplePosts = postRepo.getAllSimplePosts();
+//        ArrayList<ActivityPost> activityPosts = postRepo.getAllActivityPosts();
+//        ArrayList<Question> questions = postRepo.getAllQuestions();
+//        // Loading Activity Posts
+//        for (ActivityPost activityPost : activityPosts) {
+//            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/activity_post/activity_post.fxml"));
+//            Pane pane = loader.load();
+//            ActivityPostCont controller = loader.getController();
+//            controller.initializePost(activityPost);
+//            container.getChildren().add(pane);
+//        }
+//        // Loading Simple Posts
+//        for (SimplePost simplePost : simplePosts) {
+//            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/simple_post/simple_post.fxml"));
+//            Pane pane = loader.load();
+//            SimplePostCont controller = loader.getController();
+//            controller.initializePost(simplePost);
+//            container.getChildren().add(pane);
+//        }
+//        // Loading Questions
+//        for (int i = 0; i < 3; i++) {
+//            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/question/question.fxml"));
+//            Pane pane = loader.load();
+//            QuestionCont controller = loader.getController();
+//            controller.initializePost();
+//            container.getChildren().add(pane);
+//        }
     }
 
     @FXML
     public void initializeForm() {
-        // Initializes text fields using session object
-        i_name.setText("Hammad Ali");
-        i_phone.setText("03331234567");
-        i_email.setText("i220914@edu.pk");
-        i_username.setText("Unsatisfying Prince");
-        i_password.setText("pass2");
+        Student student = Session.getSessionVariable();
+        i_name.setText(student.getName());
+        i_phone.setText(student.getPhone());
+        i_email.setText(student.getEmail());
+        i_username.setText(student.getUserName());
+        i_password.setText(student.getPassword());
     }
 
 }

@@ -82,6 +82,12 @@ public class ActivityPostCont extends MainController {
 
     @FXML
     void addReplyButton(MouseEvent event) {
+        String content = postContent.getText();
+        if (content.length() > 10) {
+
+        } else {
+
+        }
         Button button = new Button(replyContent.getText());
         replyContent.setText("");
         button.getStyleClass().add("postButton");

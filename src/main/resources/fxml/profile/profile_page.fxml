@@ -155,11 +155,11 @@
       <Label layoutX="280.0" layoutY="154.0" styleClass="labelHeading" stylesheets="@../../css/profile.css" text="Username:" />
       <Label layoutX="696.0" layoutY="154.0" styleClass="labelHeading" stylesheets="@../../css/profile.css" text="Password:" />
       <Label layoutX="280.0" layoutY="209.0" styleClass="labelHeading" stylesheets="@../../css/profile.css" text="Phone:" />
-      <Label fx:id="name" layoutX="340.0" layoutY="103.0" styleClass="labelData" stylesheets="@../../css/profile.css" text="Hammad Ali" />
-      <Label fx:id="email" layoutX="753.0" layoutY="103.0" styleClass="labelData" stylesheets="@../../css/profile.css" text="i220914@nu.edu.pk" />
-      <Label fx:id="username" layoutX="371.0" layoutY="154.0" styleClass="labelData" stylesheets="@../../css/profile.css" text="Unsatisfying Prince" />
-      <Label fx:id="password" layoutX="784.0" layoutY="154.0" styleClass="labelData" stylesheets="@../../css/profile.css" text="pass2" />
-      <Label fx:id="phone" layoutX="340.0" layoutY="209.0" styleClass="labelData" stylesheets="@../../css/profile.css" text="03331234567" />
+      <Label fx:id="name" layoutX="340.0" layoutY="103.0" styleClass="labelData" stylesheets="@../../css/profile.css" />
+      <Label fx:id="email" layoutX="753.0" layoutY="103.0" styleClass="labelData" stylesheets="@../../css/profile.css" />
+      <Label fx:id="username" layoutX="371.0" layoutY="154.0" styleClass="labelData" stylesheets="@../../css/profile.css" />
+      <Label fx:id="password" layoutX="784.0" layoutY="154.0" styleClass="labelData" stylesheets="@../../css/profile.css" />
+      <Label fx:id="phone" layoutX="340.0" layoutY="209.0" styleClass="labelData" stylesheets="@../../css/profile.css" />
       <Button layoutX="1053.0" layoutY="696.0" mnemonicParsing="false" onMouseClicked="#openProfileForm" stylesheets="@../../css/profile.css" text="Edit Profile" />
       <Button layoutX="1165.0" layoutY="696.0" mnemonicParsing="false" onMouseClicked="#openPostForm" stylesheets="@../../css/profile.css" text="Edit Posts" />
    </children>
