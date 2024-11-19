@@ -16,6 +16,6 @@
       <Label fx:id="reactionCount" layoutX="694.0" layoutY="382.0" styleClass="postTitle" text="0" />
       <Label fx:id="author" layoutX="190.0" layoutY="395.0" styleClass="postMeta" text="By: Hammad Ali" />
       <Label fx:id="timestamp" layoutX="5.0" layoutY="395.0" styleClass="postMeta" text="Posted On: 2024-11-12 08:35:12" />
-      <Button layoutX="541.0" layoutY="380.0" mnemonicParsing="false" onMouseClicked="#handleAnswer" styleClass="postButton" text="Comment" />
+      <Button layoutX="541.0" layoutY="380.0" mnemonicParsing="false" onMouseClicked="#handleComment" styleClass="postButton" text="Comment" />
    </children>
 </Pane>

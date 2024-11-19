@@ -15,23 +15,23 @@ public class MainApp {
     public static void main(String[] args) {
         StudentRepository studentRepository = new StudentRepository();
 //        System.out.println(studentRepository.checkStudentExists("i221096"));
-        //Application.launch(Router.class, args);
-        PostRepository postRepository = new PostRepository();
-        System.out.println(postRepository.getPostType(2));
-
-        SimplePost post = postRepository.getSimplePost(2);
-        System.out.println(post.getId());
-        System.out.println(post.getDescription());
-        System.out.println(post.getTitle());
-        System.out.println(post.getAuthorId());
-        System.out.println(post.getPostImageUrl());
-        System.out.println(post.getNumberOfLikes());
-        for(Comment c : post.getComments()){
-            System.out.println(c.getAuthorId());
-            System.out.println(c.getLikes());
-            System.out.println(c.getContent());
-            System.out.println(c.getDate());
-            System.out.println(c.getPostId());
-        }
+        Application.launch(Router.class, args);
+//        PostRepository postRepository = new PostRepository();
+//        System.out.println(postRepository.getPostType(2));
+//
+//        SimplePost post = postRepository.getSimplePost(2);
+//        System.out.println(post.getId());
+//        System.out.println(post.getDescription());
+//        System.out.println(post.getTitle());
+//        System.out.println(post.getAuthorId());
+//        System.out.println(post.getPostImageUrl());
+//        System.out.println(post.getNumberOfLikes());
+//        for(Comment c : post.getComments()){
+//            System.out.println(c.getAuthorId());
+//            System.out.println(c.getLikes());
+//            System.out.println(c.getContent());
+//            System.out.println(c.getDate());
+//            System.out.println(c.getPostId());
+//        }
     }
 }
