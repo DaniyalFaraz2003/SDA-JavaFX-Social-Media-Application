@@ -3,7 +3,10 @@ package com.example.sdaprojectsocialmediaapp.controllers.posts;
 import com.example.sdaprojectsocialmediaapp.Router;
 import com.example.sdaprojectsocialmediaapp.controllers.MainController;
 import com.example.sdaprojectsocialmediaapp.controllers.engagements.AnswerCont;
+import com.example.sdaprojectsocialmediaapp.controllers.engagements.CommentCont;
 import com.example.sdaprojectsocialmediaapp.models.engagements.Answer;
+import com.example.sdaprojectsocialmediaapp.models.posts.Question;
+import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -18,14 +21,8 @@ import java.sql.Timestamp;
 
 
 public class QuestionCont extends MainController {
-    @FXML
-    private Pane pane;
-
-    @FXML
-    private Label postType;
-
-    @FXML
-    private Label votes;
+    private StudentRepository studentRepository = new StudentRepository();
+    private int id;
 
     @FXML
     private TextField answerBox;
@@ -34,7 +31,30 @@ public class QuestionCont extends MainController {
     private VBox answers;
 
     @FXML
+    private Label authorName;
+
+    @FXML
+    private Label description;
+
+    @FXML
+    private Pane pane;
+
+    @FXML
+    private Label postType;
+
+    @FXML
+    private Label timestamp;
+
+    @FXML
+    private Label title;
+
+    @FXML
     private ToggleButton voteButton;
+
+    @FXML
+    private Label votes;
+
+
 
     @FXML
     public String getPostType() {
@@ -80,8 +100,26 @@ public class QuestionCont extends MainController {
     }
 
     @FXML
-    public void initializePost() {
+    public void initializePost(Question question) {
         // Fetch data to populate post
+        this.id = question.getId();
+        this.title.setText(question.getTitle());
+        this.description.setText(question.getDescription());
+        this.timestamp.setText("Posted On: " + question.getDate());
+        this.authorName.setText("By: " + studentRepository.getStudentByID(question.getAuthorId()).getName());
+
+        try {
+            for (Answer answer : question.getAnswers()) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/question/answer.fxml"));
+                Pane commentPane = loader.load();
+                AnswerCont controller = loader.getController();
+                controller.initializeAnswer(answer);
+                this.answers.getChildren().add(commentPane);
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

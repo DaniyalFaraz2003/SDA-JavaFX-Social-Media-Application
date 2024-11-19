@@ -4,6 +4,7 @@ import com.example.sdaprojectsocialmediaapp.controllers.posts.ActivityPostCont;
 import com.example.sdaprojectsocialmediaapp.controllers.posts.QuestionCont;
 import com.example.sdaprojectsocialmediaapp.controllers.posts.SimplePostCont;
 import com.example.sdaprojectsocialmediaapp.models.posts.ActivityPost;
+import com.example.sdaprojectsocialmediaapp.models.posts.Question;
 import com.example.sdaprojectsocialmediaapp.models.posts.SimplePost;
 import com.example.sdaprojectsocialmediaapp.repository.PostRepository;
 import javafx.fxml.FXML;
@@ -43,6 +44,7 @@ public class HomepageCont extends MainController {
         container.getChildren().clear();
         ArrayList<SimplePost> simplePosts = postRepo.getAllSimplePosts();
         ArrayList<ActivityPost> activityPosts = postRepo.getAllActivityPosts();
+        ArrayList<Question> questions = postRepo.getAllQuestions();
         // Loading Activity Posts
         for (ActivityPost activityPost : activityPosts) {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/activity_post/activity_post.fxml"));
@@ -60,11 +62,11 @@ public class HomepageCont extends MainController {
             container.getChildren().add(pane);
         }
         // Loading Questions
-        for (int i = 0; i < 3; i++) {
+        for (Question question : questions) {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/question/question.fxml"));
             Pane pane = loader.load();
             QuestionCont controller = loader.getController();
-            controller.initializePost();
+            controller.initializePost(question);
             container.getChildren().add(pane);
         }
     }
