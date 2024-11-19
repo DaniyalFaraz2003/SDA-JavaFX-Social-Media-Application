@@ -2,10 +2,14 @@ package com.example.sdaprojectsocialmediaapp.controllers.posts;
 
 import com.example.sdaprojectsocialmediaapp.Router;
 import com.example.sdaprojectsocialmediaapp.controllers.MainController;
+import com.example.sdaprojectsocialmediaapp.controllers.engagements.ReplyCont;
 import com.example.sdaprojectsocialmediaapp.models.engagements.Reply;
+import com.example.sdaprojectsocialmediaapp.models.engagements.StudentActivityReply;
 import com.example.sdaprojectsocialmediaapp.models.posts.ActivityPost;
 import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
+import com.example.sdaprojectsocialmediaapp.services.Session;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -13,8 +17,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 
 public class ActivityPostCont extends MainController {
     StudentRepository studentRepository = new StudentRepository();
@@ -31,7 +37,6 @@ public class ActivityPostCont extends MainController {
 
     @FXML
     private Label description;
-
 
     @FXML
     private HBox replyBox;
@@ -55,13 +60,14 @@ public class ActivityPostCont extends MainController {
     private TextField replyContent;
 
     @FXML
-    public String getPostType() {
-        return postType.getText();
-    }
+    private Label warning;
 
     @FXML
-    void handleReply(MouseEvent event) {
-        // Will display a text area to get reply
+    private VBox replies;
+
+    @FXML
+    public String getPostType() {
+        return postType.getText();
     }
 
     @FXML
@@ -82,16 +88,16 @@ public class ActivityPostCont extends MainController {
 
     @FXML
     void addReplyButton(MouseEvent event) {
-        String content = postContent.getText();
+        String content = replyContent.getText();
         if (content.length() > 10) {
-
+            warning.setVisible(true);
         } else {
-
+            warning.setVisible(false);
+            Button button = new Button(replyContent.getText());
+            replyContent.setText("");
+            button.getStyleClass().add("postButton");
+            replyButtonBox.getChildren().add(button);
         }
-        Button button = new Button(replyContent.getText());
-        replyContent.setText("");
-        button.getStyleClass().add("postButton");
-        replyButtonBox.getChildren().add(button);
         replyContent.setDisable(replyButtonBox.getChildren().size() == 3);
     }
 
@@ -103,12 +109,21 @@ public class ActivityPostCont extends MainController {
         this.description.setText(activityPost.getDescription());
         this.timestamp.setText("Posted On: " + activityPost.getDate());
         this.authorName.setText("By: " + studentRepository.getStudentByID(activityPost.getAuthorId()).getName());
-        for (Reply reply: activityPost.getReplies()) {
+        for (Reply reply : activityPost.getReplies()) {
             Button button = new Button(reply.getText());
             button.getStyleClass().add("postButton");
             button.setOnMouseClicked(event -> {
                 System.out.println(button.getText() + " button of Activity Post: " + this.id + " is clicked.");
-
+                StudentActivityReply sar = new StudentActivityReply(Session.getSessionVariable().getId(), reply.getId(), this.id, new Timestamp(System.currentTimeMillis()));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/activity_post/reply.fxml"));
+                try {
+                    Pane pane = loader.load();
+                    ReplyCont controller = loader.getController();
+                    controller.initializeReply(sar);
+                    replies.getChildren().add(pane);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             });
             replyBox.getChildren().add(button);
         }
