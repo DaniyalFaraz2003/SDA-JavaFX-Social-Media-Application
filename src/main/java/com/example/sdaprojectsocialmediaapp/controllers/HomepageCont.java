@@ -3,6 +3,7 @@ package com.example.sdaprojectsocialmediaapp.controllers;
 import com.example.sdaprojectsocialmediaapp.controllers.posts.ActivityPostCont;
 import com.example.sdaprojectsocialmediaapp.controllers.posts.QuestionCont;
 import com.example.sdaprojectsocialmediaapp.controllers.posts.SimplePostCont;
+import com.example.sdaprojectsocialmediaapp.models.posts.ActivityPost;
 import com.example.sdaprojectsocialmediaapp.models.posts.SimplePost;
 import com.example.sdaprojectsocialmediaapp.repository.PostRepository;
 import javafx.fxml.FXML;
@@ -41,12 +42,13 @@ public class HomepageCont extends MainController {
     private void displayPosts() throws IOException {
         container.getChildren().clear();
         ArrayList<SimplePost> simplePosts = postRepo.getAllSimplePosts();
+        ArrayList<ActivityPost> activityPosts = postRepo.getAllActivityPosts();
         // Loading Activity Posts
-        for (int i = 0; i < 3; i++) {
+        for (ActivityPost activityPost : activityPosts) {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/activity_post/activity_post.fxml"));
             Pane pane = loader.load();
             ActivityPostCont controller = loader.getController();
-            controller.initializePost();
+            controller.initializePost(activityPost);
             container.getChildren().add(pane);
         }
         // Loading Simple Posts

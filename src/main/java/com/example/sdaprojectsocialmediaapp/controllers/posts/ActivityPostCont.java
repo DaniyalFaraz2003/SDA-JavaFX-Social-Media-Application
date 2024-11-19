@@ -2,7 +2,9 @@ package com.example.sdaprojectsocialmediaapp.controllers.posts;
 
 import com.example.sdaprojectsocialmediaapp.Router;
 import com.example.sdaprojectsocialmediaapp.controllers.MainController;
+import com.example.sdaprojectsocialmediaapp.models.engagements.Reply;
 import com.example.sdaprojectsocialmediaapp.models.posts.ActivityPost;
+import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,6 +17,9 @@ import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 
 public class ActivityPostCont extends MainController {
+    StudentRepository studentRepository = new StudentRepository();
+    private int id;
+
     @FXML
     private Pane pane;
 
@@ -86,9 +91,20 @@ public class ActivityPostCont extends MainController {
 
     @FXML
     public void initializePost(ActivityPost activityPost) {
+        this.replyBox.getChildren().clear();
+        this.id = activityPost.getId();
         this.title.setText(activityPost.getTitle());
         this.description.setText(activityPost.getDescription());
         this.timestamp.setText("Posted On: " + activityPost.getDate());
+        this.authorName.setText("By: " + studentRepository.getStudentByID(activityPost.getAuthorId()).getName());
+        for (Reply reply: activityPost.getReplies()) {
+            Button button = new Button(reply.getText());
+            button.getStyleClass().add("postButton");
+            button.setOnMouseClicked(event -> {
+                System.out.println(button.getText() + " button of Activity Post: " + this.id + " is clicked.");
+            });
+            replyBox.getChildren().add(button);
+        }
 
         // Fetch data to populate post
         // set replyBox layout-y to 528
