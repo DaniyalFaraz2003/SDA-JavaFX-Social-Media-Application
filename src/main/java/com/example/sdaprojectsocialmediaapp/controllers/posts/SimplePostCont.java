@@ -92,5 +92,4 @@ public class SimplePostCont extends MainController {
     public void initializeForm() {
         // Fetch data to populate form
     }
-
 }

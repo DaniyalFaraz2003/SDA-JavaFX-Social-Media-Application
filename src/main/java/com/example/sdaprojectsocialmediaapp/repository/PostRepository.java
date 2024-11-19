@@ -112,13 +112,14 @@ public class PostRepository {
                 String description = rs2.getString("description");
                 String time_stamp = rs2.getString("time_stamp");
 
-                ActivityPost post = new ActivityPost(id, title, description, author_id, time_stamp);
+                // ActivityPost post = new ActivityPost(id, title, description, author_id, time_stamp);
             }
 
         } catch (SQLException e) {
             System.out.println("Error finding posts" + e.getMessage());
             e.printStackTrace();
         }
+        return null;
     }
 
 
