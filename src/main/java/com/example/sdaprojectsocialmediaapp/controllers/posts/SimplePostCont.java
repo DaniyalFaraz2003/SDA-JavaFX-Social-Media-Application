@@ -2,18 +2,23 @@ package com.example.sdaprojectsocialmediaapp.controllers.posts;
 
 import com.example.sdaprojectsocialmediaapp.Router;
 import com.example.sdaprojectsocialmediaapp.controllers.MainController;
+import com.example.sdaprojectsocialmediaapp.controllers.engagements.CommentCont;
+import com.example.sdaprojectsocialmediaapp.models.engagements.Comment;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.StandardCopyOption;
+import java.sql.Timestamp;
 import java.util.Objects;
 import java.nio.file.Files;
 
@@ -40,7 +45,7 @@ public class SimplePostCont extends MainController {
     private TextField commentBox;
 
     @FXML
-    private ScrollPane comments;
+    private VBox comments;
 
     @FXML
     private TextArea postContent;
@@ -75,8 +80,15 @@ public class SimplePostCont extends MainController {
     }
 
     @FXML
-    void handleComment(MouseEvent event) {
-        // Will Handle Answers
+    void handleComment(MouseEvent event) throws IOException {
+        String commentString = commentBox.getText();
+        commentBox.setText("");
+        Comment comment = new Comment(0, 0, new Timestamp(System.currentTimeMillis()), commentString, 10);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/simple_post/comment.fxml"));
+        Pane commentPane = loader.load();
+        CommentCont controller = loader.getController();
+        controller.initializeComment(comment);
+        comments.getChildren().add(commentPane);
     }
 
     @FXML

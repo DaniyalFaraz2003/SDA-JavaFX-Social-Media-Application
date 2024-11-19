@@ -1,6 +1,8 @@
 package com.example.sdaprojectsocialmediaapp.models.engagements;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Response {
     private int postId;
@@ -31,8 +33,10 @@ public class Response {
         this.authorId = authorId;
     }
 
-    public Timestamp getDate() {
-        return date;
+    public String getDate() {
+        LocalDateTime localDateTime = date.toLocalDateTime();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return localDateTime.format(formatter);
     }
 
     public void setDate(Timestamp date) {
