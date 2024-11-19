@@ -75,7 +75,7 @@ public class SimplePostCont extends MainController {
     }
 
     @FXML
-    void handleAnswer(MouseEvent event) {
+    void handleComment(MouseEvent event) {
         // Will Handle Answers
     }
 
