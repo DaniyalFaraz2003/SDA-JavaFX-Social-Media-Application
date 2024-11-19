@@ -77,7 +77,7 @@ public class StudentRepository {
         return false;
     }
 
-    public Student getStudent(String username) {
+    public Student getStudentbyUsername(String username) {
         String sql = "SELECT * FROM Student WHERE username = ?";
 
         try (Connection conn = dbConnector.getConnection()) {
@@ -95,6 +95,35 @@ public class StudentRepository {
                     String phone = rs.getString("phone_number");
                     Student student = new Student(name, user, password, email, phone);
                     student.setId(id);
+                    return student;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error checking if Student Exists" + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public Student getStudentByID(int id) {
+        String sql = "SELECT * FROM Student WHERE id = ?";
+
+        try (Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            //Set parameters
+            pstmt.setInt(1, id);
+
+            try(ResultSet rs = pstmt.executeQuery()){
+                if(rs.next()){
+                    int userid = rs.getInt("ID");
+                    String user = rs.getString("username");
+                    String password = rs.getString("password");
+                    String name = rs.getString("name");
+                    String email = rs.getString("email");
+                    String phone = rs.getString("phone_number");
+                    Student student = new Student(name, user, password, email, phone);
+                    student.setId(userid);
                     return student;
                 }
             }

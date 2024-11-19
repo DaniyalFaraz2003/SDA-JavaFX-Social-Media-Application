@@ -51,8 +51,8 @@ public class  LoginCont {
         if(Validate.isValidUsername(username)) {
             if(studentRepository.checkStudentExists(username, password)) {
                 // Further session begins
-                Session.maintainSession(studentRepository.getStudent(username));
-                System.out.println(studentRepository.getStudent(username));
+                Session.maintainSession(studentRepository.getStudentbyUsername(username));
+                System.out.println(studentRepository.getStudentbyUsername(username));
                 Router.navigateTo("Homepage");
             }
             else{
@@ -62,7 +62,7 @@ public class  LoginCont {
         else{
             err.setText("Invalid Username or Password");
         }
-        Router.navigateTo("Homepage");
+
     }
 
 }

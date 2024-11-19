@@ -1,6 +1,7 @@
 package com.example.sdaprojectsocialmediaapp.controllers.engagements;
 
 import com.example.sdaprojectsocialmediaapp.models.engagements.Comment;
+import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
 import com.example.sdaprojectsocialmediaapp.services.Session;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -8,6 +9,8 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 
 public class CommentCont {
+    StudentRepository studentRepo = new StudentRepository();
+
     @FXML
     private Label comment;
 
@@ -35,7 +38,7 @@ public class CommentCont {
     @FXML
     public void initializeComment(Comment comment) {
         this.comment.setText(comment.getContent());
-        this.commentAuthor.setText(Session.getSessionVariable().getName());
+        this.commentAuthor.setText(studentRepo.getStudentByID(comment.getAuthorId()).getName());
         this.commentTimestamp.setText(comment.getDate());
         this.likeCount.setText(Integer.toString(comment.getLikes()));
     }

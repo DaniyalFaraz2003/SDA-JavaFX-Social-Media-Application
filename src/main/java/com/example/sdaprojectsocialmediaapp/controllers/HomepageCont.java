@@ -3,6 +3,8 @@ package com.example.sdaprojectsocialmediaapp.controllers;
 import com.example.sdaprojectsocialmediaapp.controllers.posts.ActivityPostCont;
 import com.example.sdaprojectsocialmediaapp.controllers.posts.QuestionCont;
 import com.example.sdaprojectsocialmediaapp.controllers.posts.SimplePostCont;
+import com.example.sdaprojectsocialmediaapp.models.posts.SimplePost;
+import com.example.sdaprojectsocialmediaapp.repository.PostRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -13,8 +15,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ToggleButton;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class HomepageCont extends MainController {
+    private PostRepository postRepo = new PostRepository();
+
     @FXML
     private Stage stage;
 
@@ -35,7 +40,7 @@ public class HomepageCont extends MainController {
 
     private void displayPosts() throws IOException {
         container.getChildren().clear();
-
+        ArrayList<SimplePost> simplePosts = postRepo.getAllSimplePosts();
         // Loading Activity Posts
         for (int i = 0; i < 3; i++) {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/activity_post/activity_post.fxml"));
@@ -45,11 +50,11 @@ public class HomepageCont extends MainController {
             container.getChildren().add(pane);
         }
         // Loading Simple Posts
-        for (int i = 0; i < 3; i++) {
+        for (SimplePost simplePost : simplePosts) {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/simple_post/simple_post.fxml"));
             Pane pane = loader.load();
             SimplePostCont controller = loader.getController();
-            controller.initializePost("/post_images/postImage.jpeg");
+            controller.initializePost(simplePost);
             container.getChildren().add(pane);
         }
         // Loading Questions

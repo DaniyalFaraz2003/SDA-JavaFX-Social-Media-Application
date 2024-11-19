@@ -54,9 +54,9 @@ public class Router extends Application {
     @Override
     public void start(Stage stage1) throws IOException {
         setStage(stage1);
-        fxmlLoader = new FXMLLoader(Router.class.getResource("/fxml/register.fxml"));
+        fxmlLoader = new FXMLLoader(Router.class.getResource("/fxml/login.fxml"));
         Parent root = fxmlLoader.load();
-        RegisterCont controller = fxmlLoader.getController();
+        LoginCont controller = fxmlLoader.getController();
         scene = new Scene(root);
         stage.setTitle("FASTBook Social Media Application");
         stage.getIcons().add(new Image(Objects.requireNonNull(Router.class.getResource("/images/logo.png")).toExternalForm()));

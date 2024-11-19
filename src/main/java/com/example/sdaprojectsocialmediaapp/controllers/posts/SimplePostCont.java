@@ -4,6 +4,8 @@ import com.example.sdaprojectsocialmediaapp.Router;
 import com.example.sdaprojectsocialmediaapp.controllers.MainController;
 import com.example.sdaprojectsocialmediaapp.controllers.engagements.CommentCont;
 import com.example.sdaprojectsocialmediaapp.models.engagements.Comment;
+import com.example.sdaprojectsocialmediaapp.models.posts.SimplePost;
+import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -19,10 +21,15 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.StandardCopyOption;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.nio.file.Files;
 
 public class SimplePostCont extends MainController {
+    private StudentRepository studentRepository = new StudentRepository();
+
+    private int id;
+
     @FXML
     private Pane pane;
 
@@ -153,10 +160,30 @@ public class SimplePostCont extends MainController {
     }
 
     @FXML
-    public void initializePost(String imageUrl) {
-        String resolvedPath = Objects.requireNonNull(getClass().getResource(imageUrl)).toExternalForm();
+    public void initializePost(SimplePost simplePost) {
+        this.id = simplePost.getId();
+        this.postHeading.setText(simplePost.getTitle());
+        this.postDescription.setText(simplePost.getDescription());
+        String resolvedPath = Objects.requireNonNull(getClass().getResource(simplePost.getPostImageUrl())).toExternalForm();
         Image image = new Image(resolvedPath);
         postImage.setImage(image);
+        this.timestamp.setText("Posted On: " + simplePost.getDate());
+        this.author.setText("By: " + studentRepository.getStudentByID(simplePost.getAuthorId()).getName());
+        this.reactionCount.setText(Integer.toString(simplePost.getNumberOfLikes()));
+
+
+        try {
+            for (Comment comment : simplePost.getComments()) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/simple_post/comment.fxml"));
+                Pane commentPane = loader.load();
+                CommentCont controller = loader.getController();
+                controller.initializeComment(comment);
+                this.comments.getChildren().add(commentPane);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @FXML
