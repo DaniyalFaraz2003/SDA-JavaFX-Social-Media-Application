@@ -11,27 +11,28 @@ import com.example.sdaprojectsocialmediaapp.repository.PostRepository;
 import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
 import javafx.application.Application;
 
+import java.util.ArrayList;
+
 public class MainApp {
     public static void main(String[] args) {
         StudentRepository studentRepository = new StudentRepository();
 //        System.out.println(studentRepository.checkStudentExists("i221096"));
         //Application.launch(Router.class, args);
         PostRepository postRepository = new PostRepository();
-        System.out.println(postRepository.getPostType(2));
+        ArrayList<Question> posts = postRepository.getAllQuestions();
 
-        SimplePost post = postRepository.getSimplePost(2);
-        System.out.println(post.getId());
-        System.out.println(post.getDescription());
-        System.out.println(post.getTitle());
-        System.out.println(post.getAuthorId());
-        System.out.println(post.getPostImageUrl());
-        System.out.println(post.getNumberOfLikes());
-        for(Comment c : post.getComments()){
-            System.out.println(c.getAuthorId());
-            System.out.println(c.getLikes());
-            System.out.println(c.getContent());
-            System.out.println(c.getDate());
-            System.out.println(c.getPostId());
+        for (Question post : posts) {
+            System.out.println(post.getId());
+            System.out.println(post.getAuthorId());
+            System.out.println(post.getTitle());
+            System.out.println(post.getDescription());
+            System.out.println(post.getDate());
+
+            for (Answer answer  : post.getAnswers()) {
+                System.out.println(answer.getContent());
+                System.out.println(answer.getUpVotes());
+                System.out.println(answer.getDate());
+            }
         }
     }
 }

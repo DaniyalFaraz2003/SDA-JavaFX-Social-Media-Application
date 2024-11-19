@@ -13,6 +13,7 @@ import com.example.sdaprojectsocialmediaapp.models.engagements.Reply;
 
 
 import java.sql.*;
+import java.time.Instant;
 import java.util.ArrayList;
 
 public class PostRepository {
@@ -235,4 +236,195 @@ public class PostRepository {
         }
         return null;
     }
+
+    public void createActivityPost(int studentID, String title, String description){
+        String sql = "INSERT INTO Post (student_id, title, description, time_stamp) VALUES (?, ?, ?, ?)";
+        String sql2 = "Select MAX(ID) as maxID from post";
+        String sql3 = "Insert into Activity_Post (post_id) Values (?)";
+
+        try (Connection conn = dbConnector.getConnection()) {
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+             PreparedStatement pstmt3 = conn.prepareStatement(sql3);
+
+            // Set parameters for the prepared statement
+            pstmt.setInt(1, studentID);
+            pstmt.setString(2, title);
+            pstmt.setString(3, description);
+            pstmt.setTimestamp(4, Timestamp.from(Instant.now()));
+
+            // Execute the insert
+            pstmt.executeUpdate();
+            System.out.println("Post saved successfully.");
+
+            ResultSet rs = pstmt2.executeQuery();
+            if(rs.next()){
+                int id = rs.getInt("maxID");
+                pstmt3.setInt(1, id);
+
+                pstmt3.executeUpdate();
+                System.out.println("Activity Post saved successfully.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error saving Activity Post: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void createSimpleActivityPost(int studentID, String title, String description, String url, int numLikes){
+        String sql = "INSERT INTO Post (student_id, title, description, time_stamp) VALUES (?, ?, ?, ?)";
+        String sql2 = "Select MAX(ID) as maxID from post";
+        String sql3 = "Insert into Simple_Post (post_id, picture_url, likes) Values (?, ?, ?)";
+
+
+        try (Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+            PreparedStatement pstmt3 = conn.prepareStatement(sql3);
+
+            pstmt.setInt(1, studentID);
+            pstmt.setString(2, title);
+            pstmt.setString(3, description);
+            pstmt.setTimestamp(4, Timestamp.from(Instant.now()));
+
+            // Execute the insert
+            pstmt.executeUpdate();
+            System.out.println("Post saved successfully.");
+
+            ResultSet rs = pstmt2.executeQuery();
+            if(rs.next()){
+                int id = rs.getInt("maxID");
+                pstmt3.setInt(1, id);
+                pstmt3.setString(2, url);
+                pstmt3.setInt(3, numLikes);
+
+                pstmt3.executeUpdate();
+                System.out.println("Simple Post saved successfully.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error saving Simple Post: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void createQuestion(int studentID, String title, String description, int votes){
+        String sql = "INSERT INTO Post (student_id, title, description, time_stamp) VALUES (?, ?, ?, ?)";
+        String sql2 = "Select MAX(ID) as maxID from post";
+        String sql3 = "Insert into Question (post_id, votes) Values (?, ?)";
+
+
+        try (Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+            PreparedStatement pstmt3 = conn.prepareStatement(sql3);
+
+            pstmt.setInt(1, studentID);
+            pstmt.setString(2, title);
+            pstmt.setString(3, description);
+            pstmt.setTimestamp(4, Timestamp.from(Instant.now()));
+
+            // Execute the insert
+            pstmt.executeUpdate();
+            System.out.println("Post saved successfully.");
+
+            ResultSet rs = pstmt2.executeQuery();
+            if(rs.next()){
+                int id = rs.getInt("maxID");
+                pstmt3.setInt(1, id);
+                pstmt3.setInt(2, votes);
+
+                pstmt3.executeUpdate();
+                System.out.println("Question saved successfully.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error saving Question: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<ActivityPost> getAllActivityPosts(){
+        String sql = "SELECT * FROM Activity_Post";
+        ArrayList<ActivityPost> activityPosts = new ArrayList<>();
+
+        try (Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()){
+                int postID = rs.getInt("post_id");
+                ActivityPost post = this.getActivityPost(postID);
+
+                if(post != null){
+                    activityPosts.add(post);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error getting Activity Post: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        if(!activityPosts.isEmpty()){
+            return activityPosts;
+        }
+
+        return null;
+    }
+
+    public ArrayList<SimplePost> getAllSimplePosts(){
+        String sql = "SELECT * FROM Simple_Post";
+        ArrayList<SimplePost> simplePosts = new ArrayList<>();
+
+        try (Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()){
+                int postID = rs.getInt("post_id");
+                SimplePost post = this.getSimplePost(postID);
+
+                if(post != null){
+                    simplePosts.add(post);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error getting Simple Post: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        if(!simplePosts.isEmpty()){
+            return simplePosts;
+        }
+
+        return null;
+    }
+
+    public ArrayList<Question> getAllQuestions(){
+        String sql = "SELECT * FROM Question";
+        ArrayList<Question> questions = new ArrayList<>();
+
+        try (Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()){
+                int postID = rs.getInt("post_id");
+                Question post = this.getQuestion(postID);
+
+                if(post != null){
+                    questions.add(post);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error getting Question Post: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        if(!questions.isEmpty()){
+            return questions;
+        }
+
+        return null;
+    }
+
 }
