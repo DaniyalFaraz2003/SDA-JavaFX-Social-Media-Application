@@ -104,9 +104,10 @@ public class PostRepository {
                     ArrayList<Reply> replies = new ArrayList<>();
 
                     while(rs3.next()){
+                        int r_id = rs3.getInt("id");
                         int p_id = rs3.getInt("post_id");
                         String text = rs3.getString("text");
-                        Reply reply = new Reply(p_id, text);
+                        Reply reply = new Reply(r_id, p_id, text);
                         replies.add(reply);
                     }
                     PreparedStatement pstmt4 = conn.prepareStatement(sql4);

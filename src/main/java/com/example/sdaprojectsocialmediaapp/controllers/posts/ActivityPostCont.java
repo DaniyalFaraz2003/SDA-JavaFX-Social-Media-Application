@@ -108,6 +108,7 @@ public class ActivityPostCont extends MainController {
             button.getStyleClass().add("postButton");
             button.setOnMouseClicked(event -> {
                 System.out.println(button.getText() + " button of Activity Post: " + this.id + " is clicked.");
+
             });
             replyBox.getChildren().add(button);
         }
