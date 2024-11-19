@@ -3,17 +3,13 @@ package com.example.sdaprojectsocialmediaapp.controllers.posts;
 import com.example.sdaprojectsocialmediaapp.Router;
 import com.example.sdaprojectsocialmediaapp.controllers.MainController;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,6 +35,12 @@ public class SimplePostCont extends MainController {
 
     @FXML
     private Label postHeading;
+
+    @FXML
+    private TextField commentBox;
+
+    @FXML
+    private ScrollPane comments;
 
     @FXML
     private TextArea postContent;
