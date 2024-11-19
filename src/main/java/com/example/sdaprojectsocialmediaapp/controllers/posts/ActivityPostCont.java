@@ -2,6 +2,7 @@ package com.example.sdaprojectsocialmediaapp.controllers.posts;
 
 import com.example.sdaprojectsocialmediaapp.Router;
 import com.example.sdaprojectsocialmediaapp.controllers.MainController;
+import com.example.sdaprojectsocialmediaapp.models.posts.ActivityPost;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,6 +20,22 @@ public class ActivityPostCont extends MainController {
 
     @FXML
     private Label postType;
+
+    @FXML
+    private Label authorName;
+
+    @FXML
+    private Label description;
+
+
+    @FXML
+    private HBox replyBox;
+
+    @FXML
+    private Label timestamp;
+
+    @FXML
+    private Label title;
 
     @FXML
     private TextArea postContent;
@@ -68,7 +85,11 @@ public class ActivityPostCont extends MainController {
     }
 
     @FXML
-    public void initializePost() {
+    public void initializePost(ActivityPost activityPost) {
+        this.title.setText(activityPost.getTitle());
+        this.description.setText(activityPost.getDescription());
+        this.timestamp.setText("Posted On: " + activityPost.getDate());
+
         // Fetch data to populate post
         // set replyBox layout-y to 528
     }

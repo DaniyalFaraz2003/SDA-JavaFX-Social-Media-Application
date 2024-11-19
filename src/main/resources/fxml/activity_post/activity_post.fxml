@@ -7,16 +7,16 @@
 
 <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="731.0" styleClass="postContainer" stylesheets="@../../css/post.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaprojectsocialmediaapp.controllers.posts.ActivityPostCont">
    <children>
-      <Label layoutX="5.0" layoutY="5.0" styleClass="postTitle" text="Escape into Nature: Morning Hike Experience" />
-      <Label layoutX="5.0" layoutY="49.0" styleClass="postDesc" text="Spent the early hours exploring new trails and enjoying the fresh air. The stillness of the morning, the sounds of nature, and the sense of accomplishment after reaching the top made it all worthwhile. Starting the day like this really puts everything into perspective. Looking forward to more days like these." />
+      <Label fx:id="title" layoutX="5.0" layoutY="5.0" styleClass="postTitle" text="Escape into Nature: Morning Hike Experience" />
+      <Label fx:id="description" layoutX="5.0" layoutY="49.0" styleClass="postDesc" text="Spent the early hours exploring new trails and enjoying the fresh air. The stillness of the morning, the sounds of nature, and the sense of accomplishment after reaching the top made it all worthwhile. Starting the day like this really puts everything into perspective. Looking forward to more days like these." />
       <Label fx:id="postType" layoutX="652.0" layoutY="10.0" styleClass="postMeta" text="Activity Post" />
-      <Label layoutX="190.0" layoutY="180.0" styleClass="postMeta" text="By: Hammad Ali" />
-      <Label layoutX="5.0" layoutY="180.0" styleClass="postMeta" text="Posted On: 2024-11-12 08:35:12" />
-      <HBox fx:id="reployBox" layoutX="528.0" layoutY="165.0" spacing="10.0">
+      <Label fx:id="authorName" layoutX="190.0" layoutY="180.0" styleClass="postMeta" text="By: Hammad Ali" />
+      <Label fx:id="timestamp" layoutX="5.0" layoutY="180.0" styleClass="postMeta" text="Posted On: 2024-11-12 08:35:12" />
+      <HBox fx:id="replyBox" layoutX="415.0" layoutY="165.0" spacing="10.0">
          <children>
-            <Button mnemonicParsing="false" onMouseClicked="#handleReply" styleClass="postButton" text="Let's Go" />
-            <Button mnemonicParsing="false" onMouseClicked="#handleReply" styleClass="postButton" text="Sorry" />
-            <Button mnemonicParsing="false" onMouseClicked="#handleReply" styleClass="postButton" text="Nice" />
+            <Button mnemonicParsing="false" onMouseClicked="#handleReply" styleClass="postButton" text="1234567890" />
+            <Button mnemonicParsing="false" onMouseClicked="#handleReply" styleClass="postButton" text="1234567890" />
+            <Button mnemonicParsing="false" onMouseClicked="#handleReply" styleClass="postButton" text="1234567890" />
          </children>
       </HBox>
    </children>
