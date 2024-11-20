@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaprojectsocialmediaapp.controllers.ProfileCont">
     <children>
@@ -152,7 +153,27 @@
       <TextField fx:id="i_phone" layoutX="682.0" layoutY="250.0" styleClass="input" stylesheets="@../../css/register.css" />
       <Label layoutX="606.0" layoutY="305.0" styleClass="inputLabel" stylesheets="@../../css/register.css" text="Username:" />
       <Label layoutX="606.0" layoutY="355.0" styleClass="inputLabel" stylesheets="@../../css/register.css" text="Password:" />
-      <TextField fx:id="i_username" layoutX="682.0" layoutY="300.0" prefHeight="25.0" prefWidth="174.0" styleClass="input" stylesheets="@../../css/register.css" />
+      <TextField fx:id="i_username" editable="false" layoutX="682.0" layoutY="300.0" prefHeight="25.0" prefWidth="174.0" styleClass="input" stylesheets="@../../css/register.css" />
       <TextField fx:id="i_password" layoutX="682.0" layoutY="353.0" styleClass="input" stylesheets="@../../css/register.css" />
+      <Label fx:id="nameErr" layoutX="884.0" layoutY="155.0" prefHeight="20.0" prefWidth="174.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="phoneErr" layoutX="884.0" layoutY="255.0" prefHeight="20.0" prefWidth="174.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="passwordErr" layoutX="884.0" layoutY="358.0" prefHeight="20.0" prefWidth="206.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="emailErr" layoutX="884.0" layoutY="205.0" prefHeight="20.0" prefWidth="174.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>
