@@ -239,10 +239,11 @@ public class PostRepository {
         return null;
     }
 
-    public void createActivityPost(int studentID, String title, String description){
+    public int createActivityPost(int studentID, String title, String description){
         String sql = "INSERT INTO Post (student_id, title, description, time_stamp) VALUES (?, ?, ?, ?)";
         String sql2 = "Select MAX(ID) as maxID from post";
         String sql3 = "Insert into Activity_Post (post_id) Values (?)";
+        int newPostId = 0;
 
         try (Connection conn = dbConnector.getConnection()) {
              PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -262,6 +263,7 @@ public class PostRepository {
             ResultSet rs = pstmt2.executeQuery();
             if(rs.next()){
                 int id = rs.getInt("maxID");
+                newPostId = id;
                 pstmt3.setInt(1, id);
 
                 pstmt3.executeUpdate();
@@ -272,12 +274,15 @@ public class PostRepository {
             System.out.println("Error saving Activity Post: " + e.getMessage());
             e.printStackTrace();
         }
+
+        return newPostId;
     }
 
-    public void createSimpleActivityPost(int studentID, String title, String description, String url, int numLikes){
+    public int createSimpleActivityPost(int studentID, String title, String description, String url, int numLikes){
         String sql = "INSERT INTO Post (student_id, title, description, time_stamp) VALUES (?, ?, ?, ?)";
         String sql2 = "Select MAX(ID) as maxID from post";
         String sql3 = "Insert into Simple_Post (post_id, picture_url, likes) Values (?, ?, ?)";
+        int newPostId = 0;
 
 
         try (Connection conn = dbConnector.getConnection()) {
@@ -297,6 +302,7 @@ public class PostRepository {
             ResultSet rs = pstmt2.executeQuery();
             if(rs.next()){
                 int id = rs.getInt("maxID");
+                newPostId = id;
                 pstmt3.setInt(1, id);
                 pstmt3.setString(2, url);
                 pstmt3.setInt(3, numLikes);
@@ -308,12 +314,15 @@ public class PostRepository {
             System.out.println("Error saving Simple Post: " + e.getMessage());
             e.printStackTrace();
         }
+
+        return newPostId;
     }
 
-    public void createQuestion(int studentID, String title, String description, int votes){
+    public int createQuestion(int studentID, String title, String description, int votes){
         String sql = "INSERT INTO Post (student_id, title, description, time_stamp) VALUES (?, ?, ?, ?)";
         String sql2 = "Select MAX(ID) as maxID from post";
         String sql3 = "Insert into Question (post_id, votes) Values (?, ?)";
+        int newPostId = 0;
 
 
         try (Connection conn = dbConnector.getConnection()) {
@@ -333,6 +342,7 @@ public class PostRepository {
             ResultSet rs = pstmt2.executeQuery();
             if(rs.next()){
                 int id = rs.getInt("maxID");
+                newPostId = id;
                 pstmt3.setInt(1, id);
                 pstmt3.setInt(2, votes);
 
@@ -343,6 +353,8 @@ public class PostRepository {
             System.out.println("Error saving Question: " + e.getMessage());
             e.printStackTrace();
         }
+
+        return newPostId;
     }
 
     public ArrayList<ActivityPost> getAllActivityPosts(){
@@ -631,4 +643,9 @@ public class PostRepository {
             e.printStackTrace();
         }
     }
+
+    public void updateSimplePost(SimplePost post){
+
+    }
+
 }
