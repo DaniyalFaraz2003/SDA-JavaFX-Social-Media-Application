@@ -154,4 +154,54 @@ public class FriendRequestRepository {
             e.printStackTrace();
         }
     }
+
+    public ArrayList<Integer> getSuggestionsForFriendRequest(int studentId) {
+        ArrayList<Integer> suggestions = new ArrayList<>();
+        String sql = "SELECT ID " +
+                "FROM Student " +
+                "WHERE ID != ? " +
+                "AND ID NOT IN (" +
+                "    SELECT CASE " +
+                "               WHEN student_id_from = ? THEN student_id_to " +
+                "               ELSE student_id_from " +
+                "           END " +
+                "    FROM Friend " +
+                "    WHERE ? IN (student_id_from, student_id_to)" +
+                ")";
+
+        try (Connection conn = dbConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, studentId); // For ID != ?
+            pstmt.setInt(2, studentId); // For CASE condition
+            pstmt.setInt(3, studentId); // For WHERE clause in subquery
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                suggestions.add(rs.getInt("ID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return suggestions;
+    }
+
+    public boolean sendFriendRequest(int fromId, int toId) {
+        String sql = "INSERT INTO Friend (student_id_from, student_id_to, status, time_stamp) " +
+                "VALUES (?, ?, ?, ?)";
+        try (Connection conn = dbConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, fromId); // The sender's ID
+            pstmt.setInt(2, toId);  // The recipient's ID
+            pstmt.setBoolean(3, false); // Request status: false = pending
+            pstmt.setTimestamp(4, new Timestamp(System.currentTimeMillis())); // Current timestamp
+
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0; // Return true if the insertion was successful
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // Return false if an exception occurred
+        }
+    }
 }

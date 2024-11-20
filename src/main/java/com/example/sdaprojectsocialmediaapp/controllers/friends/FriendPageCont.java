@@ -23,6 +23,9 @@ public class FriendPageCont extends MainController {
     Pane pane;
 
     @FXML
+    private VBox findFriendsPane;
+
+    @FXML
     private VBox container;
 
     @FXML
@@ -31,7 +34,9 @@ public class FriendPageCont extends MainController {
     @FXML
     public void initializePage(Stage stage) throws IOException {
         ArrayList<Integer> friends = friendRequestRepository.getAllFriends(Session.getSessionVariable().getId());
+        ArrayList<Integer> suggestions = friendRequestRepository.getSuggestionsForFriendRequest(Session.getSessionVariable().getId());
         container.getChildren().clear();
+        findFriendsPane.getChildren().clear();
         // setting the request count
         friendCount.setText(Integer.toString(friends.size()) + " friends");
         // populating the page
@@ -42,6 +47,15 @@ public class FriendPageCont extends MainController {
             Student s = studentRepository.getStudentByID(friends.get(i));
             controller.initializeComp(s.getName(), s.getUserName(), s.getId(), stage);
             container.getChildren().add(pane);
+        }
+
+        for (int id: suggestions) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/friend/find_friend.fxml"));
+            pane = loader.load();
+            FindFriendCompCont controller = loader.getController();
+            Student s = studentRepository.getStudentByID(id);
+            controller.initializeComp(s.getName(), s.getUserName(), s.getId(), stage);
+            findFriendsPane.getChildren().add(pane);
         }
     }
 
