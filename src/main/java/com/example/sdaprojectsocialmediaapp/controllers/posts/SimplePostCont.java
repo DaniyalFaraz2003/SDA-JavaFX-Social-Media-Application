@@ -6,6 +6,7 @@ import com.example.sdaprojectsocialmediaapp.controllers.engagements.CommentCont;
 import com.example.sdaprojectsocialmediaapp.models.engagements.Comment;
 import com.example.sdaprojectsocialmediaapp.models.posts.SimplePost;
 import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
+import com.example.sdaprojectsocialmediaapp.services.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -90,7 +91,7 @@ public class SimplePostCont extends MainController {
     void handleComment(MouseEvent event) throws IOException {
         String commentString = commentBox.getText();
         commentBox.setText("");
-        Comment comment = new Comment(0, 0, new Timestamp(System.currentTimeMillis()), commentString, 10);
+        Comment comment = new Comment(0, Session.getSessionVariable().getId(), new Timestamp(System.currentTimeMillis()), commentString, 10);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/simple_post/comment.fxml"));
         Pane commentPane = loader.load();
         CommentCont controller = loader.getController();

@@ -450,4 +450,90 @@ public class PostRepository {
         return null;
     }
 
+    public ArrayList<SimplePost> getSimplePostByStudentID(int studentID){
+        String sql = "Select * from Post where student_id = ?";
+        ArrayList<SimplePost> simplePosts = new ArrayList<>();
+
+        try(Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, studentID);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()){
+                int postID = rs.getInt("ID");
+                if (this.getPostType(postID).equals("Simple Post")) {
+                    SimplePost post = this.getSimplePost(postID);
+                    simplePosts.add(post);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error finding posts" + e.getMessage());
+            e.printStackTrace();
+        }
+
+        if(!simplePosts.isEmpty()){
+            return simplePosts;
+        }
+
+        return null;
+    }
+
+    public ArrayList<ActivityPost> getActivityPostByStudentID(int studentID){
+        String sql = "Select * from Post where student_id = ?";
+        ArrayList<ActivityPost> activityPosts = new ArrayList<>();
+
+        try(Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, studentID);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()){
+                int postID = rs.getInt("ID");
+                if (this.getPostType(postID).equals("Activity Post")) {
+                    ActivityPost post = this.getActivityPost(postID);
+                    activityPosts.add(post);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error finding posts" + e.getMessage());
+            e.printStackTrace();
+        }
+
+        if(!activityPosts.isEmpty()){
+            return activityPosts;
+        }
+
+        return null;
+    }
+
+    public ArrayList<Question> getQuestionByStudentID(int studentID){
+        String sql = "Select * from Post where student_id = ?";
+        ArrayList<Question> questions = new ArrayList<>();
+
+        try(Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, studentID);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()){
+                int postID = rs.getInt("ID");
+                if (this.getPostType(postID).equals("Question")) {
+                    Question post = this.getQuestion(postID);
+                    questions.add(post);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error finding posts" + e.getMessage());
+            e.printStackTrace();
+        }
+
+        if(!questions.isEmpty()){
+            return questions;
+        }
+
+        return null;
+    }
 }
