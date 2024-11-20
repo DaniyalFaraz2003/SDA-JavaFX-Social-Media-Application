@@ -25,11 +25,6 @@ public class ViewProfileCont extends MainController {
     private Label username;
 
     @FXML
-    void openRequestsPage(MouseEvent event) throws IOException {
-        Router.navigateTo("Friend Request Page");
-    }
-
-    @FXML
     public void initializePage(String username) {
         StudentRepository repo = new StudentRepository();
         Student student  = repo.getStudentbyUsername(username);

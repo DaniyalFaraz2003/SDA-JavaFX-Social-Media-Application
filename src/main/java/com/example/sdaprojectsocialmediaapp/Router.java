@@ -157,7 +157,7 @@ public class Router extends Application {
                 root = fxmlLoader.load();
                 FriendPageCont friendPageCont = fxmlLoader.getController();
                 scene = new Scene(root);
-                friendPageCont.initializePage();
+                friendPageCont.initializePage(stage);
                 break;
         }
         stage.setScene(scene);
