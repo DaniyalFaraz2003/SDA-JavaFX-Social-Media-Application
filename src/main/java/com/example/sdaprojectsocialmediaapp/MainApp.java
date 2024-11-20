@@ -13,6 +13,8 @@ import com.example.sdaprojectsocialmediaapp.repository.PostRepository;
 import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
 import javafx.application.Application;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 
 public class MainApp {
@@ -20,6 +22,5 @@ public class MainApp {
         StudentRepository studentRepository = new StudentRepository();
         FriendRequestRepository friendRequestRepository = new FriendRequestRepository();
         Application.launch(Router.class, args);
-
     }
 }

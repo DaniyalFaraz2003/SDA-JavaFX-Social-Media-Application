@@ -645,7 +645,88 @@ public class PostRepository {
     }
 
     public void updateSimplePost(SimplePost post){
+        String sql1 = "Update Post set title = ?, description = ?, time_stamp = ? where ID = ?";
+        String sql2 = "Update Simple_Post set picture_url = ? where post_id = ?";
 
+        int id = post.getId();
+        String title = post.getTitle();
+        String description = post.getDescription();
+        Timestamp timeStamp = Timestamp.valueOf(post.getDate());
+        String url = post.getPostImageUrl();
+
+        try(Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt1 = conn.prepareStatement(sql1);
+            pstmt1.setString(1, title);
+            pstmt1.setString(2, description);
+            pstmt1.setTimestamp(3, timeStamp);
+            pstmt1.setInt(4, id);
+            pstmt1.executeUpdate();
+
+            PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+            pstmt2.setString(1, url);
+            pstmt2.setInt(2, id);
+            pstmt2.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error Updating Simple Post" + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void updateQuestion(Question post){
+        String sql = "Update Post set title = ?, description = ?, time_stamp = ? where ID = ?";
+
+        int id = post.getId();
+        String title = post.getTitle();
+        String description = post.getDescription();
+        Timestamp timeStamp = Timestamp.valueOf(post.getDate());
+
+        try(Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, title);
+            pstmt.setString(2, description);
+            pstmt.setTimestamp(3, timeStamp);
+            pstmt.setInt(4, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error Updating Question" + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void updateActivityPost(ActivityPost post){
+        String sql1 = "Update Post set title = ?, description = ?, time_stamp = ? where ID = ?";
+        String sql2 = "Update Reply set text = ? where ID = ?";
+
+        int id = post.getId();
+        String title = post.getTitle();
+        String description = post.getDescription();
+        Timestamp timeStamp = Timestamp.valueOf(post.getDate());
+
+        try(Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql1);
+            pstmt.setString(1, title);
+            pstmt.setString(2, description);
+            pstmt.setTimestamp(3, timeStamp);
+            pstmt.setInt(4, id);
+            pstmt.executeUpdate();
+
+            ArrayList<Reply> replies = post.getReplies();
+
+            PreparedStatement pstmt1 = conn.prepareStatement(sql2);
+
+            pstmt1.setString(1, replies.get(0).getText());
+            pstmt1.setInt(2, replies.get(0).getId());
+            pstmt1.executeUpdate();
+            pstmt1.setString(1, replies.get(1).getText());
+            pstmt1.setInt(2, replies.get(1).getId());
+            pstmt1.executeUpdate();
+            pstmt1.setString(1, replies.get(2).getText());
+            pstmt1.setInt(2, replies.get(2).getId());
+            pstmt1.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error Updating Activity Post" + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
 }
