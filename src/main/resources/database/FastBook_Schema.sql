@@ -92,6 +92,7 @@ create table Friend(
                        student_id_from int,
                        student_id_to int,
                        status boolean,
+                       time_stamp timestamp,
 
                        foreign key (student_id_from) references Student (id),
                        foreign key (student_id_to) references Student (id)
