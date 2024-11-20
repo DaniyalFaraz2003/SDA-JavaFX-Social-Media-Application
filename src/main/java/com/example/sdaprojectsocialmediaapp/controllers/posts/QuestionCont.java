@@ -6,9 +6,13 @@ import com.example.sdaprojectsocialmediaapp.controllers.engagements.AnswerCont;
 import com.example.sdaprojectsocialmediaapp.controllers.engagements.CommentCont;
 import com.example.sdaprojectsocialmediaapp.models.engagements.Answer;
 import com.example.sdaprojectsocialmediaapp.models.posts.Question;
+import com.example.sdaprojectsocialmediaapp.models.posts.SimplePost;
+import com.example.sdaprojectsocialmediaapp.repository.PostRepository;
 import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
+import com.example.sdaprojectsocialmediaapp.services.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
@@ -18,6 +22,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 
 public class QuestionCont extends MainController {
@@ -29,6 +34,9 @@ public class QuestionCont extends MainController {
 
     @FXML
     private VBox answers;
+
+    @FXML
+    private VBox container;
 
     @FXML
     private Label authorName;
@@ -54,7 +62,11 @@ public class QuestionCont extends MainController {
     @FXML
     private Label votes;
 
+    @FXML
+    private Button updateBtn;
 
+    @FXML
+    private Button deleteBtn;
 
     @FXML
     public String getPostType() {
@@ -107,7 +119,17 @@ public class QuestionCont extends MainController {
         this.description.setText(question.getDescription());
         this.timestamp.setText("Posted On: " + question.getDate());
         this.authorName.setText("By: " + studentRepository.getStudentByID(question.getAuthorId()).getName());
-
+        if (Session.getSessionVariable().getId() != question.getAuthorId()) {
+            this.updateBtn.setVisible(false);
+            this.deleteBtn.setVisible(false);
+        } else {
+            this.updateBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                System.out.println("Update Btn clicked");
+            });
+            this.updateBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                System.out.println("Delete Btn clicked");
+            });
+        }
         try {
             for (Answer answer : question.getAnswers()) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/question/answer.fxml"));
@@ -123,8 +145,17 @@ public class QuestionCont extends MainController {
     }
 
     @FXML
-    public void initializePage() {
-        // Fetch data to populate page
+    public void initializePage() throws IOException {
+        container.getChildren().clear();
+        PostRepository postRepository = new PostRepository();
+        ArrayList<Question> questions = postRepository.getQuestionByStudentID(Session.getSessionVariable().getId());
+        for (Question question : questions) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/question/question.fxml"));
+            pane = loader.load();
+            QuestionCont controller = loader.getController();
+            controller.initializePost(question);
+            container.getChildren().add(pane);
+        }
     }
 
     @FXML

@@ -32,5 +32,7 @@
             <VBox fx:id="comments" spacing="10.0" />
          </content>
       </ScrollPane>
+      <Button fx:id="updateBtn" layoutX="512.0" layoutY="380.0" mnemonicParsing="false" styleClass="postButton" text="Update Post" />
+      <Button fx:id="deleteBtn" layoutX="410.0" layoutY="380.0" mnemonicParsing="false" styleClass="deleteButton" text="Delete Post" />
    </children>
 </Pane>

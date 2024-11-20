@@ -18,13 +18,7 @@ import java.util.ArrayList;
 public class MainApp {
     public static void main(String[] args) {
         StudentRepository studentRepository = new StudentRepository();
-        //Application.launch(Router.class, args);
-
-        FriendRequestRepository friendRequestRepository = new FriendRequestRepository();
-        ArrayList<Integer> frc = friendRequestRepository.getAllFriends(3);
-        for (int i : frc) {
-            System.out.println(studentRepository.getStudentByID(i).getName());
-        }
+        Application.launch(Router.class, args);
 
     }
 }

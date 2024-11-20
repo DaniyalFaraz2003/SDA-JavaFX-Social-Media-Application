@@ -1,8 +1,6 @@
 ToDos of Hammad Ali:
 
-1- Posts population in their respective pages
-2- Post Update button visibility setting
-3- Post Update functionality
+Post Update functionality
 
 ToDos of Amna Siddiqui:
 

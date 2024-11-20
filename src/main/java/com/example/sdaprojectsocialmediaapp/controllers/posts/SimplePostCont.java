@@ -5,6 +5,7 @@ import com.example.sdaprojectsocialmediaapp.controllers.MainController;
 import com.example.sdaprojectsocialmediaapp.controllers.engagements.CommentCont;
 import com.example.sdaprojectsocialmediaapp.models.engagements.Comment;
 import com.example.sdaprojectsocialmediaapp.models.posts.SimplePost;
+import com.example.sdaprojectsocialmediaapp.repository.PostRepository;
 import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
 import com.example.sdaprojectsocialmediaapp.services.Session;
 import javafx.fxml.FXML;
@@ -56,6 +57,9 @@ public class SimplePostCont extends MainController {
     private VBox comments;
 
     @FXML
+    private VBox container;
+
+    @FXML
     private TextArea postContent;
 
     @FXML
@@ -72,6 +76,12 @@ public class SimplePostCont extends MainController {
 
     @FXML
     private Button uploadBtn;
+
+    @FXML
+    private Button updateBtn;
+
+    @FXML
+    private Button deleteBtn;
 
     @FXML
     public String getPostType() {
@@ -171,8 +181,17 @@ public class SimplePostCont extends MainController {
         this.timestamp.setText("Posted On: " + simplePost.getDate());
         this.author.setText("By: " + studentRepository.getStudentByID(simplePost.getAuthorId()).getName());
         this.reactionCount.setText(Integer.toString(simplePost.getNumberOfLikes()));
-
-
+        if (Session.getSessionVariable().getId() != simplePost.getAuthorId()) {
+            this.updateBtn.setVisible(false);
+            this.deleteBtn.setVisible(false);
+        } else {
+            this.updateBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                System.out.println("Update Btn clicked");
+            });
+            this.updateBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                System.out.println("Delete Btn clicked");
+            });
+        }
         try {
             for (Comment comment : simplePost.getComments()) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/simple_post/comment.fxml"));
@@ -188,8 +207,17 @@ public class SimplePostCont extends MainController {
     }
 
     @FXML
-    public void initializePage() {
-        // Fetch data to populate page
+    public void initializePage() throws IOException {
+        container.getChildren().clear();
+        PostRepository postRepository = new PostRepository();
+        ArrayList<SimplePost> simplePosts = postRepository.getSimplePostByStudentID(Session.getSessionVariable().getId());
+        for (SimplePost simplePost : simplePosts) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/simple_post/simple_post.fxml"));
+            pane = loader.load();
+            SimplePostCont controller = loader.getController();
+            controller.initializePost(simplePost);
+            container.getChildren().add(pane);
+        }
     }
 
     @FXML
