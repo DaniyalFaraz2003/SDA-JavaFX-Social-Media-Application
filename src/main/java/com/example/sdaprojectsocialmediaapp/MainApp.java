@@ -21,12 +21,10 @@ public class MainApp {
         //Application.launch(Router.class, args);
 
         FriendRequestRepository friendRequestRepository = new FriendRequestRepository();
-        ArrayList<FriendRequestComp> frc = friendRequestRepository.getAllFriendsRequests(3);
-
-        for (FriendRequestComp f : frc){
-            System.out.println(f.getFromId());
-            System.out.println(f.getToId());
-            System.out.println(f.getRequestDate());
+        ArrayList<Integer> frc = friendRequestRepository.getAllFriends(3);
+        for (int i : frc) {
+            System.out.println(studentRepository.getStudentByID(i).getName());
         }
+
     }
 }

@@ -46,9 +46,9 @@ public class FriendRequestRepository {
         return null;
     }
 
-    public ArrayList<FriendRequestComp> getAllFriends(int studentId) {
+    public ArrayList<Integer> getAllFriends(int studentId) {
         String sql = "Select * from Friend Where (student_id_from = ? or student_id_to = ?) and status = ?";
-        ArrayList<FriendRequestComp> friends = new ArrayList<>();
+        ArrayList<Integer> friends = new ArrayList<>();
         boolean status = true;
 
         try (Connection conn = dbConnector.getConnection()) {
@@ -64,10 +64,18 @@ public class FriendRequestRepository {
                 int id_from = rs1.getInt("student_id_from");
                 int id_to = rs1.getInt("student_id_to");
                 boolean st = rs1.getBoolean("status");
+                Timestamp timeStamp = rs1.getTimestamp("time_stamp");
 
-                FriendRequestComp fr = new FriendRequestComp(id, id_from, id_to)
+                FriendRequestComp fr = new FriendRequestComp(id, id_from, id_to, timeStamp, st);
+                if (fr.getToId() == studentId) {
+                    friends.add(fr.getFromId());
+                } else if (fr.getFromId() == studentId) {
+                    friends.add(fr.getToId());
+                }
 
             }
+
+            return friends;
         } catch (SQLException e) {
             e.printStackTrace();
         }
