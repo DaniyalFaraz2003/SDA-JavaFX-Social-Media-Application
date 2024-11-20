@@ -26,7 +26,7 @@ public class FriendRequestRepository {
         ArrayList<FriendRequestComp> friends = new ArrayList<>();
         boolean status = true;
 
-        try(Connection conn = dbConnector.getConnection()) {
+        try (Connection conn = dbConnector.getConnection()) {
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, studentId);
@@ -43,10 +43,9 @@ public class FriendRequestRepository {
                 FriendRequestComp fr = new FriendRequestComp(id, id_from, id_to)
 
             }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
-
+    }
 }
