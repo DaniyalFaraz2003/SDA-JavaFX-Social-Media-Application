@@ -11,6 +11,7 @@ import com.example.sdaprojectsocialmediaapp.models.posts.SimplePost;
 import com.example.sdaprojectsocialmediaapp.repository.PostRepository;
 import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
 import com.example.sdaprojectsocialmediaapp.services.Session;
+import com.example.sdaprojectsocialmediaapp.utils.Validate;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -30,6 +31,21 @@ public class ProfileCont extends MainController {
 
     @FXML
     private VBox container;
+
+    @FXML
+    private Label nameErr;
+
+    @FXML
+    private Label passwordErr;
+
+    @FXML
+    private Label phoneErr;
+
+    @FXML
+    private Label usernameErr;
+
+    @FXML
+    private Label emailErr;
 
     @FXML
     private Label email;
@@ -75,11 +91,45 @@ public class ProfileCont extends MainController {
     @FXML
     void updateProfile(MouseEvent event) throws IOException {
         // update user's profile in database
-        Student newStudent = new Student(i_name.getText(), i_username.getText(), i_password.getText(), i_email.getText(), i_phone.getText());
-        newStudent.setId(Session.getSessionVariable().getId());
-        Session.maintainSession(newStudent);
-        studentRepo.updateStudent(newStudent);
-        Router.navigateTo("Profile Page");
+        Student student = new Student(i_name.getText(), i_username.getText(), i_password.getText(), i_email.getText(), i_phone.getText());
+        student.setId(Session.getSessionVariable().getId());
+        boolean correct = true;
+        if (!Validate.isValidName(i_name.getText())) {
+            nameErr.setText("Please enter a valid name!");
+            correct = false;
+        } else {
+            nameErr.setText("");
+        }
+
+        if (!Validate.isValidEmail(i_email.getText())) {
+            emailErr.setText("Please enter a valid email!");
+            correct = false;
+        } else {
+            emailErr.setText("");
+        }
+
+        if (!Validate.isValidPhone(i_phone.getText())) {
+            phoneErr.setText("Please enter a valid phone!");
+            correct = false;
+        } else {
+            phoneErr.setText("");
+        }
+
+        if (i_password.getText().isEmpty()) {
+            passwordErr.setText("Please enter a valid password!");
+            correct = false;
+        } else {
+            passwordErr.setText("");
+        }
+
+        if (correct) {
+            Session.maintainSession(student);
+            studentRepo.updateStudent(student);
+            Router.navigateTo("Profile Page");
+        }
+
+
+
     }
 
     @FXML
