@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -21,7 +22,7 @@ public class FriendPageCont extends MainController {
     private Label friendCount;
 
     @FXML
-    public void initializePage() throws IOException {
+    public void initializePage(Stage stage) throws IOException {
         int size = 6;
         container.getChildren().clear();
         // setting the request count
@@ -31,7 +32,7 @@ public class FriendPageCont extends MainController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/friend/friend_component.fxml"));
             pane = loader.load();
             FriendCompCont controller = loader.getController();
-            controller.initializeComp("Waleed Sheikh");
+            controller.initializeComp("i221096", stage);
             container.getChildren().add(pane);
         }
     }

@@ -3,6 +3,7 @@ module com.example.sdaprojectsocialmediaapp {
     requires javafx.fxml;
     requires java.desktop;
     requires java.sql;
+    requires jdk.compiler;
 
 
     exports com.example.sdaprojectsocialmediaapp;
