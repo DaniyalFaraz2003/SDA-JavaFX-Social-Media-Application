@@ -5,20 +5,50 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class FriendRequestComp {
-    private String requesterName;
+    private int id;
+    private int fromId;
+    private int toId;
     private Timestamp requestDate;
+    private boolean status;
 
-    public FriendRequestComp(String requesterName, Timestamp requestDate) {
-        this.requesterName = requesterName;
+    public FriendRequestComp(int id, int fromId, int toId, Timestamp requestDate, boolean status) {
+        this.id = id;
+        this.fromId = fromId;
+        this.toId = toId;
         this.requestDate = requestDate;
+        this.status = status;
     }
 
-    public String getRequesterName() {
-        return requesterName;
+    public boolean isStatus() {
+        return status;
     }
 
-    public void setRequesterName(String requesterName) {
-        this.requesterName = requesterName;
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getFromId() {
+        return fromId;
+    }
+
+    public void setFromId(int fromId) {
+        this.fromId = fromId;
+    }
+
+    public int getToId() {
+        return toId;
+    }
+
+    public void setToId(int toId) {
+        this.toId = toId;
     }
 
     public String getRequestDate() {

@@ -2,6 +2,7 @@ package com.example.sdaprojectsocialmediaapp.controllers.posts;
 
 import com.example.sdaprojectsocialmediaapp.Router;
 import com.example.sdaprojectsocialmediaapp.controllers.MainController;
+import com.example.sdaprojectsocialmediaapp.controllers.engagements.CommentCont;
 import com.example.sdaprojectsocialmediaapp.controllers.engagements.ReplyCont;
 import com.example.sdaprojectsocialmediaapp.models.engagements.Reply;
 import com.example.sdaprojectsocialmediaapp.models.engagements.StudentActivityReply;
@@ -126,6 +127,18 @@ public class ActivityPostCont extends MainController {
                 }
             });
             replyBox.getChildren().add(button);
+        }
+        try {
+            for (StudentActivityReply sar: activityPost.getStudentReplies()) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/activity_post/reply.fxml"));
+                Pane commentPane = loader.load();
+                ReplyCont controller = loader.getController();
+                controller.initializeReply(sar);
+                this.replies.getChildren().add(commentPane);
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
         }
 
         // Fetch data to populate post
