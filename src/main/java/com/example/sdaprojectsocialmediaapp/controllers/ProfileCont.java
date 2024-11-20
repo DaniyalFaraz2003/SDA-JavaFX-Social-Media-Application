@@ -9,6 +9,7 @@ import com.example.sdaprojectsocialmediaapp.models.posts.ActivityPost;
 import com.example.sdaprojectsocialmediaapp.models.posts.Question;
 import com.example.sdaprojectsocialmediaapp.models.posts.SimplePost;
 import com.example.sdaprojectsocialmediaapp.repository.PostRepository;
+import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
 import com.example.sdaprojectsocialmediaapp.services.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 public class ProfileCont extends MainController {
 
     private PostRepository postRepo = new PostRepository();
+    private StudentRepository studentRepo = new StudentRepository();
 
     @FXML
     private VBox container;
@@ -73,6 +75,10 @@ public class ProfileCont extends MainController {
     @FXML
     void updateProfile(MouseEvent event) throws IOException {
         // update user's profile in database
+        Student newStudent = new Student(i_name.getText(), i_username.getText(), i_password.getText(), i_email.getText(), i_phone.getText());
+        newStudent.setId(Session.getSessionVariable().getId());
+        Session.maintainSession(newStudent);
+        studentRepo.updateStudent(newStudent);
         Router.navigateTo("Profile Page");
     }
 
