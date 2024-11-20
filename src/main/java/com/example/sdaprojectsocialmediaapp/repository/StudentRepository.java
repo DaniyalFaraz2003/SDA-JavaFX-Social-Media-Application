@@ -135,4 +135,27 @@ public class StudentRepository {
         return null;
     }
 
+    public boolean updateStudent(Student student) {
+        String sql = "UPDATE Student SET username = ?, password = ?, name = ?, email = ?, phone_number = ? " +
+                "WHERE ID = ?";
+
+        try (Connection conn = dbConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // Set parameters from the Student object
+            pstmt.setString(1, student.getUserName());
+            pstmt.setString(2, student.getPassword());
+            pstmt.setString(3, student.getName());
+            pstmt.setString(4, student.getEmail());
+            pstmt.setString(5, student.getPhone());
+            pstmt.setInt(6, student.getId()); // ID to identify the record
+
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0; // Return true if the update was successful
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // Return false if an exception occurred
+        }
+    }
+
 }
