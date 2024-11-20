@@ -16,11 +16,6 @@
       <Label fx:id="authorName" layoutX="190.0" layoutY="180.0" styleClass="postMeta" text="By: Hammad Ali" />
       <Label fx:id="timestamp" layoutX="5.0" layoutY="180.0" styleClass="postMeta" text="Posted On: 2024-11-12 08:35:12" />
       <HBox fx:id="replyBox" layoutX="415.0" layoutY="165.0" spacing="10.0">
-<!--         <children>-->
-<!--            <Button fx:id="reply1" mnemonicParsing="false" onMouseClicked="#handleReply" styleClass="postButton" text="1234567890" />-->
-<!--            <Button mnemonicParsing="false" onMouseClicked="#handleReply" styleClass="postButton" text="1234567890" />-->
-<!--            <Button mnemonicParsing="false" onMouseClicked="#handleReply" styleClass="postButton" text="1234567890" />-->
-<!--         </children>-->
       </HBox>
       <Label layoutX="6.0" layoutY="209.0" text="Replies:">
          <font>

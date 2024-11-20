@@ -150,14 +150,14 @@ public class Router extends Application {
                 root = fxmlLoader.load();
                 FriendRequestCont friendRequestCont = fxmlLoader.getController();
                 scene = new Scene(root);
-                friendRequestCont.initializePage();
+                friendRequestCont.initializePage(stage);
                 break;
             case "Friends Page":
                 fxmlLoader = new FXMLLoader(Router.class.getResource("/fxml/friend/friends_page.fxml"));
                 root = fxmlLoader.load();
                 FriendPageCont friendPageCont = fxmlLoader.getController();
                 scene = new Scene(root);
-                friendPageCont.initializePage();
+                friendPageCont.initializePage(stage);
                 break;
         }
         stage.setScene(scene);

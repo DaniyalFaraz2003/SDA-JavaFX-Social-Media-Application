@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class FriendRequestCont extends MainController {
     }
 
     @FXML
-    public void initializePage() throws IOException {
+    public void initializePage(Stage stage) throws IOException {
         // get array list of friend request component
         populateFriendRequests();
         int size = friendRequests.size();
@@ -47,7 +48,7 @@ public class FriendRequestCont extends MainController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/friend_request/friend_req_component.fxml"));
             pane = loader.load();
             FriendRequestCompCont controller = loader.getController();
-            controller.initializePost(friendRequests.get(i));
+            controller.initializePost(friendRequests.get(i), stage);
             container.getChildren().add(pane);
         }
     }
