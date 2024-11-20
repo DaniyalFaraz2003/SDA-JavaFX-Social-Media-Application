@@ -29,12 +29,9 @@ public class FriendRequestCont extends MainController {
     private void populateFriendRequests() {
         friendRequests = new ArrayList<>();
         // Mock friend request data
-        friendRequests.add(new FriendRequestComp("John Doe", new Timestamp(System.currentTimeMillis())));
-        friendRequests.add(new FriendRequestComp("Jane Smith", new Timestamp(System.currentTimeMillis() - 3600 * 1000))); // 1 hour ago
-        friendRequests.add(new FriendRequestComp("Alice Johnson", new Timestamp(System.currentTimeMillis() - 7200 * 1000))); // 2 hours ago
-        friendRequests.add(new FriendRequestComp("Bob Brown", new Timestamp(System.currentTimeMillis() - 24 * 3600 * 1000))); // 1 day ago
-        friendRequests.add(new FriendRequestComp("Charlie Wilson", new Timestamp(System.currentTimeMillis() - 2 * 24 * 3600 * 1000))); // 2 days ago
-        friendRequests.add(new FriendRequestComp("Diana Green", new Timestamp(System.currentTimeMillis() - 7 * 24 * 3600 * 1000))); // 1 week ago
+        friendRequests.add(new FriendRequestComp(1, 1, 3, new Timestamp(System.currentTimeMillis() - 3600 * 1000), false));
+        friendRequests.add(new FriendRequestComp(2, 3, 2, new Timestamp(System.currentTimeMillis() - 3600 * 1000), false)); // 1 hour ago
+        friendRequests.add(new FriendRequestComp(3, 4, 2, new Timestamp(System.currentTimeMillis() - 3600 * 1000), false)); // 2 hours ago
     }
 
     @FXML
