@@ -50,7 +50,7 @@ public class HomepageCont extends MainController {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/activity_post/activity_post.fxml"));
             Pane pane = loader.load();
             ActivityPostCont controller = loader.getController();
-            controller.initializePost(activityPost);
+            controller.initializePost(activityPost, true, stage);
             container.getChildren().add(pane);
         }
         // Loading Simple Posts
@@ -58,7 +58,7 @@ public class HomepageCont extends MainController {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/simple_post/simple_post.fxml"));
             Pane pane = loader.load();
             SimplePostCont controller = loader.getController();
-            controller.initializePost(simplePost);
+            controller.initializePost(simplePost, true, stage);
             container.getChildren().add(pane);
         }
         // Loading Questions
@@ -66,7 +66,7 @@ public class HomepageCont extends MainController {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/question/question.fxml"));
             Pane pane = loader.load();
             QuestionCont controller = loader.getController();
-            controller.initializePost(question);
+            controller.initializePost(question, true, stage);
             container.getChildren().add(pane);
         }
     }

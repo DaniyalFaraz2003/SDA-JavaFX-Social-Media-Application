@@ -3,15 +3,15 @@ package com.example.sdaprojectsocialmediaapp.controllers.posts;
 import com.example.sdaprojectsocialmediaapp.Router;
 import com.example.sdaprojectsocialmediaapp.controllers.MainController;
 import com.example.sdaprojectsocialmediaapp.controllers.engagements.AnswerCont;
-import com.example.sdaprojectsocialmediaapp.controllers.engagements.CommentCont;
 import com.example.sdaprojectsocialmediaapp.models.engagements.Answer;
 import com.example.sdaprojectsocialmediaapp.models.posts.Question;
-import com.example.sdaprojectsocialmediaapp.models.posts.SimplePost;
 import com.example.sdaprojectsocialmediaapp.repository.PostRepository;
 import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
 import com.example.sdaprojectsocialmediaapp.services.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -19,6 +19,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -69,6 +70,9 @@ public class QuestionCont extends MainController {
     private Button deleteBtn;
 
     @FXML
+    private Label warning;
+
+    @FXML
     public String getPostType() {
         return postType.getText();
     }
@@ -112,14 +116,14 @@ public class QuestionCont extends MainController {
     }
 
     @FXML
-    public void initializePost(Question question) {
+    public void initializePost(Question question, boolean isHomepage, Stage stage) {
         // Fetch data to populate post
         this.id = question.getId();
         this.title.setText(question.getTitle());
         this.description.setText(question.getDescription());
         this.timestamp.setText("Posted On: " + question.getDate());
         this.authorName.setText("By: " + studentRepository.getStudentByID(question.getAuthorId()).getName());
-        if (Session.getSessionVariable().getId() != question.getAuthorId()) {
+        if (Session.getSessionVariable().getId() != question.getAuthorId() || isHomepage) {
             this.updateBtn.setVisible(false);
             this.deleteBtn.setVisible(false);
         } else {
@@ -127,7 +131,17 @@ public class QuestionCont extends MainController {
                 System.out.println("Update Btn clicked");
             });
             this.deleteBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                System.out.println("Delete Btn clicked");
+                PostRepository postRepository = new PostRepository();
+                postRepository.deleteQuestion(id);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/question/question_page.fxml"));
+                try {
+                    Parent root = loader.load();
+                    QuestionCont controller = loader.getController();
+                    controller.initializePage(stage);
+                    stage.setScene(new Scene(root));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             });
         }
         try {
@@ -145,16 +159,20 @@ public class QuestionCont extends MainController {
     }
 
     @FXML
-    public void initializePage() throws IOException {
-        container.getChildren().clear();
+    public void initializePage(Stage stage) throws IOException {
         PostRepository postRepository = new PostRepository();
         ArrayList<Question> questions = postRepository.getQuestionByStudentID(Session.getSessionVariable().getId());
-        for (Question question : questions) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/question/question.fxml"));
-            pane = loader.load();
-            QuestionCont controller = loader.getController();
-            controller.initializePost(question);
-            container.getChildren().add(pane);
+        if (questions == null)
+            warning.setVisible(true);
+        else if (container != null) {
+            container.getChildren().clear();
+            for (Question question : questions) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/question/question.fxml"));
+                pane = loader.load();
+                QuestionCont controller = loader.getController();
+                controller.initializePost(question, false, stage);
+                container.getChildren().add(pane);
+            }
         }
     }
 

@@ -160,5 +160,6 @@
          </content>
       </ScrollPane>
       <Button layoutX="1112.0" layoutY="667.0" mnemonicParsing="false" onMouseClicked="#createNewPost" stylesheets="@../../css/postpage.css" text="Create New Post" />
+      <Label fx:id="pageWarning" layoutX="1026.0" layoutY="200.0" styleClass="postTitle" stylesheets="@../../css/post.css" text="You have no posts yet" textFill="RED" visible="false" />
    </children>
 </AnchorPane>

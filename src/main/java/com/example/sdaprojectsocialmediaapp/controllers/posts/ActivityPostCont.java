@@ -13,6 +13,8 @@ import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
 import com.example.sdaprojectsocialmediaapp.services.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -21,6 +23,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -79,6 +82,9 @@ public class ActivityPostCont extends MainController {
     private Button deleteBtn;
 
     @FXML
+    private Label pageWarning;
+
+    @FXML
     public String getPostType() {
         return postType.getText();
     }
@@ -115,7 +121,7 @@ public class ActivityPostCont extends MainController {
     }
 
     @FXML
-    public void initializePost(ActivityPost activityPost) {
+    public void initializePost(ActivityPost activityPost, boolean isHomepage, Stage stage) {
         this.replyBox.getChildren().clear();
         this.id = activityPost.getId();
         this.title.setText(activityPost.getTitle());
@@ -140,7 +146,7 @@ public class ActivityPostCont extends MainController {
             });
             replyBox.getChildren().add(button);
         }
-        if (Session.getSessionVariable().getId() != activityPost.getAuthorId()) {
+        if (Session.getSessionVariable().getId() != activityPost.getAuthorId() || isHomepage) {
             this.updateBtn.setVisible(false);
             this.deleteBtn.setVisible(false);
         } else {
@@ -148,7 +154,17 @@ public class ActivityPostCont extends MainController {
                 System.out.println("Update Btn clicked");
             });
             this.deleteBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                System.out.println("Delete Btn clicked");
+                PostRepository postRepository = new PostRepository();
+                postRepository.deleteActivityPost(id);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/activity_post/activity_post_page.fxml"));
+                try {
+                    Parent root = loader.load();
+                    ActivityPostCont controller = loader.getController();
+                    controller.initializePage(stage);
+                    stage.setScene(new Scene(root));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             });
         }
         try {
@@ -169,16 +185,20 @@ public class ActivityPostCont extends MainController {
     }
 
     @FXML
-    public void initializePage() throws IOException {
-        container.getChildren().clear();
+    public void initializePage(Stage stage) throws IOException {
         PostRepository postRepository = new PostRepository();
         ArrayList<ActivityPost> activityPosts = postRepository.getActivityPostByStudentID(Session.getSessionVariable().getId());
-        for (ActivityPost activityPost : activityPosts) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/activity_post/activity_post.fxml"));
-            pane = loader.load();
-            ActivityPostCont controller = loader.getController();
-            controller.initializePost(activityPost);
-            container.getChildren().add(pane);
+        if (activityPosts == null)
+            pageWarning.setVisible(true);
+        else if (container != null) {
+            container.getChildren().clear();
+            for (ActivityPost activityPost : activityPosts) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/activity_post/activity_post.fxml"));
+                pane = loader.load();
+                ActivityPostCont controller = loader.getController();
+                controller.initializePost(activityPost, false, stage);
+                container.getChildren().add(pane);
+            }
         }
     }
 

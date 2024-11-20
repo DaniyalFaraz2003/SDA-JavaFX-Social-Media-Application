@@ -94,7 +94,7 @@ public class Router extends Application {
                 root = fxmlLoader.load();
                 ActivityPostCont activityCont = fxmlLoader.getController();
                 scene = new Scene(root);
-                activityCont.initializePage();
+                activityCont.initializePage(stage);
                 break;
             case "Activity Post Form":
                 fxmlLoader = new FXMLLoader(Router.class.getResource("/fxml/activity_post/activity_post_form.fxml"));
@@ -108,7 +108,7 @@ public class Router extends Application {
                 root = fxmlLoader.load();
                 SimplePostCont postCont = fxmlLoader.getController();
                 scene = new Scene(root);
-                postCont.initializePage();
+                postCont.initializePage(stage);
                 break;
             case "Simple Post Form":
                 fxmlLoader = new FXMLLoader(Router.class.getResource("/fxml/simple_post/simple_post_form.fxml"));
@@ -122,7 +122,7 @@ public class Router extends Application {
                 root = fxmlLoader.load();
                 QuestionCont questCont = fxmlLoader.getController();
                 scene = new Scene(root);
-                questCont.initializePage();
+                questCont.initializePage(stage);
                 break;
             case "Question Form":
                 fxmlLoader = new FXMLLoader(Router.class.getResource("/fxml/question/question_form.fxml"));

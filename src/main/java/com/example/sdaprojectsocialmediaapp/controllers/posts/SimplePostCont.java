@@ -10,6 +10,8 @@ import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
 import com.example.sdaprojectsocialmediaapp.services.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -82,6 +84,9 @@ public class SimplePostCont extends MainController {
 
     @FXML
     private Button deleteBtn;
+
+    @FXML
+    private Label warning;
 
     @FXML
     public String getPostType() {
@@ -171,7 +176,7 @@ public class SimplePostCont extends MainController {
     }
 
     @FXML
-    public void initializePost(SimplePost simplePost) {
+    public void initializePost(SimplePost simplePost, boolean isHomepage, Stage stage) {
         this.id = simplePost.getId();
         this.postHeading.setText(simplePost.getTitle());
         this.postDescription.setText(simplePost.getDescription());
@@ -181,7 +186,7 @@ public class SimplePostCont extends MainController {
         this.timestamp.setText("Posted On: " + simplePost.getDate());
         this.author.setText("By: " + studentRepository.getStudentByID(simplePost.getAuthorId()).getName());
         this.reactionCount.setText(Integer.toString(simplePost.getNumberOfLikes()));
-        if (Session.getSessionVariable().getId() != simplePost.getAuthorId()) {
+        if (Session.getSessionVariable().getId() != simplePost.getAuthorId() || isHomepage) {
             this.updateBtn.setVisible(false);
             this.deleteBtn.setVisible(false);
         } else {
@@ -189,7 +194,17 @@ public class SimplePostCont extends MainController {
                 System.out.println("Update Btn clicked");
             });
             this.deleteBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                System.out.println("Delete Btn clicked");
+                PostRepository postRepository = new PostRepository();
+                postRepository.deleteSimplePost(id);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/simple_post/simple_post_page.fxml"));
+                try {
+                    Parent root = loader.load();
+                    SimplePostCont controller = loader.getController();
+                    controller.initializePage(stage);
+                    stage.setScene(new Scene(root));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             });
         }
         try {
@@ -207,16 +222,20 @@ public class SimplePostCont extends MainController {
     }
 
     @FXML
-    public void initializePage() throws IOException {
-        container.getChildren().clear();
+    public void initializePage(Stage stage) throws IOException {
         PostRepository postRepository = new PostRepository();
         ArrayList<SimplePost> simplePosts = postRepository.getSimplePostByStudentID(Session.getSessionVariable().getId());
-        for (SimplePost simplePost : simplePosts) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/simple_post/simple_post.fxml"));
-            pane = loader.load();
-            SimplePostCont controller = loader.getController();
-            controller.initializePost(simplePost);
-            container.getChildren().add(pane);
+        if (simplePosts == null)
+            warning.setVisible(true);
+        else if (this.container != null) {
+            container.getChildren().clear();
+            for (SimplePost simplePost : simplePosts) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/simple_post/simple_post.fxml"));
+                pane = loader.load();
+                SimplePostCont controller = loader.getController();
+                controller.initializePost(simplePost, false, stage);
+                container.getChildren().add(pane);
+            }
         }
     }
 
