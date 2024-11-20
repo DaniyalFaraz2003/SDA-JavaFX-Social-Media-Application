@@ -66,3 +66,7 @@ INSERT INTO Friend (student_id_from, student_id_to, status, time_stamp) VALUES
                                                                             (12, 4, false, NOW()),
                                                                             (4, 11, false, NOW()),
                                                                             (12, 3, false, NOW());
+
+delete from comment where post_id = 13;
+delete from simple_post where post_id = 13;
+delete from post where id = 13;

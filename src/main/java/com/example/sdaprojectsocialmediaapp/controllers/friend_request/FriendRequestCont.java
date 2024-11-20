@@ -36,8 +36,10 @@ public class FriendRequestCont extends MainController {
     public void initializePage(Stage stage) throws IOException {
         // get array list of friend request component
         ArrayList<FriendRequestComp> requests = friendRequestRepository.getAllFriendsRequests(Session.getSessionVariable().getId());
-
-        int size = requests.size();
+        int size = 0;
+        if (requests != null) {
+            size = requests.size();
+        }
         container.getChildren().clear();
         // setting the request count
         requestCount.setText(Integer.toString(size) + " requests");
