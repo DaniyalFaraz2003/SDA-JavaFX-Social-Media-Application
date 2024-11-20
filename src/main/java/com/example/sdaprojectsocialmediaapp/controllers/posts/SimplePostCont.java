@@ -188,7 +188,7 @@ public class SimplePostCont extends MainController {
             this.updateBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                 System.out.println("Update Btn clicked");
             });
-            this.updateBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            this.deleteBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                 System.out.println("Delete Btn clicked");
             });
         }

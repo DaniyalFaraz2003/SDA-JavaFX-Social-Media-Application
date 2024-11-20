@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaprojectsocialmediaapp.controllers.posts.ActivityPostCont">
    <children>
@@ -154,5 +155,10 @@
       <HBox fx:id="replyButtonBox" layoutX="550.0" layoutY="542.0" spacing="20.0" stylesheets="@../../css/post.css" />
       <TextField fx:id="replyContent" layoutX="550.0" layoutY="495.0" prefHeight="35.0" prefWidth="200.0" stylesheets="@../../css/postpage.css" />
       <Button layoutX="769.0" layoutY="495.0" mnemonicParsing="false" onMouseClicked="#addReplyButton" stylesheets="@../../css/postpage.css" text="Add" />
+      <Label fx:id="warning" layoutX="838.0" layoutY="504.0" prefHeight="20.0" prefWidth="188.0" textFill="#f20a0a">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

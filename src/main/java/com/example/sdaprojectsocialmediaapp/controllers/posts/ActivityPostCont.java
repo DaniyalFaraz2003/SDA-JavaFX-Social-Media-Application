@@ -103,9 +103,9 @@ public class ActivityPostCont extends MainController {
     void addReplyButton(MouseEvent event) {
         String content = replyContent.getText();
         if (content.length() > 10) {
-            warning.setVisible(true);
+            this.warning.setText("Not more than 10 characters");
         } else {
-            warning.setVisible(false);
+            this.warning.setText("");
             Button button = new Button(replyContent.getText());
             replyContent.setText("");
             button.getStyleClass().add("postButton");
@@ -147,7 +147,7 @@ public class ActivityPostCont extends MainController {
             this.updateBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                 System.out.println("Update Btn clicked");
             });
-            this.updateBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            this.deleteBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                 System.out.println("Delete Btn clicked");
             });
         }
