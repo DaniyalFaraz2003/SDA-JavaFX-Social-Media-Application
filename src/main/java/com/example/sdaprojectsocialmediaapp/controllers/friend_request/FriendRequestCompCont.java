@@ -3,6 +3,7 @@ package com.example.sdaprojectsocialmediaapp.controllers.friend_request;
 import com.example.sdaprojectsocialmediaapp.Router;
 import com.example.sdaprojectsocialmediaapp.controllers.ViewProfileCont;
 import com.example.sdaprojectsocialmediaapp.models.FriendRequestComp;
+import com.example.sdaprojectsocialmediaapp.models.Student;
 import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,14 +45,15 @@ public class FriendRequestCompCont {
 
     @FXML
     public void initializePost(FriendRequestComp friendRequest, Stage stage) {
-        senderName.setText(studentRepository.getStudentByID(friendRequest.getFromId()).getName());
+        Student s = studentRepository.getStudentByID(friendRequest.getFromId());
+        senderName.setText(s.getName());
         requestDate.setText("Requested On: " + friendRequest.getRequestDate());
         viewProfileBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/view_profile.fxml"));
             try {
                 Parent root = loader.load();
                 ViewProfileCont controller = loader.getController();
-                controller.initializePage(studentRepository.getStudentByID(friendRequest.getFromId()).getUserName());
+                controller.initializePage(s.getUserName());
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
             } catch (IOException e) {

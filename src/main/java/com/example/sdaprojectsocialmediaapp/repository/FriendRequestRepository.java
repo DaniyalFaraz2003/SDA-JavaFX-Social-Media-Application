@@ -81,4 +81,77 @@ public class FriendRequestRepository {
         }
         return null;
     }
+
+    public void removeFriendRequest(int toId, int fromId) {
+        // SQL query to delete entries where the IDs match in any order
+        String sql = "DELETE FROM Friend " +
+                "WHERE (student_id_from = ? AND student_id_to = ?) " +
+                " and status = FALSE";
+
+        try (Connection conn = dbConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // Set the parameters for both ID combinations
+            pstmt.setInt(1, fromId);
+            pstmt.setInt(2, toId);
+
+            // Execute the update
+            int rowsAffected = pstmt.executeUpdate();
+            System.out.println(rowsAffected + " friend request(s) deleted.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void removeFriend(int toId, int fromId) {
+        // SQL query to delete entries where the IDs match in any order
+        String sql = "DELETE FROM Friend " +
+                "WHERE (student_id_from = ? AND student_id_to = ?) " +
+                "   OR (student_id_from = ? AND student_id_to = ?) and status = TRUE";
+
+        try (Connection conn = dbConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // Set the parameters for both ID combinations
+            pstmt.setInt(1, toId);
+            pstmt.setInt(2, fromId);
+            pstmt.setInt(3, fromId);
+            pstmt.setInt(4, toId);
+
+            // Execute the update
+            int rowsAffected = pstmt.executeUpdate();
+            System.out.println(rowsAffected + " friend(s) deleted.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void acceptFriendRequest(int toId, int fromId) {
+        // SQL query to update the status of the friend request
+        String sql = "UPDATE Friend " +
+                "SET status = TRUE " +
+                "WHERE student_id_from = ? AND student_id_to = ?";
+
+        try (Connection conn = dbConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // Set the parameters for the query
+            pstmt.setInt(1, fromId);
+            pstmt.setInt(2, toId);
+
+            // Execute the update
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Friend request accepted.");
+            } else {
+                System.out.println("No matching friend request found.");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
