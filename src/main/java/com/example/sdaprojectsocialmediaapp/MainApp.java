@@ -20,13 +20,7 @@ public class MainApp {
         StudentRepository studentRepository = new StudentRepository();
         //Application.launch(Router.class, args);
 
-        FriendRequestRepository friendRequestRepository = new FriendRequestRepository();
-        ArrayList<FriendRequestComp> frc = friendRequestRepository.getAllFriendsRequests(3);
-
-        for (FriendRequestComp f : frc){
-            System.out.println(f.getFromId());
-            System.out.println(f.getToId());
-            System.out.println(f.getRequestDate());
-        }
+        PostRepository postRepository = new PostRepository();
+        postRepository.deleteActivityPost(4);
     }
 }

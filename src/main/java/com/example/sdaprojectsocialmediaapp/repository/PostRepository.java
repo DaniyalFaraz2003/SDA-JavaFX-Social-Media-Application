@@ -536,4 +536,99 @@ public class PostRepository {
 
         return null;
     }
+
+    public void deleteSimplePost(int postID) {
+        String sql1 = "Select * from Simple_Post where post_id = ?";
+        String sql2 = "Delete from Comment where post_id = ?";
+        String sql3 = "Delete from Simple_Post where post_id = ?";
+        String sql4 = "Delete from Post where ID = ?";
+
+        try(Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt1 = conn.prepareStatement(sql1);
+            pstmt1.setInt(1, postID);
+            ResultSet rs1 = pstmt1.executeQuery();
+
+            if(rs1.next()){
+                PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+                pstmt2.setInt(1, postID);
+                pstmt2.executeUpdate();
+
+                PreparedStatement pstmt3 = conn.prepareStatement(sql3);
+                pstmt3.setInt(1, postID);
+                pstmt3.executeUpdate();
+
+                PreparedStatement pstmt4 = conn.prepareStatement(sql4);
+                pstmt4.setInt(1, postID);
+                pstmt4.executeUpdate();
+            }
+        } catch (SQLException e) {
+            System.out.println("Error deleting post" + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteQuestion(int postID) {
+        String sql1 = "Select * from Question where post_id = ?";
+        String sql2 = "Delete from Answer where post_id = ?";
+        String sql3 = "Delete from Question where post_id = ?";
+        String sql4 = "Delete from Post where ID = ?";
+
+        try(Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt1 = conn.prepareStatement(sql1);
+            pstmt1.setInt(1, postID);
+            ResultSet rs1 = pstmt1.executeQuery();
+
+            if(rs1.next()){
+                PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+                pstmt2.setInt(1, postID);
+                pstmt2.executeUpdate();
+
+                PreparedStatement pstmt3 = conn.prepareStatement(sql3);
+                pstmt3.setInt(1, postID);
+                pstmt3.executeUpdate();
+
+                PreparedStatement pstmt4 = conn.prepareStatement(sql4);
+                pstmt4.setInt(1, postID);
+                pstmt4.executeUpdate();
+            }
+        } catch (SQLException e) {
+            System.out.println("Error deleting question" + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteActivityPost(int postID) {
+        String sql1 = "Select * from Activity_Post where post_id = ?";
+        String sql2 = "Delete from Student_ActivityReply where post_id = ?";
+        String sql3 = "Delete from Reply where post_id = ?";
+        String sql4 = "Delete from Activity_Post where post_id = ?";
+        String sql5 = "Delete from Post where ID = ?";
+
+        try(Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt1 = conn.prepareStatement(sql1);
+            pstmt1.setInt(1, postID);
+            ResultSet rs1 = pstmt1.executeQuery();
+
+            if(rs1.next()){
+                PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+                pstmt2.setInt(1, postID);
+                pstmt2.executeUpdate();
+
+                PreparedStatement pstmt3 = conn.prepareStatement(sql3);
+                pstmt3.setInt(1, postID);
+                pstmt3.executeUpdate();
+
+                PreparedStatement pstmt4 = conn.prepareStatement(sql4);
+                pstmt4.setInt(1, postID);
+                pstmt4.executeUpdate();
+
+                PreparedStatement pstmt5 = conn.prepareStatement(sql5);
+                pstmt5.setInt(1, postID);
+                pstmt5.executeUpdate();
+            }
+        } catch (SQLException e) {
+            System.out.println("Error deleting question" + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 }
