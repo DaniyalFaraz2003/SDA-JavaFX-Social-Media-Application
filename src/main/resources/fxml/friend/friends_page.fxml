@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaprojectsocialmediaapp.controllers.friends.FriendPageCont">
    <children>
@@ -148,7 +149,17 @@
             <VBox fx:id="container" prefHeight="598.0" prefWidth="731.0" spacing="20.0" />
          </content>
       </ScrollPane>
-      <Label layoutX="1024.0" layoutY="126.0" styleClass="inputLabel" stylesheets="@../../css/register.css" text="You Have:" />
-      <Label fx:id="friendCount" layoutX="1092.0" layoutY="126.0" styleClass="inputLabel" stylesheets="@../../css/register.css" text="0 Friends" />
+      <Label layoutX="280.0" layoutY="99.0" styleClass="inputLabel" stylesheets="@../../css/register.css" text="You Have:" />
+      <Label fx:id="friendCount" layoutX="348.0" layoutY="99.0" styleClass="inputLabel" stylesheets="@../../css/register.css" text="0 Friends" />
+      <Label layoutX="1029.0" layoutY="126.0" text="Find More People">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <ScrollPane layoutX="1029.0" layoutY="168.0" prefHeight="556.0" prefWidth="257.0">
+         <content>
+            <VBox fx:id="findFriendsPane" prefHeight="539.0" prefWidth="256.0" />
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

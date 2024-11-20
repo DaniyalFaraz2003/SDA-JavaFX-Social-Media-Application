@@ -36,3 +36,17 @@
 .postButton:hover {
     -fx-background-color: #0088d6;
 }
+
+.deleteButton {
+    -fx-font-size: 14px;
+    /*-fx-border-width: 1px;*/
+    /*-fx-border-color: black;*/
+    /*-fx-border-radius: 20px;*/
+    -fx-text-fill: white;
+    -fx-background-color: red;
+    -fx-cursor: hand;
+}
+
+.deleteButton:hover {
+    -fx-background-color: #c60000;
+}

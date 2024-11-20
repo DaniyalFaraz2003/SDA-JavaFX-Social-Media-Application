@@ -18,9 +18,8 @@ import java.util.ArrayList;
 public class MainApp {
     public static void main(String[] args) {
         StudentRepository studentRepository = new StudentRepository();
-        //Application.launch(Router.class, args);
+        FriendRequestRepository friendRequestRepository = new FriendRequestRepository();
+        Application.launch(Router.class, args);
 
-        PostRepository postRepository = new PostRepository();
-        postRepository.deleteActivityPost(4);
     }
 }

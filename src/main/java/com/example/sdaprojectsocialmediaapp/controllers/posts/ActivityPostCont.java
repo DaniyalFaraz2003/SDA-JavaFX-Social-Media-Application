@@ -7,6 +7,8 @@ import com.example.sdaprojectsocialmediaapp.controllers.engagements.ReplyCont;
 import com.example.sdaprojectsocialmediaapp.models.engagements.Reply;
 import com.example.sdaprojectsocialmediaapp.models.engagements.StudentActivityReply;
 import com.example.sdaprojectsocialmediaapp.models.posts.ActivityPost;
+import com.example.sdaprojectsocialmediaapp.models.posts.SimplePost;
+import com.example.sdaprojectsocialmediaapp.repository.PostRepository;
 import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
 import com.example.sdaprojectsocialmediaapp.services.Session;
 import javafx.fxml.FXML;
@@ -22,6 +24,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 public class ActivityPostCont extends MainController {
     StudentRepository studentRepository = new StudentRepository();
@@ -67,6 +70,15 @@ public class ActivityPostCont extends MainController {
     private VBox replies;
 
     @FXML
+    private VBox container;
+
+    @FXML
+    private Button updateBtn;
+
+    @FXML
+    private Button deleteBtn;
+
+    @FXML
     public String getPostType() {
         return postType.getText();
     }
@@ -91,9 +103,9 @@ public class ActivityPostCont extends MainController {
     void addReplyButton(MouseEvent event) {
         String content = replyContent.getText();
         if (content.length() > 10) {
-            warning.setVisible(true);
+            this.warning.setText("Not more than 10 characters");
         } else {
-            warning.setVisible(false);
+            this.warning.setText("");
             Button button = new Button(replyContent.getText());
             replyContent.setText("");
             button.getStyleClass().add("postButton");
@@ -128,6 +140,17 @@ public class ActivityPostCont extends MainController {
             });
             replyBox.getChildren().add(button);
         }
+        if (Session.getSessionVariable().getId() != activityPost.getAuthorId()) {
+            this.updateBtn.setVisible(false);
+            this.deleteBtn.setVisible(false);
+        } else {
+            this.updateBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                System.out.println("Update Btn clicked");
+            });
+            this.deleteBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                System.out.println("Delete Btn clicked");
+            });
+        }
         try {
             for (StudentActivityReply sar: activityPost.getStudentReplies()) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/activity_post/reply.fxml"));
@@ -146,8 +169,17 @@ public class ActivityPostCont extends MainController {
     }
 
     @FXML
-    public void initializePage() {
-        // Fetch data to populate page
+    public void initializePage() throws IOException {
+        container.getChildren().clear();
+        PostRepository postRepository = new PostRepository();
+        ArrayList<ActivityPost> activityPosts = postRepository.getActivityPostByStudentID(Session.getSessionVariable().getId());
+        for (ActivityPost activityPost : activityPosts) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/activity_post/activity_post.fxml"));
+            pane = loader.load();
+            ActivityPostCont controller = loader.getController();
+            controller.initializePost(activityPost);
+            container.getChildren().add(pane);
+        }
     }
 
     @FXML
