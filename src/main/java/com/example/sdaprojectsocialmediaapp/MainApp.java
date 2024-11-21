@@ -22,5 +22,7 @@ public class MainApp {
         StudentRepository studentRepository = new StudentRepository();
         FriendRequestRepository friendRequestRepository = new FriendRequestRepository();
         Application.launch(Router.class, args);
+
+
     }
 }

@@ -224,10 +224,19 @@ public class SimplePostCont extends MainController {
         this.id = simplePost.getId();
         this.postHeading.setText(simplePost.getTitle());
         this.postDescription.setText(simplePost.getDescription());
-        String resolvedPath = getClass().getResource(simplePost.getPostImageUrl()).toExternalForm();
+        String resolvedPath = System.getProperty("user.dir") + "\\src\\main\\resources".replace("\\", "/") + simplePost.getPostImageUrl();
 
-        Image image = new Image(resolvedPath);
-        postImage.setImage(image);
+        File file = new File(resolvedPath);
+
+        if (file.exists()) {
+            String fileURI = file.toURI().toString(); // Convert absolute path to a URI
+            Image image = new Image(fileURI); // Load the image using its URI
+            this.postImage.setImage(image); // Set the image in the ImageView
+        } else {
+            System.out.println("Error: File does not exist at " + resolvedPath);
+            return;
+        }
+
         this.timestamp.setText("Posted On: " + simplePost.getDate());
         this.author.setText("By: " + studentRepository.getStudentByID(simplePost.getAuthorId()).getName());
         this.reactionCount.setText(Integer.toString(simplePost.getNumberOfLikes()));
@@ -271,9 +280,6 @@ public class SimplePostCont extends MainController {
         PostRepository postRepository = new PostRepository();
         ArrayList<SimplePost> simplePosts = postRepository.getSimplePostByStudentID(Session.getSessionVariable().getId());
 
-        for (SimplePost post: simplePosts) {
-            System.out.println(post.getPostImageUrl());
-        }
 
         if (simplePosts == null)
             warning.setVisible(true);
