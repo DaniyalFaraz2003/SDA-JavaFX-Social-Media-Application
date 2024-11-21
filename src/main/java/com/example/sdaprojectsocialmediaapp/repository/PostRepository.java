@@ -278,12 +278,11 @@ public class PostRepository {
         return newPostId;
     }
 
-    public int createSimpleActivityPost(int studentID, String title, String description, String url, int numLikes){
+    public int createSimplePost(int studentID, String title, String description, String url, int numLikes){
         String sql = "INSERT INTO Post (student_id, title, description, time_stamp) VALUES (?, ?, ?, ?)";
         String sql2 = "Select MAX(ID) as maxID from post";
         String sql3 = "Insert into Simple_Post (post_id, picture_url, likes) Values (?, ?, ?)";
         int newPostId = 0;
-
 
         try (Connection conn = dbConnector.getConnection()) {
             PreparedStatement pstmt = conn.prepareStatement(sql);

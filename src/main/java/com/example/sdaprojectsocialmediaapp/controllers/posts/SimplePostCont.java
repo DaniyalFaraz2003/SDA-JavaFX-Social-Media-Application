@@ -8,6 +8,7 @@ import com.example.sdaprojectsocialmediaapp.models.posts.SimplePost;
 import com.example.sdaprojectsocialmediaapp.repository.PostRepository;
 import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
 import com.example.sdaprojectsocialmediaapp.services.Session;
+import com.example.sdaprojectsocialmediaapp.utils.Validate;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -29,13 +30,24 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.nio.file.Files;
 
+
+import javax.imageio.ImageIO;
+
 public class SimplePostCont extends MainController {
     private StudentRepository studentRepository = new StudentRepository();
+    private PostRepository postRepository = new PostRepository();
 
+    File imageFile = null;
     private int id;
 
     @FXML
+    private ImageView imageView;
+
+    @FXML
     private Pane pane;
+
+    @FXML
+    private Label errorText;
 
     @FXML
     private ToggleButton reactBtn;
@@ -119,6 +131,7 @@ public class SimplePostCont extends MainController {
 
     }
 
+
     @FXML
     void createNewPost(MouseEvent event) throws IOException {
         // Routing to the post creation page
@@ -137,42 +150,73 @@ public class SimplePostCont extends MainController {
 
         // Show open file dialog
         File file = fileChooser.showOpenDialog(new Stage());
+        this.imageFile = file;
         if (file != null) {
             try {
-                // Define the target directory (post_images in resources)
-                String targetDirPath = "src/main/resources/post_images";
-                File targetDir = new File(targetDirPath);
-                if (!targetDir.exists()) {
-                    targetDir.mkdirs(); // Create the directory if it doesn't exist
-                }
+                // Load the image from the file
+                Image image = new Image(file.toURI().toString());
+                // Set the image in the ImageView
+                imageView.setImage(image);
 
-                // Find the next available file name (1.jpeg, 2.jpeg, etc.)
-                int fileIndex = 1;
-                File targetFile;
-                do {
-                    targetFile = new File(targetDir, fileIndex + ".jpeg");
-                    fileIndex++;
-                } while (targetFile.exists());
-
-                // Copy the file to the target directory with the new name
-                Files.copy(file.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-
-                System.out.println("File saved as: " + targetFile.getAbsolutePath());
+                // Optionally disable the upload button after the image is uploaded
                 uploadBtn.setDisable(true);
-            } catch (IOException e) {
-                System.out.println("Error saving the file: " + e.getMessage());
+            } catch (Exception e) {
+                errorText.setText("Error loading the image");
             }
         }
     }
 
     @FXML
     void submit(MouseEvent event) throws IOException {
-        // Create an activity post object
 
-        // Insert post data to database
+        if (Validate.isValidPostTitle(this.postTitle.getText())) {
+            if (Validate.isValidPostDescription(this.postContent.getText())) {
+                if (this.imageFile != null) {
+                    try {
+                        // Define the target directory (post_images in resources)
+                        String targetDirPath = "src/main/resources/post_images";
+                        File targetDir = new File(targetDirPath);
+                        if (!targetDir.exists()) {
+                            targetDir.mkdirs(); // Create the directory if it doesn't exist
+                        }
 
-        // Return back to Activity posts page
-        Router.navigateTo("Simple Post Page");
+                        //int studentID, String title, String description, String url, int numLikes
+                        int newId = postRepository.createSimplePost(Session.getSessionVariable().getId(), this.postTitle.getText(), this.postContent.getText(), "", 0);
+                        SimplePost sp = postRepository.getSimplePost(newId);
+
+
+                        // Find the next available file name (1.jpeg, 2.jpeg, etc.)
+                        File targetFile = new File(targetDir, newId + ".jpeg");
+                        Files.copy(this.imageFile.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+                        // Verify the file exists
+
+                        if (targetFile.exists()) {
+                            // Update the post with the correct image URL
+                            sp.setPostImageUrl("/post_images/" + newId + ".jpeg");
+                            postRepository.updateSimplePost(sp);
+
+                            // Navigate to the Simple Post Page
+                            System.out.println("File saved as: " + targetFile.getAbsolutePath());
+                            Router.navigateTo("Simple Post Page");
+                        } else {
+                            errorText.setText("Image file not saved properly. Please try again.");
+                        }
+
+                    } catch (IOException e) {
+                        System.out.println("Error saving the file: " + e.getMessage());
+                    }
+                }
+                else {
+                    errorText.setText("Please Choose Image File");
+                }
+            } else {
+                errorText.setText("Invalid post description");
+            }
+        } else {
+            errorText.setText("Please enter valid post title");
+        }
+
     }
 
     @FXML
@@ -180,7 +224,8 @@ public class SimplePostCont extends MainController {
         this.id = simplePost.getId();
         this.postHeading.setText(simplePost.getTitle());
         this.postDescription.setText(simplePost.getDescription());
-        String resolvedPath = Objects.requireNonNull(getClass().getResource(simplePost.getPostImageUrl())).toExternalForm();
+        String resolvedPath = getClass().getResource(simplePost.getPostImageUrl()).toExternalForm();
+
         Image image = new Image(resolvedPath);
         postImage.setImage(image);
         this.timestamp.setText("Posted On: " + simplePost.getDate());
@@ -225,6 +270,11 @@ public class SimplePostCont extends MainController {
     public void initializePage(Stage stage) throws IOException {
         PostRepository postRepository = new PostRepository();
         ArrayList<SimplePost> simplePosts = postRepository.getSimplePostByStudentID(Session.getSessionVariable().getId());
+
+        for (SimplePost post: simplePosts) {
+            System.out.println(post.getPostImageUrl());
+        }
+
         if (simplePosts == null)
             warning.setVisible(true);
         else if (this.container != null) {

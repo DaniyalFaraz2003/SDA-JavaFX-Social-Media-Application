@@ -63,4 +63,43 @@ public class Validate {
         return pattern.matcher(username).matches();
     }
 
+    public static boolean isValidPostTitle(String title) {
+        // Check if the title is null or empty
+        if (title == null || title.trim().isEmpty()) {
+            return false;
+        }
+
+        // Define the criteria for a valid title
+        // For example: Title should be at least 3 characters long and no more than 100 characters
+        // It should also not contain invalid characters (e.g., only letters, numbers, and basic punctuation allowed)
+        if (title.length() < 3 || title.length() > 100) {
+            return false;
+        }
+
+        // Check if the title contains only valid characters (letters, numbers, spaces, basic punctuation)
+        String validTitlePattern = "^[a-zA-Z0-9 .,!?'-]+$";
+        return title.matches(validTitlePattern);
+
+        // If all checks pass, the title is valid
+    }
+
+    public static boolean isValidPostDescription(String description) {
+        // Check if the description is null or empty
+        if (description == null || description.trim().isEmpty()) {
+            return false;
+        }
+
+        // Define the criteria for a valid description
+        // For example: Description should be at least 10 characters long and no more than 500 characters
+        if (description.length() < 10 || description.length() > 500) {
+            return false;
+        }
+
+        // Check if the description contains only valid characters (letters, numbers, spaces, and basic punctuation)
+        String validDescriptionPattern = "^[a-zA-Z0-9 .,!?'-]+$";
+        return description.matches(validDescriptionPattern);
+
+    }
+
+
 }
