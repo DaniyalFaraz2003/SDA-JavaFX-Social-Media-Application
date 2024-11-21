@@ -1,7 +1,6 @@
 ToDos of Hammad Ali:
 
-1- Logout functionality
-2- Answer description overlapping bug
+1- Answer description overlapping bug
 
 ToDos of Amna Siddiqui:
 

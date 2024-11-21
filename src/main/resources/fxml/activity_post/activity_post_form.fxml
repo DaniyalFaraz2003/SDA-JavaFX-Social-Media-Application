@@ -20,7 +20,7 @@
       <Pane id="sidebar" prefHeight="750.0" prefWidth="250.0" stylesheets="@../../css/homepage.css">
          <children>
             <Label id="sidebarTitle" layoutY="37.0" stylesheets="@../../css/homepage.css" text="FASTBook" textAlignment="CENTER" />
-            <ImageView fitHeight="31.0" fitWidth="31.0" layoutX="212.0" layoutY="708.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="31.0" fitWidth="31.0" layoutX="212.0" layoutY="708.0" onMouseClicked="#handleLogout" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/logout.png" />
                </image>
