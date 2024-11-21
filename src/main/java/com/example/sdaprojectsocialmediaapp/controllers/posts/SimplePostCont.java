@@ -62,6 +62,9 @@ public class SimplePostCont extends MainController {
     private TextField postTitle;
 
     @FXML
+    private TextArea postContent;
+
+    @FXML
     private Label postHeading;
 
     @FXML
@@ -72,9 +75,6 @@ public class SimplePostCont extends MainController {
 
     @FXML
     private VBox container;
-
-    @FXML
-    private TextArea postContent;
 
     @FXML
     private Label postDescription;
@@ -96,6 +96,9 @@ public class SimplePostCont extends MainController {
 
     @FXML
     private Button deleteBtn;
+
+    @FXML
+    private Button submit;
 
     @FXML
     private Label warning;
@@ -236,7 +239,15 @@ public class SimplePostCont extends MainController {
             this.deleteBtn.setVisible(false);
         } else {
             this.updateBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                System.out.println("Update Btn clicked");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/simple_post/simple_post_form.fxml"));
+                try {
+                    Parent root = loader.load();
+                    SimplePostCont controller = loader.getController();
+                    controller.initializeForm(simplePost);
+                    stage.setScene(new Scene(root));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             });
             this.deleteBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                 PostRepository postRepository = new PostRepository();
@@ -263,7 +274,6 @@ public class SimplePostCont extends MainController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     @FXML
@@ -290,7 +300,25 @@ public class SimplePostCont extends MainController {
     }
 
     @FXML
-    public void initializeForm() {
-        // Fetch data to populate form
+    public void initializeForm(SimplePost simplePost) {
+        if (simplePost != null) {
+            this.submit.setText("Update");
+            this.postTitle.setText(simplePost.getTitle());
+            this.postContent.setText(simplePost.getDescription());
+            this.uploadBtn.setDisable(true);
+            submit.removeEventHandler(MouseEvent.MOUSE_CLICKED, submit.getOnMouseClicked());
+            submit.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                simplePost.setTitle(postTitle.getText());
+                simplePost.setDescription(postContent.getText());
+                simplePost.setDate(new Timestamp(System.currentTimeMillis()));
+                PostRepository postRepository = new PostRepository();
+                postRepository.updateSimplePost(simplePost);
+                try {
+                    Router.navigateTo("Simple Post Page");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
     }
 }

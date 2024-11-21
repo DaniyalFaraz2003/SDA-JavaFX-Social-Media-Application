@@ -12,10 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -68,6 +65,15 @@ public class QuestionCont extends MainController {
 
     @FXML
     private Button deleteBtn;
+
+    @FXML
+    private Button submit;
+
+    @FXML
+    private TextField postTitle;
+
+    @FXML
+    private TextArea postContent;
 
     @FXML
     private Label warning;
@@ -128,7 +134,15 @@ public class QuestionCont extends MainController {
             this.deleteBtn.setVisible(false);
         } else {
             this.updateBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                System.out.println("Update Btn clicked");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/question/question_form.fxml"));
+                try {
+                    Parent root = loader.load();
+                    QuestionCont controller = loader.getController();
+                    controller.initializeForm(question);
+                    stage.setScene(new Scene(root));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             });
             this.deleteBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                 PostRepository postRepository = new PostRepository();
@@ -177,7 +191,24 @@ public class QuestionCont extends MainController {
     }
 
     @FXML
-    public void initializeForm() {
-        // Fetch data to populate form
+    public void initializeForm(Question question) {
+        if (question != null) {
+            this.submit.setText("Update");
+            this.postTitle.setText(question.getTitle());
+            this.postContent.setText(question.getDescription());
+            submit.removeEventHandler(MouseEvent.MOUSE_CLICKED, submit.getOnMouseClicked());
+            submit.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                question.setTitle(postTitle.getText());
+                question.setDescription(postContent.getText());
+                question.setDate(new Timestamp(System.currentTimeMillis()));
+                PostRepository postRepository = new PostRepository();
+                postRepository.updateQuestion(question);
+                try {
+                    Router.navigateTo("Question Page");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
     }
 }
