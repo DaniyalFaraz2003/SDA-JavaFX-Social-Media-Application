@@ -20,7 +20,7 @@
       <Pane id="sidebar" prefHeight="750.0" prefWidth="250.0" stylesheets="@../../css/homepage.css">
          <children>
             <Label id="sidebarTitle" layoutY="37.0" stylesheets="@../../css/homepage.css" text="FASTBook" textAlignment="CENTER" />
-            <ImageView fitHeight="31.0" fitWidth="31.0" layoutX="212.0" layoutY="708.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="31.0" fitWidth="31.0" layoutX="212.0" layoutY="708.0" onMouseClicked="#handleLogout" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/logout.png" />
                </image>
@@ -146,15 +146,15 @@
             <Label id="username" stylesheets="@../../css/homepage.css" text="Unsatisfying Prince" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <Button layoutX="548.0" layoutY="638.0" mnemonicParsing="false" onMouseClicked="#submit" stylesheets="@../../css/postpage.css" text="Submit" />
+      <Button fx:id="submit" layoutX="548.0" layoutY="638.0" mnemonicParsing="false" onMouseClicked="#submit" stylesheets="@../../css/postpage.css" text="Submit" />
       <Label layoutX="460.0" layoutY="224.0" stylesheets="@../../css/postpage.css" text="Post Title:" />
       <Label layoutX="433.0" layoutY="289.0" stylesheets="@../../css/postpage.css" text="Post Content:" />
       <TextField fx:id="postTitle" layoutX="548.0" layoutY="219.0" prefHeight="25.0" prefWidth="381.0" stylesheets="@../../css/postpage.css" />
-      <TextArea fx:id="postContent" layoutX="548.0" layoutY="289.0" prefHeight="173.0" prefWidth="528.0" />
+      <TextArea fx:id="postContent" layoutX="548.0" layoutY="289.0" prefHeight="173.0" prefWidth="528.0" styleClass="contentBox" stylesheets="@../../css/post.css" />
       <Label layoutX="390.0" layoutY="500.0" stylesheets="@../../css/postpage.css" text="Add Reply (Max 3):" />
       <HBox fx:id="replyButtonBox" layoutX="550.0" layoutY="542.0" spacing="20.0" stylesheets="@../../css/post.css" />
       <TextField fx:id="replyContent" layoutX="550.0" layoutY="495.0" prefHeight="35.0" prefWidth="200.0" stylesheets="@../../css/postpage.css" />
-      <Button layoutX="769.0" layoutY="495.0" mnemonicParsing="false" onMouseClicked="#addReplyButton" stylesheets="@../../css/postpage.css" text="Add" />
+      <Button fx:id="addBtn" layoutX="769.0" layoutY="495.0" mnemonicParsing="false" onMouseClicked="#addReplyButton" stylesheets="@../../css/postpage.css" text="Add" />
       <Label fx:id="warning" layoutX="838.0" layoutY="504.0" prefHeight="20.0" prefWidth="188.0" textFill="#f20a0a">
          <font>
             <Font size="14.0" />

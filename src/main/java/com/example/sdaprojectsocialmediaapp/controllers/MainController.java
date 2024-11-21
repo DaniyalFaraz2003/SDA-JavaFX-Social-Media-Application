@@ -1,6 +1,7 @@
 package com.example.sdaprojectsocialmediaapp.controllers;
 
 import com.example.sdaprojectsocialmediaapp.Router;
+import com.example.sdaprojectsocialmediaapp.services.Session;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 
@@ -48,5 +49,11 @@ public class MainController {
     @FXML
     void openSimplePosts(MouseEvent event) throws IOException {
         Router.navigateTo("Simple Post Page");
+    }
+
+    @FXML
+    void handleLogout(MouseEvent event) throws IOException {
+        Session.maintainSession(null);
+        Router.navigateTo("Login");
     }
 }

@@ -82,6 +82,12 @@ public class ActivityPostCont extends MainController {
     private Button deleteBtn;
 
     @FXML
+    private Button submit;
+
+    @FXML
+    private Button addBtn;
+
+    @FXML
     private Label pageWarning;
 
     @FXML
@@ -151,7 +157,15 @@ public class ActivityPostCont extends MainController {
             this.deleteBtn.setVisible(false);
         } else {
             this.updateBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                System.out.println("Update Btn clicked");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/activity_post/activity_post_form.fxml"));
+                try {
+                    Parent root = loader.load();
+                    ActivityPostCont controller = loader.getController();
+                    controller.initializeForm(activityPost);
+                    stage.setScene(new Scene(root));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             });
             this.deleteBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                 PostRepository postRepository = new PostRepository();
@@ -203,7 +217,33 @@ public class ActivityPostCont extends MainController {
     }
 
     @FXML
-    public void initializeForm() {
-        // Fetch data to populate form
+    public void initializeForm(ActivityPost activityPost) {
+        if (activityPost != null) {
+            this.submit.setText("Update");
+            this.postTitle.setText(activityPost.getTitle());
+            this.postContent.setText(activityPost.getDescription());
+            this.replyContent.setDisable(true);
+            this.addBtn.setDisable(true);
+            this.replyButtonBox.getChildren().clear();
+            for (Reply reply : activityPost.getReplies()) {
+                Button button = new Button(reply.getText());
+                button.getStyleClass().add("postButton");
+                button.setDisable(true);
+                replyButtonBox.getChildren().add(button);
+            }
+            submit.removeEventHandler(MouseEvent.MOUSE_CLICKED, submit.getOnMouseClicked());
+            submit.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                activityPost.setTitle(postTitle.getText());
+                activityPost.setDescription(postContent.getText());
+                activityPost.setDate(new Timestamp(System.currentTimeMillis()));
+                PostRepository postRepository = new PostRepository();
+                postRepository.updateActivityPost(activityPost);
+                try {
+                    Router.navigateTo("Question Page");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
     }
 }
