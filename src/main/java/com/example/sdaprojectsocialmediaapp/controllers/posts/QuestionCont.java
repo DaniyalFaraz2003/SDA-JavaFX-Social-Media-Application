@@ -8,6 +8,7 @@ import com.example.sdaprojectsocialmediaapp.models.posts.Question;
 import com.example.sdaprojectsocialmediaapp.repository.PostRepository;
 import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
 import com.example.sdaprojectsocialmediaapp.services.Session;
+import com.example.sdaprojectsocialmediaapp.utils.Validate;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 
 public class QuestionCont extends MainController {
     private StudentRepository studentRepository = new StudentRepository();
+    private PostRepository postRepository = new PostRepository();
     private int id;
 
     @FXML
@@ -32,6 +34,9 @@ public class QuestionCont extends MainController {
 
     @FXML
     private VBox answers;
+
+    @FXML
+    private Label errorText;
 
     @FXML
     private VBox container;
@@ -111,14 +116,22 @@ public class QuestionCont extends MainController {
         Router.navigateTo("Question Form");
     }
 
+    //int studentID, String title, String description, int votes
     @FXML
     void submit(MouseEvent event) throws IOException {
         // Create an activity post object
+        if (Validate.isValidPostTitle(postTitle.getText())) {
+            if (Validate.isValidPostDescription(postContent.getText())) {
+                postRepository.createQuestion(Session.getSessionVariable().getId(), postTitle.getText().trim(), postContent.getText().trim(), 0);
+                Router.navigateTo("Question Page");
+            } else {
+                errorText.setText("Invalid Post Description");
+            }
+        } else {
+            errorText.setText("Invalid Post Title");
+        }
 
-        // Insert post data to database
 
-        // Return back to Activity posts page
-        Router.navigateTo("Question Page");
     }
 
     @FXML
