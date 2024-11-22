@@ -21,8 +21,9 @@ public class MainApp {
     public static void main(String[] args) {
         StudentRepository studentRepository = new StudentRepository();
         FriendRequestRepository friendRequestRepository = new FriendRequestRepository();
-        Application.launch(Router.class, args);
+        //Application.launch(Router.class, args);
 
-
+        PostRepository postRepository = new PostRepository();
+        postRepository.addStudentActivityReply(1, 4, 3);
     }
 }
