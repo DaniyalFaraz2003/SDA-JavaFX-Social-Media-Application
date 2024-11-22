@@ -23,6 +23,5 @@ public class MainApp {
         FriendRequestRepository friendRequestRepository = new FriendRequestRepository();
         Application.launch(Router.class, args);
 
-
     }
 }
