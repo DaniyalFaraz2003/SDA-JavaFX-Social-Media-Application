@@ -218,6 +218,7 @@ public class PostRepository {
 
                     ArrayList<Comment> comments = new ArrayList<>();
                     while (rs3.next()) {
+                        int commentID = rs3.getInt("id");
                         int p_id = rs3.getInt("post_id");
                         int studentID = rs3.getInt("student_id");
                         String text = rs3.getString("text");
@@ -225,6 +226,7 @@ public class PostRepository {
                         Timestamp timeStamp = rs3.getTimestamp("time_stamp");
 
                         Comment comment = new Comment(p_id, studentID, timeStamp, text, answerLikes);
+                        comment.setCommentID(commentID);
                         comments.add(comment);
                     }
 
@@ -804,8 +806,9 @@ public class PostRepository {
         }
     }
 
-    public void commentOnPost(int postID, int studentID, String text) {
+    public int commentOnPost(int postID, int studentID, String text) {
         String sql = "Insert into Comment (post_id, student_id, text, likes, time_stamp) values (?, ?, ?, ?, ?)";
+        int commentID = -1;
 
         try (Connection conn = dbConnector.getConnection()) {
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -815,11 +818,18 @@ public class PostRepository {
             pstmt.setInt(4, 0);
             pstmt.setTimestamp(5, Timestamp.from(Instant.now()));
             pstmt.executeUpdate();
+
+            // Retrieve generated keys
+            ResultSet rs = pstmt.getGeneratedKeys();
+            if (rs.next()) {
+                commentID = rs.getInt(1); // Get the auto-generated comment ID
+            }
             System.out.println("Comment Added");
         } catch (SQLException e) {
             System.out.println("Error Adding Comment" + e.getMessage());
             e.printStackTrace();
         }
+        return commentID;
     }
 
     public void addAnswer(int postID, int studentID, String text) {

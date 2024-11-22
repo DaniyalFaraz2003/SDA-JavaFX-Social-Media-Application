@@ -9,7 +9,7 @@
    <children>
       <Label layoutX="9.0" layoutY="8.0" styleClass="postTitle" text="Comment:" />
       <Label fx:id="comment" layoutX="8.0" layoutY="35.0" styleClass="postDesc" text="This is a Comment" />
-      <ToggleButton fx:id="likeBtn" layoutX="641.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#handleLike" styleClass="postButton" text="Like" />
+      <ToggleButton fx:id="likeBtn" layoutX="641.0" layoutY="81.0" mnemonicParsing="false" styleClass="postButton" text="Like" />
       <Label fx:id="likeCount" layoutX="696.0" layoutY="83.0" styleClass="postTitle" text="0" />
       <Label fx:id="commentAuthor" layoutX="194.0" layoutY="96.0" styleClass="postMeta" text="By: Hammad Ali" />
       <Label fx:id="commentTimestamp" layoutX="9.0" layoutY="96.0" styleClass="postMeta" text="Posted On: 2024-11-12 08:35:12" />
