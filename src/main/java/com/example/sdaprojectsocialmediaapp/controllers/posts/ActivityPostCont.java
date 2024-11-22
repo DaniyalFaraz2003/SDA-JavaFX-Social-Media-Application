@@ -33,6 +33,8 @@ import java.util.ArrayList;
 
 public class ActivityPostCont extends MainController {
     StudentRepository studentRepository = new StudentRepository();
+    PostRepository postRepository = new PostRepository();
+
     private int id;
 
     @FXML
@@ -119,9 +121,8 @@ public class ActivityPostCont extends MainController {
                             replies.add(reply);
                         }
                     }
-                    for (Reply reply: replies) {
-                        System.out.println(reply.getText());
-                    }
+
+                    postRepository.createActivityPost(Session.getSessionVariable().getId(), this.postTitle.getText().trim(), this.postContent.getText().trim(), replies);
 
                     Router.navigateTo("Activity Post Page");
                 } else {
@@ -133,10 +134,6 @@ public class ActivityPostCont extends MainController {
         } else {
             this.warning.setText("Invalid Post Title");
         }
-
-        // Insert post data to database
-
-        // Return back to Activity posts page
 
     }
 
