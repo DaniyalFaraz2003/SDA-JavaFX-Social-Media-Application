@@ -239,16 +239,18 @@ public class PostRepository {
         return null;
     }
 
-    public int createActivityPost(int studentID, String title, String description){
+    public int createActivityPost(int studentID, String title, String description, ArrayList<Reply> replies){
         String sql = "INSERT INTO Post (student_id, title, description, time_stamp) VALUES (?, ?, ?, ?)";
         String sql2 = "Select MAX(ID) as maxID from post";
         String sql3 = "Insert into Activity_Post (post_id) Values (?)";
+        String sql4 = "Insert into Reply (post_id, text) VALUES (?, ?)";
         int newPostId = 0;
 
         try (Connection conn = dbConnector.getConnection()) {
              PreparedStatement pstmt = conn.prepareStatement(sql);
              PreparedStatement pstmt2 = conn.prepareStatement(sql2);
              PreparedStatement pstmt3 = conn.prepareStatement(sql3);
+             PreparedStatement pstmt4 = conn.prepareStatement(sql4);
 
             // Set parameters for the prepared statement
             pstmt.setInt(1, studentID);
@@ -268,6 +270,14 @@ public class PostRepository {
 
                 pstmt3.executeUpdate();
                 System.out.println("Activity Post saved successfully.");
+
+                for(Reply reply : replies){
+                    pstmt4.setInt(1, newPostId);
+                    pstmt4.setString(2, reply.getText());
+                    pstmt4.executeUpdate();
+                }
+
+                System.out.println("Replies saved successfully.");
             }
 
         } catch (SQLException e) {
@@ -713,15 +723,12 @@ public class PostRepository {
 
             PreparedStatement pstmt1 = conn.prepareStatement(sql2);
 
-            pstmt1.setString(1, replies.get(0).getText());
-            pstmt1.setInt(2, replies.get(0).getId());
-            pstmt1.executeUpdate();
-            pstmt1.setString(1, replies.get(1).getText());
-            pstmt1.setInt(2, replies.get(1).getId());
-            pstmt1.executeUpdate();
-            pstmt1.setString(1, replies.get(2).getText());
-            pstmt1.setInt(2, replies.get(2).getId());
-            pstmt1.executeUpdate();
+            for(Reply reply : replies){
+                pstmt1.setString(1, reply.getText());
+                pstmt1.setInt(2, reply.getId());
+                pstmt1.executeUpdate();
+            }
+
         } catch (SQLException e) {
             System.out.println("Error Updating Activity Post" + e.getMessage());
             e.printStackTrace();
