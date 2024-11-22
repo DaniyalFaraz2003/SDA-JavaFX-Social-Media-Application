@@ -24,7 +24,7 @@ public class PostRepository {
         dbConnector = new DatabaseConnector();
     }
 
-    public String getPostType(int postID){
+    public String getPostType(int postID) {
         String sql1 = "Select * from post where ID = ?";
         String sql2 = "Select * from simple_post where post_id = ?";
         String sql3 = "Select * from question where post_id = ?";
@@ -35,27 +35,27 @@ public class PostRepository {
             //Set parameters
             pstmt1.setInt(1, postID);
 
-            try(ResultSet rs1 = pstmt1.executeQuery()){
-                if(rs1.next()){
+            try (ResultSet rs1 = pstmt1.executeQuery()) {
+                if (rs1.next()) {
                     PreparedStatement pstmt2 = conn.prepareStatement(sql2);
                     pstmt2.setInt(1, postID);
 
-                    try(ResultSet rs2 = pstmt2.executeQuery()){
-                        if(rs2.next()){
+                    try (ResultSet rs2 = pstmt2.executeQuery()) {
+                        if (rs2.next()) {
                             return "Simple Post";
                         } else {
                             PreparedStatement pstmt3 = conn.prepareStatement(sql3);
                             pstmt3.setInt(1, postID);
 
-                            try(ResultSet rs3 = pstmt3.executeQuery()){
-                                if(rs3.next()){
+                            try (ResultSet rs3 = pstmt3.executeQuery()) {
+                                if (rs3.next()) {
                                     return "Question";
                                 } else {
                                     PreparedStatement pstmt4 = conn.prepareStatement(sql4);
                                     pstmt4.setInt(1, postID);
 
-                                    try(ResultSet rs4 = pstmt4.executeQuery()){
-                                        if(rs4.next()){
+                                    try (ResultSet rs4 = pstmt4.executeQuery()) {
+                                        if (rs4.next()) {
                                             return "Activity Post";
                                         }
                                     }
@@ -75,13 +75,13 @@ public class PostRepository {
         return null;
     }
 
-    public ActivityPost getActivityPost(int postID){
+    public ActivityPost getActivityPost(int postID) {
         String sql = "Select * from activity_post where post_id = ?";
         String sql2 = "Select * from post where ID = ?";
         String sql3 = "Select * from reply where post_id = ?";
         String sql4 = "Select * from Student_ActivityReply where post_id = ?";
 
-        try(Connection conn = dbConnector.getConnection()) {
+        try (Connection conn = dbConnector.getConnection()) {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             PreparedStatement pstmt2 = conn.prepareStatement(sql2);
             PreparedStatement pstmt3 = conn.prepareStatement(sql3);
@@ -93,7 +93,7 @@ public class PostRepository {
             ResultSet rs2 = pstmt2.executeQuery();
 
             if (rs1.next()) {
-                if(rs2.next()){
+                if (rs2.next()) {
                     int id = rs2.getInt("ID");
                     int author_id = rs2.getInt("student_id");
                     String title = rs2.getString("title");
@@ -103,7 +103,7 @@ public class PostRepository {
 
                     ArrayList<Reply> replies = new ArrayList<>();
 
-                    while(rs3.next()){
+                    while (rs3.next()) {
                         int r_id = rs3.getInt("id");
                         int p_id = rs3.getInt("post_id");
                         String text = rs3.getString("text");
@@ -115,7 +115,7 @@ public class PostRepository {
                     ResultSet rs4 = pstmt4.executeQuery();
 
                     ArrayList<StudentActivityReply> studentReply = new ArrayList<>();
-                    while (rs4.next()){
+                    while (rs4.next()) {
                         int replyID = rs4.getInt("reply_id");
                         int stdID = rs4.getInt("student_id");
                         Timestamp timeStamp = rs4.getTimestamp("time_stamp");
@@ -136,7 +136,7 @@ public class PostRepository {
         return null;
     }
 
-    public Question getQuestion(int postID){
+    public Question getQuestion(int postID) {
         String sql = "Select * from question where post_id = ?";
         String sql2 = "Select * from post where ID = ?";
         String sql3 = "Select * from answer where post_id = ?";
@@ -147,7 +147,7 @@ public class PostRepository {
             pstmt.setInt(1, postID);
             ResultSet rs = pstmt.executeQuery();
 
-            if(rs.next()){
+            if (rs.next()) {
                 PreparedStatement pstmt2 = conn.prepareStatement(sql2);
                 pstmt2.setInt(1, postID);
                 ResultSet rs2 = pstmt2.executeQuery();
@@ -164,7 +164,7 @@ public class PostRepository {
                     ResultSet rs3 = pstmt3.executeQuery();
 
                     ArrayList<Answer> answers = new ArrayList<>();
-                    while(rs3.next()){
+                    while (rs3.next()) {
                         int p_id = rs3.getInt("post_id");
                         int studentID = rs3.getInt("student_id");
                         boolean isCorrect = rs3.getBoolean("marked_correct");
@@ -188,7 +188,7 @@ public class PostRepository {
         return null;
     }
 
-    public SimplePost getSimplePost(int postID){
+    public SimplePost getSimplePost(int postID) {
         String sql = "Select * from simple_post where post_id = ?";
         String sql2 = "Select * from post where ID = ?";
         String sql3 = "Select * from comment where post_id = ?";
@@ -199,7 +199,7 @@ public class PostRepository {
             pstmt.setInt(1, postID);
             ResultSet rs = pstmt.executeQuery();
 
-            if(rs.next()){
+            if (rs.next()) {
                 PreparedStatement pstmt2 = conn.prepareStatement(sql2);
                 pstmt2.setInt(1, postID);
                 ResultSet rs2 = pstmt2.executeQuery();
@@ -217,7 +217,7 @@ public class PostRepository {
                     ResultSet rs3 = pstmt3.executeQuery();
 
                     ArrayList<Comment> comments = new ArrayList<>();
-                    while(rs3.next()){
+                    while (rs3.next()) {
                         int p_id = rs3.getInt("post_id");
                         int studentID = rs3.getInt("student_id");
                         String text = rs3.getString("text");
@@ -239,7 +239,7 @@ public class PostRepository {
         return null;
     }
 
-    public int createActivityPost(int studentID, String title, String description, ArrayList<Reply> replies){
+    public int createActivityPost(int studentID, String title, String description, ArrayList<Reply> replies) {
         String sql = "INSERT INTO Post (student_id, title, description, time_stamp) VALUES (?, ?, ?, ?)";
         String sql2 = "Select MAX(ID) as maxID from post";
         String sql3 = "Insert into Activity_Post (post_id) Values (?)";
@@ -247,10 +247,10 @@ public class PostRepository {
         int newPostId = 0;
 
         try (Connection conn = dbConnector.getConnection()) {
-             PreparedStatement pstmt = conn.prepareStatement(sql);
-             PreparedStatement pstmt2 = conn.prepareStatement(sql2);
-             PreparedStatement pstmt3 = conn.prepareStatement(sql3);
-             PreparedStatement pstmt4 = conn.prepareStatement(sql4);
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+            PreparedStatement pstmt3 = conn.prepareStatement(sql3);
+            PreparedStatement pstmt4 = conn.prepareStatement(sql4);
 
             // Set parameters for the prepared statement
             pstmt.setInt(1, studentID);
@@ -263,7 +263,7 @@ public class PostRepository {
             System.out.println("Post saved successfully.");
 
             ResultSet rs = pstmt2.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 int id = rs.getInt("maxID");
                 newPostId = id;
                 pstmt3.setInt(1, id);
@@ -271,7 +271,7 @@ public class PostRepository {
                 pstmt3.executeUpdate();
                 System.out.println("Activity Post saved successfully.");
 
-                for(Reply reply : replies){
+                for (Reply reply : replies) {
                     pstmt4.setInt(1, newPostId);
                     pstmt4.setString(2, reply.getText());
                     pstmt4.executeUpdate();
@@ -288,7 +288,7 @@ public class PostRepository {
         return newPostId;
     }
 
-    public int createSimplePost(int studentID, String title, String description, String url, int numLikes){
+    public int createSimplePost(int studentID, String title, String description, String url, int numLikes) {
         String sql = "INSERT INTO Post (student_id, title, description, time_stamp) VALUES (?, ?, ?, ?)";
         String sql2 = "Select MAX(ID) as maxID from post";
         String sql3 = "Insert into Simple_Post (post_id, picture_url, likes) Values (?, ?, ?)";
@@ -309,7 +309,7 @@ public class PostRepository {
             System.out.println("Post saved successfully.");
 
             ResultSet rs = pstmt2.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 int id = rs.getInt("maxID");
                 newPostId = id;
                 pstmt3.setInt(1, id);
@@ -327,7 +327,7 @@ public class PostRepository {
         return newPostId;
     }
 
-    public int createQuestion(int studentID, String title, String description, int votes){
+    public int createQuestion(int studentID, String title, String description, int votes) {
         String sql = "INSERT INTO Post (student_id, title, description, time_stamp) VALUES (?, ?, ?, ?)";
         String sql2 = "Select MAX(ID) as maxID from post";
         String sql3 = "Insert into Question (post_id, votes) Values (?, ?)";
@@ -349,7 +349,7 @@ public class PostRepository {
             System.out.println("Post saved successfully.");
 
             ResultSet rs = pstmt2.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 int id = rs.getInt("maxID");
                 newPostId = id;
                 pstmt3.setInt(1, id);
@@ -366,7 +366,7 @@ public class PostRepository {
         return newPostId;
     }
 
-    public ArrayList<ActivityPost> getAllActivityPosts(){
+    public ArrayList<ActivityPost> getAllActivityPosts() {
         String sql = "SELECT * FROM Activity_Post";
         ArrayList<ActivityPost> activityPosts = new ArrayList<>();
 
@@ -374,11 +374,11 @@ public class PostRepository {
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             ResultSet rs = pstmt.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 int postID = rs.getInt("post_id");
                 ActivityPost post = this.getActivityPost(postID);
 
-                if(post != null){
+                if (post != null) {
                     activityPosts.add(post);
                 }
             }
@@ -387,14 +387,14 @@ public class PostRepository {
             e.printStackTrace();
         }
 
-        if(!activityPosts.isEmpty()){
+        if (!activityPosts.isEmpty()) {
             return activityPosts;
         }
 
         return null;
     }
 
-    public ArrayList<SimplePost> getAllSimplePosts(){
+    public ArrayList<SimplePost> getAllSimplePosts() {
         String sql = "SELECT * FROM Simple_Post";
         ArrayList<SimplePost> simplePosts = new ArrayList<>();
 
@@ -402,11 +402,11 @@ public class PostRepository {
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             ResultSet rs = pstmt.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 int postID = rs.getInt("post_id");
                 SimplePost post = this.getSimplePost(postID);
 
-                if(post != null){
+                if (post != null) {
                     simplePosts.add(post);
                 }
             }
@@ -415,14 +415,14 @@ public class PostRepository {
             e.printStackTrace();
         }
 
-        if(!simplePosts.isEmpty()){
+        if (!simplePosts.isEmpty()) {
             return simplePosts;
         }
 
         return null;
     }
 
-    public ArrayList<Question> getAllQuestions(){
+    public ArrayList<Question> getAllQuestions() {
         String sql = "SELECT * FROM Question";
         ArrayList<Question> questions = new ArrayList<>();
 
@@ -430,11 +430,11 @@ public class PostRepository {
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             ResultSet rs = pstmt.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 int postID = rs.getInt("post_id");
                 Question post = this.getQuestion(postID);
 
-                if(post != null){
+                if (post != null) {
                     questions.add(post);
                 }
             }
@@ -443,7 +443,7 @@ public class PostRepository {
             e.printStackTrace();
         }
 
-        if(!questions.isEmpty()){
+        if (!questions.isEmpty()) {
             return questions;
         }
 
@@ -453,7 +453,7 @@ public class PostRepository {
     public String getReplyFromId(int replyId) {
         String sql = "Select text from reply where id = ?";
 
-        try(Connection conn = dbConnector.getConnection()) {
+        try (Connection conn = dbConnector.getConnection()) {
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, replyId);
@@ -471,17 +471,17 @@ public class PostRepository {
         return null;
     }
 
-    public ArrayList<SimplePost> getSimplePostByStudentID(int studentID){
+    public ArrayList<SimplePost> getSimplePostByStudentID(int studentID) {
         String sql = "Select * from Post where student_id = ?";
         ArrayList<SimplePost> simplePosts = new ArrayList<>();
 
-        try(Connection conn = dbConnector.getConnection()) {
+        try (Connection conn = dbConnector.getConnection()) {
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, studentID);
             ResultSet rs = pstmt.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
                 int postID = rs.getInt("ID");
                 if (this.getPostType(postID).equals("Simple Post")) {
                     SimplePost post = this.getSimplePost(postID);
@@ -493,24 +493,24 @@ public class PostRepository {
             e.printStackTrace();
         }
 
-        if(!simplePosts.isEmpty()){
+        if (!simplePosts.isEmpty()) {
             return simplePosts;
         }
 
         return null;
     }
 
-    public ArrayList<ActivityPost> getActivityPostByStudentID(int studentID){
+    public ArrayList<ActivityPost> getActivityPostByStudentID(int studentID) {
         String sql = "Select * from Post where student_id = ?";
         ArrayList<ActivityPost> activityPosts = new ArrayList<>();
 
-        try(Connection conn = dbConnector.getConnection()) {
+        try (Connection conn = dbConnector.getConnection()) {
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, studentID);
             ResultSet rs = pstmt.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
                 int postID = rs.getInt("ID");
                 if (this.getPostType(postID).equals("Activity Post")) {
                     ActivityPost post = this.getActivityPost(postID);
@@ -522,24 +522,24 @@ public class PostRepository {
             e.printStackTrace();
         }
 
-        if(!activityPosts.isEmpty()){
+        if (!activityPosts.isEmpty()) {
             return activityPosts;
         }
 
         return null;
     }
 
-    public ArrayList<Question> getQuestionByStudentID(int studentID){
+    public ArrayList<Question> getQuestionByStudentID(int studentID) {
         String sql = "Select * from Post where student_id = ?";
         ArrayList<Question> questions = new ArrayList<>();
 
-        try(Connection conn = dbConnector.getConnection()) {
+        try (Connection conn = dbConnector.getConnection()) {
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, studentID);
             ResultSet rs = pstmt.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
                 int postID = rs.getInt("ID");
                 if (this.getPostType(postID).equals("Question")) {
                     Question post = this.getQuestion(postID);
@@ -551,7 +551,7 @@ public class PostRepository {
             e.printStackTrace();
         }
 
-        if(!questions.isEmpty()){
+        if (!questions.isEmpty()) {
             return questions;
         }
 
@@ -564,12 +564,12 @@ public class PostRepository {
         String sql3 = "Delete from Simple_Post where post_id = ?";
         String sql4 = "Delete from Post where ID = ?";
 
-        try(Connection conn = dbConnector.getConnection()) {
+        try (Connection conn = dbConnector.getConnection()) {
             PreparedStatement pstmt1 = conn.prepareStatement(sql1);
             pstmt1.setInt(1, postID);
             ResultSet rs1 = pstmt1.executeQuery();
 
-            if(rs1.next()){
+            if (rs1.next()) {
                 PreparedStatement pstmt2 = conn.prepareStatement(sql2);
                 pstmt2.setInt(1, postID);
                 pstmt2.executeUpdate();
@@ -594,12 +594,12 @@ public class PostRepository {
         String sql3 = "Delete from Question where post_id = ?";
         String sql4 = "Delete from Post where ID = ?";
 
-        try(Connection conn = dbConnector.getConnection()) {
+        try (Connection conn = dbConnector.getConnection()) {
             PreparedStatement pstmt1 = conn.prepareStatement(sql1);
             pstmt1.setInt(1, postID);
             ResultSet rs1 = pstmt1.executeQuery();
 
-            if(rs1.next()){
+            if (rs1.next()) {
                 PreparedStatement pstmt2 = conn.prepareStatement(sql2);
                 pstmt2.setInt(1, postID);
                 pstmt2.executeUpdate();
@@ -625,12 +625,12 @@ public class PostRepository {
         String sql4 = "Delete from Activity_Post where post_id = ?";
         String sql5 = "Delete from Post where ID = ?";
 
-        try(Connection conn = dbConnector.getConnection()) {
+        try (Connection conn = dbConnector.getConnection()) {
             PreparedStatement pstmt1 = conn.prepareStatement(sql1);
             pstmt1.setInt(1, postID);
             ResultSet rs1 = pstmt1.executeQuery();
 
-            if(rs1.next()){
+            if (rs1.next()) {
                 PreparedStatement pstmt2 = conn.prepareStatement(sql2);
                 pstmt2.setInt(1, postID);
                 pstmt2.executeUpdate();
@@ -653,7 +653,7 @@ public class PostRepository {
         }
     }
 
-    public void updateSimplePost(SimplePost post){
+    public void updateSimplePost(SimplePost post) {
         String sql1 = "Update Post set title = ?, description = ?, time_stamp = ? where ID = ?";
         String sql2 = "Update Simple_Post set picture_url = ? where post_id = ?";
 
@@ -663,7 +663,7 @@ public class PostRepository {
         Timestamp timeStamp = Timestamp.valueOf(post.getDate());
         String url = post.getPostImageUrl();
 
-        try(Connection conn = dbConnector.getConnection()) {
+        try (Connection conn = dbConnector.getConnection()) {
             PreparedStatement pstmt1 = conn.prepareStatement(sql1);
             pstmt1.setString(1, title);
             pstmt1.setString(2, description);
@@ -681,7 +681,7 @@ public class PostRepository {
         }
     }
 
-    public void updateQuestion(Question post){
+    public void updateQuestion(Question post) {
         String sql = "Update Post set title = ?, description = ?, time_stamp = ? where ID = ?";
 
         int id = post.getId();
@@ -689,7 +689,7 @@ public class PostRepository {
         String description = post.getDescription();
         Timestamp timeStamp = Timestamp.valueOf(post.getDate());
 
-        try(Connection conn = dbConnector.getConnection()) {
+        try (Connection conn = dbConnector.getConnection()) {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, title);
             pstmt.setString(2, description);
@@ -702,7 +702,7 @@ public class PostRepository {
         }
     }
 
-    public void updateActivityPost(ActivityPost post){
+    public void updateActivityPost(ActivityPost post) {
         String sql1 = "Update Post set title = ?, description = ?, time_stamp = ? where ID = ?";
         String sql2 = "Update Reply set text = ? where ID = ?";
 
@@ -711,7 +711,7 @@ public class PostRepository {
         String description = post.getDescription();
         Timestamp timeStamp = Timestamp.valueOf(post.getDate());
 
-        try(Connection conn = dbConnector.getConnection()) {
+        try (Connection conn = dbConnector.getConnection()) {
             PreparedStatement pstmt = conn.prepareStatement(sql1);
             pstmt.setString(1, title);
             pstmt.setString(2, description);
@@ -723,7 +723,7 @@ public class PostRepository {
 
             PreparedStatement pstmt1 = conn.prepareStatement(sql2);
 
-            for(Reply reply : replies){
+            for (Reply reply : replies) {
                 pstmt1.setString(1, reply.getText());
                 pstmt1.setInt(2, reply.getId());
                 pstmt1.executeUpdate();
@@ -735,4 +735,128 @@ public class PostRepository {
         }
     }
 
+    public void reactOnSimplePost(int postID, int likes) {
+        String sql1 = "Update Simple_Post set likes = ? where post_id = ?";
+
+        try (Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql1);
+            pstmt.setInt(1, likes);
+            pstmt.setInt(2, postID);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error Reacting on Simple Post" + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void voteOnQuestion(int postID, int votes) {
+        String sql = "Update Question set votes = ? where post_id = ?";
+
+        try (Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, votes);
+            pstmt.setInt(2, postID);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error Reacting on Question" + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void likeComment(int commentID, int likes) {
+        String sql = "Update Comment set likes = ? where ID = ?";
+
+        try (Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, likes);
+            pstmt.setInt(2, commentID);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error Reacting on Comment" + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void voteOnAnswer(int answerID, int votes) {
+        String sql = "Update Answer set votes = ? where ID = ?";
+
+        try (Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, votes);
+            pstmt.setInt(2, answerID);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error Reacting on Answer" + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void markAnswerCorrect(int answerID) {
+        String sql = "Update Answer set marked_correct = true where ID = ?";
+
+        try (Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, answerID);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error Marking Correct" + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void commentOnPost(int postID, int studentID, String text) {
+        String sql = "Insert into Comment (post_id, student_id, text, likes, time_stamp) values (?, ?, ?, ?, ?)";
+
+        try (Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, postID);
+            pstmt.setInt(2, studentID);
+            pstmt.setString(3, text);
+            pstmt.setInt(4, 0);
+            pstmt.setTimestamp(5, Timestamp.from(Instant.now()));
+            pstmt.executeUpdate();
+            System.out.println("Comment Added");
+        } catch (SQLException e) {
+            System.out.println("Error Adding Comment" + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void addAnswer(int postID, int studentID, String text) {
+        String sql = "Insert into Answer (post_id, student_id, marked_correct, votes, text, time_stamp) values (?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, postID);
+            pstmt.setInt(2, studentID);
+            pstmt.setBoolean(3, false);
+            pstmt.setInt(4, 0);
+            pstmt.setString(5, text);
+            pstmt.setTimestamp(6, Timestamp.from(Instant.now()));
+            pstmt.executeUpdate();
+            System.out.println("Answer Added");
+        } catch (SQLException e) {
+            System.out.println("Error Adding Answer" + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void addStudentActivityReply(int replyID, int postID, int studentID) {
+        String sql = "Insert into Student_ActivityReply (reply_id, post_id, student_id, time_stamp) values (?, ?, ?, ?)";
+
+        try (Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, replyID);
+            pstmt.setInt(2, postID);
+            pstmt.setInt(3, studentID);
+            pstmt.setTimestamp(4, Timestamp.from(Instant.now()));
+            pstmt.executeUpdate();
+            System.out.println("Student Activity Reply Added");
+        } catch (SQLException e) {
+            System.out.println("Error Adding Student Activity Reply" + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
 }
+
