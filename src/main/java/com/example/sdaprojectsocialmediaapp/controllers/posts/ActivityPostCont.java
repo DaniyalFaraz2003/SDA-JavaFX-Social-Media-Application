@@ -11,8 +11,10 @@ import com.example.sdaprojectsocialmediaapp.models.posts.SimplePost;
 import com.example.sdaprojectsocialmediaapp.repository.PostRepository;
 import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
 import com.example.sdaprojectsocialmediaapp.services.Session;
+import com.example.sdaprojectsocialmediaapp.utils.Validate;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -105,10 +107,37 @@ public class ActivityPostCont extends MainController {
     void submit(MouseEvent event) throws IOException {
         // Create an activity post object
 
+        if (Validate.isValidPostTitle(this.postTitle.getText())) {
+            if (Validate.isValidPostDescription(this.postContent.getText())) {
+                if (!this.replyButtonBox.getChildren().isEmpty()) {
+
+                    ArrayList<Reply> replies = new ArrayList<>();
+                    for (int i = 0; i < this.replyButtonBox.getChildren().size(); i++) {
+                        Node node = (Node) this.replyButtonBox.getChildren().get(i);
+                        if (node instanceof Button) {
+                            Reply reply = new Reply(0, 0, ((Button) node).getText());
+                            replies.add(reply);
+                        }
+                    }
+                    for (Reply reply: replies) {
+                        System.out.println(reply.getText());
+                    }
+
+                    Router.navigateTo("Activity Post Page");
+                } else {
+                    this.warning.setText("Enter at least 1 reply");
+                }
+            } else {
+                this.warning.setText("Invalid Post Description");
+            }
+        } else {
+            this.warning.setText("Invalid Post Title");
+        }
+
         // Insert post data to database
 
         // Return back to Activity posts page
-        Router.navigateTo("Activity Post Page");
+
     }
 
     @FXML
@@ -116,7 +145,11 @@ public class ActivityPostCont extends MainController {
         String content = replyContent.getText();
         if (content.length() > 10) {
             this.warning.setText("Not more than 10 characters");
-        } else {
+        }
+        else if (content.isEmpty()) {
+            this.warning.setText("Enter at least 1 character");
+        }
+        else {
             this.warning.setText("");
             Button button = new Button(replyContent.getText());
             replyContent.setText("");
@@ -239,7 +272,7 @@ public class ActivityPostCont extends MainController {
                 PostRepository postRepository = new PostRepository();
                 postRepository.updateActivityPost(activityPost);
                 try {
-                    Router.navigateTo("Question Page");
+                    Router.navigateTo("Activity Post Page");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
