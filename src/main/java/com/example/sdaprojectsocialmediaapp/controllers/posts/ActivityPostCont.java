@@ -169,6 +169,7 @@ public class ActivityPostCont extends MainController {
             button.getStyleClass().add("postButton");
             button.setOnMouseClicked(event -> {
                 System.out.println(button.getText() + " button of Activity Post: " + this.id + " is clicked.");
+                postRepository.addStudentActivityReply(reply.getId(), activityPost.getId(), Session.getSessionVariable().getId());
                 StudentActivityReply sar = new StudentActivityReply(Session.getSessionVariable().getId(), reply.getId(), this.id, new Timestamp(System.currentTimeMillis()));
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/activity_post/reply.fxml"));
                 try {
