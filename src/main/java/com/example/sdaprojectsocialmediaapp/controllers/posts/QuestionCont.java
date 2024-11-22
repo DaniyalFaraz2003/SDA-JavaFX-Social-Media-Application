@@ -101,13 +101,16 @@ public class QuestionCont extends MainController {
     @FXML
     void handleAnswer(MouseEvent event) throws IOException {
         String answerString = answerBox.getText();
-        answerBox.setText("");
-        Answer answer = new Answer(0, 1, new Timestamp(System.currentTimeMillis()), answerString, 10, true);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/question/answer.fxml"));
-        Pane answerPane = loader.load();
-        AnswerCont controller = loader.getController();
-        controller.initializeAnswer(answer);
-        answers.getChildren().add(answerPane);
+        if (!answerString.isEmpty()) {
+            postRepository.addAnswer(this.id, Session.getSessionVariable().getId(), answerString);
+            answerBox.setText("");
+            Answer answer = new Answer(this.id, Session.getSessionVariable().getId(), new Timestamp(System.currentTimeMillis()), answerString, 0, false);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/question/answer.fxml"));
+            Pane answerPane = loader.load();
+            AnswerCont controller = loader.getController();
+            controller.initializeAnswer(answer);
+            answers.getChildren().add(answerPane);
+        }
     }
 
     @FXML
@@ -140,6 +143,7 @@ public class QuestionCont extends MainController {
         this.id = question.getId();
         this.title.setText(question.getTitle());
         this.description.setText(question.getDescription());
+        this.votes.setText(Integer.toString(question.getUpVotes()));
         this.timestamp.setText("Posted On: " + question.getDate());
         this.authorName.setText("By: " + studentRepository.getStudentByID(question.getAuthorId()).getName());
         if (Session.getSessionVariable().getId() != question.getAuthorId() || isHomepage) {
