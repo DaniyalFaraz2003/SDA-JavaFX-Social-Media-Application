@@ -5,11 +5,13 @@ import java.sql.Timestamp;
 public class Answer extends Response {
     private int upVotes;
     private boolean isCorrect;
+    private int id;
 
-    public Answer(int postId, int authorId, Timestamp date, String content, int upVotes, boolean isCorrect) {
+    public Answer(int id, int postId, int authorId, Timestamp date, String content, int upVotes, boolean isCorrect) {
         super(postId, authorId, date, content);
         this.upVotes = upVotes;
         this.isCorrect = isCorrect;
+        this.id = id;
     }
 
     public int getUpVotes() {
@@ -18,6 +20,14 @@ public class Answer extends Response {
 
     public void setUpVotes(int upVotes) {
         this.upVotes = upVotes;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public boolean isCorrect() {

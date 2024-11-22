@@ -92,9 +92,9 @@ public class QuestionCont extends MainController {
     void handleAnswer(MouseEvent event) throws IOException {
         String answerString = answerBox.getText();
         if (!answerString.isEmpty()) {
-            postRepository.addAnswer(this.id, Session.getSessionVariable().getId(), answerString);
+            int answerId = postRepository.addAnswer(this.id, Session.getSessionVariable().getId(), answerString);
             answerBox.setText("");
-            Answer answer = new Answer(this.id, Session.getSessionVariable().getId(), new Timestamp(System.currentTimeMillis()), answerString, 0, false);
+            Answer answer = new Answer(answerId, this.id, Session.getSessionVariable().getId(), new Timestamp(System.currentTimeMillis()), answerString, 0, false);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/question/answer.fxml"));
             Pane answerPane = loader.load();
             AnswerCont controller = loader.getController();
