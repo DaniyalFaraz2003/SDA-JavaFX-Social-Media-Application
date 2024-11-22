@@ -857,5 +857,26 @@ public class PostRepository {
             e.printStackTrace();
         }
     }
+
+    public boolean checkUniqueStudentReply(int postID, int studentID) {
+        String sql = "Select * from Student_ActivityReply where post_id = ? and student_id = ?";
+
+        try (Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, postID);
+            pstmt.setInt(2, studentID);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error Checking Unique Reply" + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return true;
+    }
+
 }
 
