@@ -155,7 +155,7 @@
       <HBox fx:id="replyButtonBox" layoutX="550.0" layoutY="542.0" spacing="20.0" stylesheets="@../../css/post.css" />
       <TextField fx:id="replyContent" layoutX="550.0" layoutY="495.0" prefHeight="35.0" prefWidth="200.0" stylesheets="@../../css/postpage.css" />
       <Button fx:id="addBtn" layoutX="769.0" layoutY="495.0" mnemonicParsing="false" onMouseClicked="#addReplyButton" stylesheets="@../../css/postpage.css" text="Add" />
-      <Label fx:id="warning" layoutX="838.0" layoutY="504.0" prefHeight="20.0" prefWidth="188.0" textFill="#f20a0a">
+      <Label fx:id="warning" layoutX="838.0" layoutY="504.0" prefHeight="20.0" prefWidth="275.0" textFill="#f20a0a">
          <font>
             <Font size="14.0" />
          </font>
