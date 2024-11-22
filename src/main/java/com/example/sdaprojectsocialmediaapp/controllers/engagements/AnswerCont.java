@@ -3,6 +3,7 @@ package com.example.sdaprojectsocialmediaapp.controllers.engagements;
 import com.example.sdaprojectsocialmediaapp.models.engagements.Answer;
 import com.example.sdaprojectsocialmediaapp.models.engagements.Comment;
 import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
@@ -42,6 +43,15 @@ public class AnswerCont {
         this.answerAuthor.setText("By: " + studentRepo.getStudentByID(answer.getAuthorId()).getName());
         this.answerTimestamp.setText("Given On: " + answer.getDate());
         this.likeCount.setText(Integer.toString(answer.getUpVotes()));
+        // arranging all the meta-data with proper spacing so that no overlapping occurs
+        Platform.runLater(() -> {
+            double answerHeight = this.answer.getBoundsInParent().getHeight();
+            double y_coordinate = this.answer.getLayoutY() + answerHeight + 34.5;
+            this.answerAuthor.setLayoutY(y_coordinate);
+            this.answerTimestamp.setLayoutY(y_coordinate);
+            this.likeBtn.setLayoutY(y_coordinate - 15.0);
+            this.likeCount.setLayoutY(y_coordinate - 13.0);
+        });
     }
 
 }
