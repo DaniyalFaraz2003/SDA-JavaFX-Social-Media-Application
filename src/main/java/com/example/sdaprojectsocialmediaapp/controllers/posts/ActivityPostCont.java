@@ -1,6 +1,7 @@
 package com.example.sdaprojectsocialmediaapp.controllers.posts;
 
 import com.example.sdaprojectsocialmediaapp.Router;
+import com.example.sdaprojectsocialmediaapp.controllers.HomepageCont;
 import com.example.sdaprojectsocialmediaapp.controllers.MainController;
 import com.example.sdaprojectsocialmediaapp.controllers.engagements.CommentCont;
 import com.example.sdaprojectsocialmediaapp.controllers.engagements.ReplyCont;
@@ -167,19 +168,51 @@ public class ActivityPostCont extends MainController {
         for (Reply reply : activityPost.getReplies()) {
             Button button = new Button(reply.getText());
             button.getStyleClass().add("postButton");
+            if (!postRepository.checkUniqueStudentReply(activityPost.getId(), Session.getSessionVariable().getId())) {
+                button.setDisable(true);
+            }
             button.setOnMouseClicked(event -> {
                 System.out.println(button.getText() + " button of Activity Post: " + this.id + " is clicked.");
-                postRepository.addStudentActivityReply(reply.getId(), activityPost.getId(), Session.getSessionVariable().getId());
-                StudentActivityReply sar = new StudentActivityReply(Session.getSessionVariable().getId(), reply.getId(), this.id, new Timestamp(System.currentTimeMillis()));
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/activity_post/reply.fxml"));
-                try {
-                    Pane pane = loader.load();
-                    ReplyCont controller = loader.getController();
-                    controller.initializeReply(sar);
-                    replies.getChildren().add(pane);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+
+                if (postRepository.checkUniqueStudentReply(activityPost.getId(), Session.getSessionVariable().getId())) {
+                    postRepository.addStudentActivityReply(reply.getId(), activityPost.getId(), Session.getSessionVariable().getId());
+                    StudentActivityReply sar = new StudentActivityReply(Session.getSessionVariable().getId(), reply.getId(), this.id, new Timestamp(System.currentTimeMillis()));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/activity_post/reply.fxml"));
+                    try {
+                        Pane pane = loader.load();
+                        ReplyCont controller = loader.getController();
+                        controller.initializeReply(sar);
+                        replies.getChildren().add(pane);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    if (isHomepage) {
+                        FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("/fxml/homepage.fxml"));
+                        try {
+                            Parent root = homeLoader.load();
+                            HomepageCont controller = homeLoader.getController();
+                            controller.initialize(stage);
+                            stage.setScene(new Scene(root));
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    else {
+                        FXMLLoader postPageLoader = new FXMLLoader(getClass().getResource("/fxml/activity_post/activity_post_page.fxml"));
+                        try {
+                            Parent root = postPageLoader.load();
+                            ActivityPostCont controller = postPageLoader.getController();
+                            controller.initializePage(stage);
+                            stage.setScene(new Scene(root));
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
                 }
+
+
+
             });
             replyBox.getChildren().add(button);
         }
