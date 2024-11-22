@@ -187,26 +187,10 @@ public class ActivityPostCont extends MainController {
                         throw new RuntimeException(e);
                     }
 
-                    if (isHomepage) {
-                        FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("/fxml/homepage.fxml"));
-                        try {
-                            Parent root = homeLoader.load();
-                            HomepageCont controller = homeLoader.getController();
-                            controller.initialize(stage);
-                            stage.setScene(new Scene(root));
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                    else {
-                        FXMLLoader postPageLoader = new FXMLLoader(getClass().getResource("/fxml/activity_post/activity_post_page.fxml"));
-                        try {
-                            Parent root = postPageLoader.load();
-                            ActivityPostCont controller = postPageLoader.getController();
-                            controller.initializePage(stage);
-                            stage.setScene(new Scene(root));
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
+                    for (int i = 0; i < replyBox.getChildren().size(); i++) {
+                        Node node = (Node) replyBox.getChildren().get(i);
+                        if (node instanceof Button) {
+                            node.setDisable(true);
                         }
                     }
                 }
