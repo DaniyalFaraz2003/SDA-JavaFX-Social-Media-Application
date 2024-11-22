@@ -23,6 +23,7 @@ public class AnswerCont {
 
     StudentRepository studentRepo = new StudentRepository();
     PostRepository postRepo = new PostRepository();
+    private int id;
 
     @FXML
     private AnchorPane pane;
@@ -51,15 +52,28 @@ public class AnswerCont {
     @FXML
     void handleLike(MouseEvent event) {
         int likes = Integer.parseInt(this.likeCount.getText());
-        if (this.likeBtn.isSelected())
+        if (this.likeBtn.isSelected()) {
             this.likeCount.setText(Integer.toString(likes + 1));
-        else
+            postRepo.voteOnAnswer(this.id, likes + 1);
+        }
+        else {
             this.likeCount.setText(Integer.toString(likes - 1));
+            postRepo.voteOnAnswer(this.id, likes - 1);
+        }
+
+    }
+
+    @FXML
+    void markCorrect(MouseEvent event) {
+        postRepo.markAnswerCorrect(this.id);
+        String filePath = Objects.requireNonNull(getClass().getResource("/images/tick.png")).toExternalForm();
+        Image image = new Image(filePath);
+        tickSign.setImage(image);
     }
 
     @FXML
     public void initializeAnswer(Answer answer) {
-
+        this.id = answer.getId();
         this.markCorrect.setVisible(false);
         this.answer.setText(answer.getContent());
         this.answerAuthor.setText("By: " + studentRepo.getStudentByID(answer.getAuthorId()).getName());

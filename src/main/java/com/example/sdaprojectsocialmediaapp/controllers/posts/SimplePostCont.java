@@ -34,8 +34,8 @@ import java.nio.file.Files;
 import javax.imageio.ImageIO;
 
 public class SimplePostCont extends MainController {
-    private StudentRepository studentRepository = new StudentRepository();
-    private PostRepository postRepository = new PostRepository();
+    private final StudentRepository studentRepository = new StudentRepository();
+    private final PostRepository postRepository = new PostRepository();
 
     File imageFile = null;
     private int id;
@@ -101,32 +101,14 @@ public class SimplePostCont extends MainController {
     private Button submit;
 
     @FXML
+    private Button commentBtn;
+
+    @FXML
     private Label warning;
 
     @FXML
     public String getPostType() {
         return postType.getText();
-    }
-
-    @FXML
-    void handleReaction(MouseEvent event) {
-        int reactions = Integer.parseInt(this.reactionCount.getText());
-        if (this.reactBtn.isSelected())
-            this.reactionCount.setText(Integer.toString(reactions + 1));
-        else
-            this.reactionCount.setText(Integer.toString(reactions - 1));
-    }
-
-    @FXML
-    void handleComment(MouseEvent event) throws IOException {
-        String commentString = commentBox.getText();
-        commentBox.setText("");
-        Comment comment = new Comment(0, Session.getSessionVariable().getId(), new Timestamp(System.currentTimeMillis()), commentString, 10);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/simple_post/comment.fxml"));
-        Pane commentPane = loader.load();
-        CommentCont controller = loader.getController();
-        controller.initializeComment(comment);
-        comments.getChildren().add(commentPane);
     }
 
     @FXML
@@ -239,7 +221,33 @@ public class SimplePostCont extends MainController {
             System.out.println("Error: File does not exist at " + resolvedPath);
             return;
         }
-
+        this.reactBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            int reactions = Integer.parseInt(this.reactionCount.getText());
+            if (this.reactBtn.isSelected()) {
+                this.reactionCount.setText(Integer.toString(reactions + 1));
+                postRepository.reactOnSimplePost(id, reactions + 1);
+            }
+            else {
+                this.reactionCount.setText(Integer.toString(reactions - 1));
+                postRepository.reactOnSimplePost(id, reactions - 1);
+            }
+        });
+        this.commentBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            String commentString = commentBox.getText();
+            commentBox.setText("");
+            Comment comment = new Comment(id, Session.getSessionVariable().getId(), new Timestamp(System.currentTimeMillis()), commentString, 0);
+            int commentID = postRepository.commentOnPost(id, Session.getSessionVariable().getId(), commentString);
+            comment.setCommentID(commentID);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/simple_post/comment.fxml"));
+            try {
+                Pane commentPane = loader.load();
+                CommentCont controller = loader.getController();
+                controller.initializeComment(comment);
+                comments.getChildren().add(commentPane);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
         this.timestamp.setText("Posted On: " + simplePost.getDate());
         this.author.setText("By: " + studentRepository.getStudentByID(simplePost.getAuthorId()).getName());
         this.reactionCount.setText(Integer.toString(simplePost.getNumberOfLikes()));
@@ -259,7 +267,6 @@ public class SimplePostCont extends MainController {
                 }
             });
             this.deleteBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                PostRepository postRepository = new PostRepository();
                 postRepository.deleteSimplePost(id);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/simple_post/simple_post_page.fxml"));
                 try {
@@ -287,9 +294,7 @@ public class SimplePostCont extends MainController {
 
     @FXML
     public void initializePage(Stage stage) throws IOException {
-        PostRepository postRepository = new PostRepository();
         ArrayList<SimplePost> simplePosts = postRepository.getSimplePostByStudentID(Session.getSessionVariable().getId());
-
 
         if (simplePosts == null)
             warning.setVisible(true);
@@ -317,7 +322,6 @@ public class SimplePostCont extends MainController {
                 simplePost.setTitle(postTitle.getText());
                 simplePost.setDescription(postContent.getText());
                 simplePost.setDate(new Timestamp(System.currentTimeMillis()));
-                PostRepository postRepository = new PostRepository();
                 postRepository.updateSimplePost(simplePost);
                 try {
                     Router.navigateTo("Simple Post Page");

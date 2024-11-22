@@ -15,7 +15,7 @@
       <Label fx:id="description" layoutX="5.0" layoutY="49.0" styleClass="postDesc" text="I'm working on a JavaFX app where the search bar (TextField) is auto-focused when the app starts, causing the placeholder to disappear. How can I make it so the TextField only gets focused when clicked, and the placeholder stays visible initially?" />
       <Label fx:id="postType" layoutX="669.0" layoutY="10.0" styleClass="postMeta" text="Question" />
       <Button layoutX="622.0" layoutY="241.0" mnemonicParsing="false" onMouseClicked="#handleAnswer" styleClass="postButton" text="Give Answer" />
-      <ToggleButton fx:id="voteButton" layoutX="622.0" layoutY="188.0" mnemonicParsing="false" onMouseClicked="#handleUpVote" styleClass="postButton" text="UpVote" />
+      <ToggleButton fx:id="voteButton" layoutX="622.0" layoutY="188.0" mnemonicParsing="false" styleClass="postButton" text="UpVote" />
       <Label fx:id="votes" layoutX="693.0" layoutY="190.0" styleClass="postTitle" text="0" />
       <Label fx:id="authorName" layoutX="190.0" layoutY="203.0" styleClass="postMeta" text="By: Hammad Ali" />
       <Label fx:id="timestamp" layoutX="5.0" layoutY="203.0" styleClass="postMeta" text="Posted On: 2024-11-12 08:35:12" />

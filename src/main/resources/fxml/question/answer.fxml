@@ -15,7 +15,7 @@
       <Label fx:id="likeCount" layoutX="696.0" layoutY="83.0" styleClass="postTitle" text="0" />
       <Label fx:id="answerAuthor" layoutX="194.0" layoutY="96.0" styleClass="postMeta" text="By: Hammad Ali" />
       <Label fx:id="answerTimestamp" layoutX="9.0" layoutY="96.0" styleClass="postMeta" text="Posted On: 2024-11-12 08:35:12" />
-      <Button fx:id="markCorrect" layoutX="505.0" layoutY="82.0" mnemonicParsing="false" styleClass="postButton" text="Mark As Correct" />
+      <Button fx:id="markCorrect" layoutX="505.0" layoutY="82.0" mnemonicParsing="false" onMouseClicked="#markCorrect" styleClass="postButton" text="Mark As Correct" />
       <ImageView fx:id="tickSign" fitHeight="30.0" fitWidth="30.0" layoutX="296.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true" />
    </children>
    <padding>

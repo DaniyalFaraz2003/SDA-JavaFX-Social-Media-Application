@@ -89,25 +89,18 @@ public class QuestionCont extends MainController {
     }
 
     @FXML
-    void handleUpVote(MouseEvent event) {
-        int votes = Integer.parseInt(this.votes.getText());
-        if (voteButton.isSelected()) {
-            this.votes.setText(Integer.toString(votes + 1));
-        }
-        else
-            this.votes.setText(Integer.toString(votes - 1));
-    }
-
-    @FXML
     void handleAnswer(MouseEvent event) throws IOException {
         String answerString = answerBox.getText();
-        answerBox.setText("");
-        Answer answer = new Answer(0, 1, new Timestamp(System.currentTimeMillis()), answerString, 10, true);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/question/answer.fxml"));
-        Pane answerPane = loader.load();
-        AnswerCont controller = loader.getController();
-        controller.initializeAnswer(answer);
-        answers.getChildren().add(answerPane);
+        if (!answerString.isEmpty()) {
+            int answerId = postRepository.addAnswer(this.id, Session.getSessionVariable().getId(), answerString);
+            answerBox.setText("");
+            Answer answer = new Answer(answerId, this.id, Session.getSessionVariable().getId(), new Timestamp(System.currentTimeMillis()), answerString, 0, false);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/question/answer.fxml"));
+            Pane answerPane = loader.load();
+            AnswerCont controller = loader.getController();
+            controller.initializeAnswer(answer);
+            answers.getChildren().add(answerPane);
+        }
     }
 
     @FXML
@@ -140,8 +133,21 @@ public class QuestionCont extends MainController {
         this.id = question.getId();
         this.title.setText(question.getTitle());
         this.description.setText(question.getDescription());
+        this.votes.setText(Integer.toString(question.getUpVotes()));
         this.timestamp.setText("Posted On: " + question.getDate());
         this.authorName.setText("By: " + studentRepository.getStudentByID(question.getAuthorId()).getName());
+        this.votes.setText(Integer.toString(question.getUpVotes()));
+        this.voteButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            int votes = Integer.parseInt(this.votes.getText());
+            if (voteButton.isSelected()) {
+                this.votes.setText(Integer.toString(votes + 1));
+                postRepository.voteOnQuestion(id, votes + 1);
+            }
+            else {
+                this.votes.setText(Integer.toString(votes - 1));
+                postRepository.voteOnQuestion(id, votes - 1);
+            }
+        });
         if (Session.getSessionVariable().getId() != question.getAuthorId() || isHomepage) {
             this.updateBtn.setVisible(false);
             this.deleteBtn.setVisible(false);
