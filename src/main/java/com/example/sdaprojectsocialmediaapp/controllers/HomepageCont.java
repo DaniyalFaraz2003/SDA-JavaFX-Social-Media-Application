@@ -22,6 +22,7 @@ import java.util.ArrayList;
 public class HomepageCont extends MainController {
     private PostRepository postRepo = new PostRepository();
 
+
     @FXML
     private Stage stage;
 
@@ -42,6 +43,10 @@ public class HomepageCont extends MainController {
 
     @FXML
     private ToggleButton questionFilterBtn;
+
+    private void displayNotifications() {
+
+    }
 
     private void displayPosts() throws IOException {
         container.getChildren().clear();
