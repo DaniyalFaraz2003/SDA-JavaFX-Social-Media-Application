@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.sdaprojectsocialmediaapp.controllers.notification.NotificationCont"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane fx:id="pane" prefHeight="92.0" prefWidth="200.0" stylesheets="@../../css/post.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaprojectsocialmediaapp.controllers.notification.NotificationCont">
+   <children>
+      <Label fx:id="name" layoutX="14.0" layoutY="2.0" prefHeight="23.0" prefWidth="120.0" styleClass="postTitle" text="Daniyal Faraz">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="40.0" prefHeight="18.0" prefWidth="88.0" text="Created A New:" />
+      <Label fx:id="postType" alignment="CENTER" contentDisplay="CENTER" layoutX="65.0" layoutY="58.0" prefHeight="25.0" text="Activity Post" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Bold Italic" size="13.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>

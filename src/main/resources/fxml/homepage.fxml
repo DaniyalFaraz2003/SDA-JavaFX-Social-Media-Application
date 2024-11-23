@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -16,6 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaprojectsocialmediaapp.controllers.HomepageCont">
    <children>
@@ -165,21 +164,23 @@
             <ToggleButton fx:id="questionFilterBtn" mnemonicParsing="false" onMouseClicked="#filterQuestions" styleClass="filters" stylesheets="@../css/homepage.css" text="Questions" />
          </children>
       </HBox>
-      <TitledPane id="filterBox" animated="false" layoutX="1036.0" layoutY="118.0" prefHeight="163.0" prefWidth="202.0" stylesheets="@../css/homepage.css" text="Sort The Posts by: ">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <CheckBox layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Date" />
-                  <CheckBox layoutX="14.0" layoutY="39.0" mnemonicParsing="false" text="Reactions" />
-                  <CheckBox layoutX="14.0" layoutY="64.0" mnemonicParsing="false" text="Comments" />
-                  <CheckBox layoutX="14.0" layoutY="90.0" mnemonicParsing="false" text="Answers" />
-               </children>
-            </AnchorPane>
-        </content>
-      </TitledPane>
       <ScrollPane layoutX="280.0" layoutY="229.0" prefHeight="502.0" prefWidth="733.0">
          <content>
             <VBox fx:id="container" prefHeight="500.0" prefWidth="731.0" spacing="20.0" />
          </content></ScrollPane>
+      <ScrollPane layoutX="1049.0" layoutY="229.0" prefHeight="502.0" prefWidth="200.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <VBox fx:id="notificationBox" prefHeight="489.0" prefWidth="200.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <Label layoutX="1049.0" layoutY="194.0" prefHeight="24.0" prefWidth="126.0" text="Notifications">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

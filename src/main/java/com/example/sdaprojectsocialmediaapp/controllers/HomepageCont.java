@@ -38,6 +38,9 @@ public class HomepageCont extends MainController {
     private VBox container;
 
     @FXML
+    private VBox notificationBox;
+
+    @FXML
     private ToggleButton questionFilterBtn;
 
     private void displayPosts() throws IOException {
