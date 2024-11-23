@@ -4,6 +4,7 @@ module com.example.sdaprojectsocialmediaapp {
     requires java.desktop;
     requires java.sql;
     requires jdk.compiler;
+    requires jdk.jfr;
 
 
     exports com.example.sdaprojectsocialmediaapp;
