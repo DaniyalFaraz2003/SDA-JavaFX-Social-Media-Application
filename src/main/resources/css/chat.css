@@ -1,0 +1,29 @@
+/*--blue: #00a2ff;*/
+/*--darkBlue: #0088d6;*/
+
+#messageBox {
+    -fx-font-size: 16px;
+
+}
+
+.message {
+    -fx-font-size: 16px;
+    -fx-max-width: 600px;
+    -fx-wrap-text: true;
+    -fx-padding: 0 5px 5px 0;
+}
+
+.name {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.metaData {
+    -fx-font-size: 12px;
+    -fx-text-fill: gray;
+    -fx-font-weight: normal;
+}
+
+.contactBox:hover {
+    -fx-background-color: silver;
+}
