@@ -108,3 +108,14 @@ create table Message(
                         foreign key (student_id_from) references Student (id),
                         foreign key (student_id_to) references Student (id)
 );
+
+create table Notification (
+                              id int auto_increment primary key,
+                              sender_id int,
+                              reciever_id int,
+                              post_type text,
+                              time_stamp timestamp,
+
+                              foreign key (sender_id) references Student (id),
+                              foreign key (reciever_id) references Student (id)
+);
