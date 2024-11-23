@@ -35,4 +35,19 @@ public class NotificationRepository {
         }
     }
 
+    public void notificationReceived(int notificationID) {
+        String sql = "Delete from Notification where id = ?";
+
+        try (Connection conn = dbConnector.getConnection()){
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, notificationID);
+            pstmt.executeUpdate();
+            System.out.println("Notification received successfully");
+
+        } catch (SQLException e) {
+            System.out.println("error deleting notification");
+            e.printStackTrace();
+        }
+    }
+
 }
