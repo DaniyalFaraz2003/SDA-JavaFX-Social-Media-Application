@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="messageBlock" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="840.0" styleClass="message" stylesheets="@../../css/chat.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaprojectsocialmediaapp.controllers.chat.MessageCont">
+   <children>
+      <Label fx:id="name" layoutX="8.0" layoutY="6.0" styleClass="name" text="You" />
+      <Label fx:id="messageText" layoutX="9.0" layoutY="48.0" prefWidth="825.0" styleClass="message" text="Hey there! Just wanted to drop you a quick message to see how you’re doing. I hope everything’s going great on your end and that you’re smashing all the goals you’ve set for yourself. Remember, even if things get tough, you’re way stronger than you give yourself credit for. Don’t forget to take a little time for yourself today—whether it’s to relax, enjoy something you love, or just breathe for a moment. Sending good vibes your way! Let me know if there’s anything exciting happening or if you just feel like chatting." />
+      <Label fx:id="timeStamp" layoutX="656.0" layoutY="13.0" styleClass="metaData" text="Posted On: 2024-11-12 08:35:12" />
+   </children>
+</AnchorPane>

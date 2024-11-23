@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane fx:id="contact" maxWidth="180.0" prefHeight="72.0" prefWidth="180.0" styleClass="contactBox" stylesheets="@../../css/chat.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaprojectsocialmediaapp.controllers.chat.ContactCont">
+   <children>
+      <Label fx:id="contactName" layoutX="4.0" layoutY="-1.0" styleClass="name" text="i220914" />
+      <Label fx:id="metaMessage" layoutX="4.0" layoutY="41.0" prefWidth="180.0" styleClass="metaData" text="Hey! Just checking in to see how you're doing. Hope your day’s going as awesome as you are!" />
+      <Label fx:id="time" layoutX="145.0" layoutY="6.0" prefHeight="17.0" prefWidth="31.0" styleClass="metaData" text="08:35" />
+   </children>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
+</AnchorPane>

@@ -14,5 +14,6 @@ module com.example.sdaprojectsocialmediaapp {
     opens com.example.sdaprojectsocialmediaapp.controllers.posts to javafx.fxml;
     opens com.example.sdaprojectsocialmediaapp.controllers.friends to javafx.fxml;
     opens com.example.sdaprojectsocialmediaapp.controllers.engagements to javafx.fxml;
+    opens com.example.sdaprojectsocialmediaapp.controllers.chat to javafx.fxml;
 
 }

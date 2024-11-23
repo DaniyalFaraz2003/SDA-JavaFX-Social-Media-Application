@@ -1,6 +1,7 @@
 package com.example.sdaprojectsocialmediaapp;
 
 import com.example.sdaprojectsocialmediaapp.controllers.*;
+import com.example.sdaprojectsocialmediaapp.controllers.chat.ChatCont;
 import com.example.sdaprojectsocialmediaapp.controllers.friend_request.FriendRequestCont;
 import com.example.sdaprojectsocialmediaapp.controllers.friends.FriendPageCont;
 import com.example.sdaprojectsocialmediaapp.controllers.posts.ActivityPostCont;
@@ -158,6 +159,13 @@ public class Router extends Application {
                 FriendPageCont friendPageCont = fxmlLoader.getController();
                 scene = new Scene(root);
                 friendPageCont.initializePage(stage);
+                break;
+            case "Chat Page":
+                fxmlLoader = new FXMLLoader(Router.class.getResource("/fxml/chat/chat_page.fxml"));
+                root = fxmlLoader.load();
+                ChatCont chatCont = fxmlLoader.getController();
+                scene = new Scene(root);
+                chatCont.initializePage();
                 break;
         }
         stage.setScene(scene);
