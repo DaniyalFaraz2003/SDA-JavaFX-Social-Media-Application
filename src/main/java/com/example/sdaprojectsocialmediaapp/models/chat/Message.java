@@ -58,6 +58,8 @@ public class Message {
     }
 
     public String getTime() {
+        if (date == null)
+            return "";
         LocalDateTime localDateTime = date.toLocalDateTime();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         return localDateTime.format(formatter);

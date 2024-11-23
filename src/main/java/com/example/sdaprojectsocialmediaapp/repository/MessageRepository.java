@@ -15,7 +15,7 @@ public class MessageRepository {
     }
 
     public ArrayList<Message> getChat(int loggedInID, int otherID){
-        String sql = "SELECT * FROM Message WHERE (student_id_from = ? AND student_id_to = ?) or (student_id_from = ? AND student_id_to = ?)";
+        String sql = "SELECT * FROM Message WHERE (student_id_from = ? AND student_id_to = ?) or (student_id_from = ? AND student_id_to = ?) order by time_stamp";
         ArrayList<Message> messages = new ArrayList<>();
 
         try (Connection conn = dbConnector.getConnection();) {
@@ -42,11 +42,7 @@ public class MessageRepository {
             e.printStackTrace();
         }
 
-        if(!messages.isEmpty()){
-            return messages;
-        }
-
-        return null;
+        return messages;
     }
 
     public void saveChat(int fromID, int toID, String text){

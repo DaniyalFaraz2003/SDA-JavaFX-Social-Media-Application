@@ -183,7 +183,7 @@
                     </rowConstraints>
                      <children>
                         <TextField id="messageBox" fx:id="messageBox" />
-                        <ImageView fx:id="sendBtn" fitHeight="68.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                        <ImageView fx:id="sendBtn" fitHeight="68.0" fitWidth="36.0" onMouseClicked="#sendMessage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                            <image>
                               <Image url="@../../images/send-message.png" />
                            </image>
