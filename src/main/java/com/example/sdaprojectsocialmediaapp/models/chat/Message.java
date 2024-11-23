@@ -1,7 +1,7 @@
-package com.example.sdaprojectsocialmediaapp.models.engagements;
+package com.example.sdaprojectsocialmediaapp.models.chat;
 
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 public class Message {
     private int id;

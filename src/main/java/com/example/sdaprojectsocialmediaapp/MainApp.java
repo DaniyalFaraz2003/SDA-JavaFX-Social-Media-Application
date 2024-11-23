@@ -1,26 +1,29 @@
 package com.example.sdaprojectsocialmediaapp;
 
-import com.example.sdaprojectsocialmediaapp.models.FriendRequestComp;
-import com.example.sdaprojectsocialmediaapp.models.engagements.Answer;
-import com.example.sdaprojectsocialmediaapp.models.engagements.Comment;
-import com.example.sdaprojectsocialmediaapp.models.engagements.Reply;
-import com.example.sdaprojectsocialmediaapp.models.engagements.StudentActivityReply;
-import com.example.sdaprojectsocialmediaapp.models.posts.ActivityPost;
-import com.example.sdaprojectsocialmediaapp.models.posts.Question;
-import com.example.sdaprojectsocialmediaapp.models.posts.SimplePost;
+import com.example.sdaprojectsocialmediaapp.models.chat.Message;
 import com.example.sdaprojectsocialmediaapp.repository.FriendRequestRepository;
-import com.example.sdaprojectsocialmediaapp.repository.PostRepository;
+import com.example.sdaprojectsocialmediaapp.repository.MessageRepository;
 import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
-import javafx.application.Application;
 
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.ArrayList;
 
 public class MainApp {
     public static void main(String[] args) {
         StudentRepository studentRepository = new StudentRepository();
         FriendRequestRepository friendRequestRepository = new FriendRequestRepository();
-        Application.launch(Router.class, args);
+        //Application.launch(Router.class, args);
+
+        MessageRepository messageRepository = new MessageRepository();
+        //messageRepository.saveChat(1,2, "Hi. How are you?");
+        //messageRepository.saveChat(2,1, "Daniyal is a bad boi");
+        ArrayList<Message> messages = new ArrayList<>();
+        messages = messageRepository.getChat(1, 2);
+
+        for (Message m : messages) {
+            System.out.println(m.getFromID());
+            System.out.println(m.getToID());
+            System.out.println(m.getText());
+            System.out.println(m.getDate());
+        }
     }
 }
