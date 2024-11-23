@@ -2,6 +2,8 @@ package com.example.sdaprojectsocialmediaapp.controllers;
 
 import com.example.sdaprojectsocialmediaapp.Router;
 import com.example.sdaprojectsocialmediaapp.models.Student;
+import com.example.sdaprojectsocialmediaapp.models.notification.Friend;
+import com.example.sdaprojectsocialmediaapp.repository.FriendRequestRepository;
 import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
 import com.example.sdaprojectsocialmediaapp.services.Session;
 import com.example.sdaprojectsocialmediaapp.utils.Validate;
@@ -16,12 +18,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 
 public class  LoginCont {
 
     StudentRepository studentRepository = new StudentRepository();
+    FriendRequestRepository friendRequestRepository = new FriendRequestRepository();
+
     @FXML
     private PasswordField i_password;
 
@@ -51,8 +56,13 @@ public class  LoginCont {
         if(Validate.isValidUsername(username)) {
             if(studentRepository.checkStudentExists(username, password)) {
                 // Further session begins
-                Session.maintainSession(studentRepository.getStudentbyUsername(username));
-                System.out.println(studentRepository.getStudentbyUsername(username));
+                Student student = studentRepository.getStudentbyUsername(username);
+                ArrayList<Integer> friends = friendRequestRepository.getAllFriends(student.getId());
+                for (int i = 0; i < friends.size(); i++) {
+                    Friend friend = new Friend(friends.get(i));
+                    student.addObserver(friend);
+                }
+                Session.maintainSession(student);
                 Router.navigateTo("Homepage");
             }
             else{

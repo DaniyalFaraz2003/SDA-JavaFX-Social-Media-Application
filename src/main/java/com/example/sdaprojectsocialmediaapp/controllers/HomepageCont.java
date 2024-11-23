@@ -69,7 +69,11 @@ public class HomepageCont extends MainController {
 
     @FXML
     void clearNotification(MouseEvent event) {
-
+        ArrayList<Notification> notifications = notificationRepository.getNotifications(Session.getSessionVariable().getId());
+        this.notificationBox.getChildren().clear();
+        for (Notification notification : notifications) {
+            notificationRepository.notificationReceived(notification.getId());
+        }
     }
 
     private void displayPosts() throws IOException {

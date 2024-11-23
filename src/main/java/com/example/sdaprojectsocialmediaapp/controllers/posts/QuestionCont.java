@@ -4,6 +4,7 @@ import com.example.sdaprojectsocialmediaapp.Router;
 import com.example.sdaprojectsocialmediaapp.controllers.MainController;
 import com.example.sdaprojectsocialmediaapp.controllers.engagements.AnswerCont;
 import com.example.sdaprojectsocialmediaapp.models.engagements.Answer;
+import com.example.sdaprojectsocialmediaapp.models.notification.Notification;
 import com.example.sdaprojectsocialmediaapp.models.posts.Question;
 import com.example.sdaprojectsocialmediaapp.repository.PostRepository;
 import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
@@ -116,6 +117,9 @@ public class QuestionCont extends MainController {
         if (Validate.isValidPostTitle(postTitle.getText())) {
             if (Validate.isValidPostDescription(postContent.getText())) {
                 postRepository.createQuestion(Session.getSessionVariable().getId(), postTitle.getText().trim(), postContent.getText().trim(), 0);
+
+                Notification notification = new Notification(0, Session.getSessionVariable().getId(), 0, "Question", null);
+                Session.getSessionVariable().notifyObservers(notification);
                 Router.navigateTo("Question Page");
             } else {
                 errorText.setText("Invalid Post Description");

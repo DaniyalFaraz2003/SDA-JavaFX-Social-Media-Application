@@ -7,6 +7,7 @@ import com.example.sdaprojectsocialmediaapp.controllers.engagements.CommentCont;
 import com.example.sdaprojectsocialmediaapp.controllers.engagements.ReplyCont;
 import com.example.sdaprojectsocialmediaapp.models.engagements.Reply;
 import com.example.sdaprojectsocialmediaapp.models.engagements.StudentActivityReply;
+import com.example.sdaprojectsocialmediaapp.models.notification.Notification;
 import com.example.sdaprojectsocialmediaapp.models.posts.ActivityPost;
 import com.example.sdaprojectsocialmediaapp.models.posts.SimplePost;
 import com.example.sdaprojectsocialmediaapp.repository.PostRepository;
@@ -125,6 +126,8 @@ public class ActivityPostCont extends MainController {
 
                     postRepository.createActivityPost(Session.getSessionVariable().getId(), this.postTitle.getText().trim(), this.postContent.getText().trim(), replies);
 
+                    Notification notification = new Notification(0, Session.getSessionVariable().getId(), 0, "Activity Post", null);
+                    Session.getSessionVariable().notifyObservers(notification);
                     Router.navigateTo("Activity Post Page");
                 } else {
                     this.warning.setText("Enter at least 1 reply");

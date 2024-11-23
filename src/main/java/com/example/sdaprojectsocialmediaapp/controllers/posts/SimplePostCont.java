@@ -4,6 +4,7 @@ import com.example.sdaprojectsocialmediaapp.Router;
 import com.example.sdaprojectsocialmediaapp.controllers.MainController;
 import com.example.sdaprojectsocialmediaapp.controllers.engagements.CommentCont;
 import com.example.sdaprojectsocialmediaapp.models.engagements.Comment;
+import com.example.sdaprojectsocialmediaapp.models.notification.Notification;
 import com.example.sdaprojectsocialmediaapp.models.posts.SimplePost;
 import com.example.sdaprojectsocialmediaapp.repository.PostRepository;
 import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
@@ -183,6 +184,9 @@ public class SimplePostCont extends MainController {
 
                             // Navigate to the Simple Post Page
                             System.out.println("File saved as: " + targetFile.getAbsolutePath());
+
+                            Notification notification = new Notification(0, Session.getSessionVariable().getId(), 0, "Simple Post", null);
+                            Session.getSessionVariable().notifyObservers(notification);
                             Router.navigateTo("Simple Post Page");
                         } else {
                             errorText.setText("Image file not saved properly. Please try again.");

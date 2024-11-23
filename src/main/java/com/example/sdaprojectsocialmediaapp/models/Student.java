@@ -87,7 +87,12 @@ public class Student implements Subject {
 
     @Override
     public void removeObserver(Observer observer) {
-        this.observers.remove(observer);
+        for (int j = 0; j < this.observers.size(); j++) {
+            if (this.observers.get(j).getId() == observer.getId()) {
+                this.observers.remove(j);
+                break;
+            }
+        }
     }
 
     @Override

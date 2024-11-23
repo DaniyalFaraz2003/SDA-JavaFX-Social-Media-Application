@@ -1,6 +1,7 @@
 package com.example.sdaprojectsocialmediaapp.controllers.friends;
 
 import com.example.sdaprojectsocialmediaapp.controllers.ViewProfileCont;
+import com.example.sdaprojectsocialmediaapp.models.notification.Friend;
 import com.example.sdaprojectsocialmediaapp.repository.FriendRequestRepository;
 import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
 import com.example.sdaprojectsocialmediaapp.services.Session;
@@ -72,6 +73,9 @@ public class FriendCompCont {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            Friend friend = new Friend(senderId);
+            Session.getSessionVariable().removeObserver(friend);
         });
     }
 

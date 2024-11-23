@@ -20,6 +20,6 @@ public class Friend implements Observer{
 
     @Override
     public void notify(Notification notification) {
-        repo.sendNotification(notification.getSenderId(), notification.getRecieverId(), notification.getMessage());
+        repo.sendNotification(notification.getSenderId(), this.id, notification.getMessage());
     }
 }

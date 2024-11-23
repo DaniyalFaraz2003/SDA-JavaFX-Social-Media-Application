@@ -5,8 +5,10 @@ import com.example.sdaprojectsocialmediaapp.controllers.ViewProfileCont;
 import com.example.sdaprojectsocialmediaapp.controllers.friends.FriendPageCont;
 import com.example.sdaprojectsocialmediaapp.models.FriendRequestComp;
 import com.example.sdaprojectsocialmediaapp.models.Student;
+import com.example.sdaprojectsocialmediaapp.models.notification.Friend;
 import com.example.sdaprojectsocialmediaapp.repository.FriendRequestRepository;
 import com.example.sdaprojectsocialmediaapp.repository.StudentRepository;
+import com.example.sdaprojectsocialmediaapp.services.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -80,6 +82,8 @@ public class FriendRequestCompCont {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            Friend friend = new Friend(friendRequest.getFromId());
+            Session.getSessionVariable().addObserver(friend);
         });
         rejectBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             friendRequestRepository.removeFriendRequest(friendRequest.getToId(), friendRequest.getFromId());
