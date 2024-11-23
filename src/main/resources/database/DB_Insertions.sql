@@ -103,3 +103,13 @@ INSERT INTO Message (student_id_from, student_id_to, text, time_stamp) VALUES
                                                                            (8, 9, 'Sheharyar, I loved your review of the book! It was insightful.', NOW()),
                                                                            (9, 10, 'Muneeb, how is your puppy doing? I saw some cute pictures!', NOW()),
                                                                            (10, 1, 'Amna, I adopted a new puppy today! He is so cute!', NOW());
+
+
+Insert into Notification (sender_id, reciever_id, post_type, time_stamp) Values
+                                                                             (1, 2, "Simple Post", NOW()),
+                                                                             (3, 4, "Simple Post", NOW()),
+                                                                             (3, 4, "Simple Post", NOW()),
+                                                                             (3, 4, "Acitivity Post", NOW()),
+                                                                             (3, 4, "Acitivity Post", NOW()),
+                                                                             (3, 4, "Question", NOW()),
+                                                                             (3, 4, "Question", NOW());
