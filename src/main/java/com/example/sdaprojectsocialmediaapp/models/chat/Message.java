@@ -2,6 +2,8 @@ package com.example.sdaprojectsocialmediaapp.models.chat;
 
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Message {
     private int id;
@@ -10,8 +12,7 @@ public class Message {
     private String text;
     private Timestamp date;
 
-    public Message(int id, int toID, int fromID, String text, Timestamp date) {
-        this.id = id;
+    public Message(int toID, int fromID, String text, Timestamp date) {
         this.toID = toID;
         this.fromID = fromID;
         this.text = text;
@@ -50,8 +51,18 @@ public class Message {
         this.text = text;
     }
 
-    public Timestamp getDate() {
-        return date;
+    public String getDate() {
+        LocalDateTime localDateTime = date.toLocalDateTime();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return localDateTime.format(formatter);
+    }
+
+    public String getTime() {
+        if (date == null)
+            return "";
+        LocalDateTime localDateTime = date.toLocalDateTime();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        return localDateTime.format(formatter);
     }
 
     public void setDate(Timestamp date) {
