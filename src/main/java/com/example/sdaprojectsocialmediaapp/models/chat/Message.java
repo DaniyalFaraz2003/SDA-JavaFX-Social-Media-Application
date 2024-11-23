@@ -12,8 +12,7 @@ public class Message {
     private String text;
     private Timestamp date;
 
-    public Message(int id, int toID, int fromID, String text, Timestamp date) {
-        this.id = id;
+    public Message(int toID, int fromID, String text, Timestamp date) {
         this.toID = toID;
         this.fromID = fromID;
         this.text = text;

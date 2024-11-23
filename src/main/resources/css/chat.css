@@ -8,7 +8,7 @@
 
 .message {
     -fx-font-size: 16px;
-    -fx-max-width: 600px;
+    -fx-max-width: 825px;
     -fx-wrap-text: true;
     -fx-padding: 0 5px 5px 0;
 }

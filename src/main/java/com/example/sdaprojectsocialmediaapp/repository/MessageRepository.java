@@ -32,7 +32,8 @@ public class MessageRepository {
                 int fromID = rs.getInt("student_id_from");
                 int toID = rs.getInt("student_id_to");
                 int id = rs.getInt("ID");
-                Message message = new Message(id, toID, fromID, text, timestamp);
+                Message message = new Message(toID, fromID, text, timestamp);
+                message.setId(id);
                 messages.add(message);
             }
 

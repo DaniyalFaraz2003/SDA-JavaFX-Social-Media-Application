@@ -168,6 +168,11 @@
                   <RowConstraints maxHeight="315.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
+                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                     <content>
+                        <VBox fx:id="messagesContainer" prefHeight="588.0" prefWidth="848.0" />
+                     </content>
+                  </ScrollPane>
                   <GridPane hgap="20.0" prefWidth="850.0" GridPane.rowIndex="1">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="783.0" minWidth="10.0" prefWidth="783.0" />
@@ -178,7 +183,7 @@
                     </rowConstraints>
                      <children>
                         <TextField id="messageBox" fx:id="messageBox" />
-                        <ImageView fx:id="sendBtn" fitHeight="68.0" fitWidth="36.0" onMouseClicked="#handleMessageSend" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                        <ImageView fx:id="sendBtn" fitHeight="68.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                            <image>
                               <Image url="@../../images/send-message.png" />
                            </image>
@@ -191,7 +196,6 @@
                         <Insets left="5.0" />
                      </GridPane.margin>
                   </GridPane>
-                  <VBox fx:id="messagesContainer" prefHeight="200.0" prefWidth="100.0" />
                </children>
             </GridPane>
          </children>

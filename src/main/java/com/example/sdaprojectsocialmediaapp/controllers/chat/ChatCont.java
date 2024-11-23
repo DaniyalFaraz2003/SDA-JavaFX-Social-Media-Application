@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class ChatCont extends MainController {
@@ -50,11 +51,6 @@ public class ChatCont extends MainController {
     private AnchorPane contact;
 
     @FXML
-    void handleMessageSend(MouseEvent event) {
-
-    }
-
-    @FXML
     public void initializePage() throws IOException {
         ArrayList<Integer> friendIDs = friendRepo.getAllFriends(Session.getSessionVariable().getId());
         Student friend = null;
@@ -66,19 +62,45 @@ public class ChatCont extends MainController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/chat/contact.fxml"));
             AnchorPane pane = loader.load();
             ChatCont controller = loader.getController();
-            controller.initializeContacts(friend, messages);
+            controller.initializeContacts(friend, messages, messagesContainer, sendBtn, messageBox);
             this.contacts.getChildren().add(pane);
         }
     }
 
     @FXML
-    private void initializeContacts(Student friend, ArrayList<Message> messages) {
-        Message message = messages.get(messages.size() - 1);
+    private void initializeContacts(Student friend, ArrayList<Message> messages, VBox messagesContainer, ImageView sendBtn, TextField messageBox) {
         this.contactName.setText(friend.getUserName());
-        this.time.setText(message.getTime());
-        this.metaMessage.setText(message.getText());
+        this.time.setText(messages.get(messages.size() - 1).getTime());
+        this.metaMessage.setText(messages.get(messages.size() - 1).getText());
         this.contact.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            System.out.println("Contact Page for friend " + friend.getUserName() + " should be opened");
+            messagesContainer.getChildren().clear();
+            for (Message message : messages) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/chat/message.fxml"));
+                try {
+                    AnchorPane messagePane = loader.load();
+                    MessageCont messageCont = loader.getController();
+                    messageCont.initializeMessage(message);
+                    messagesContainer.getChildren().add(messagePane);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            sendBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, sendEvent -> {
+                String message = messageBox.getText();
+                messageBox.setText("");
+                Message newMessage = new Message(friend.getId(), Session.getSessionVariable().getId(), message, new Timestamp(System.currentTimeMillis()));
+                FXMLLoader messageLoader = new FXMLLoader(getClass().getResource("/fxml/chat/message.fxml"));
+                AnchorPane messagePane = null;
+                try {
+                    messagePane = messageLoader.load();
+                    MessageCont messageCont = messageLoader.getController();
+                    messageCont.initializeMessage(newMessage);
+                    messagesContainer.getChildren().add(messagePane);
+                    messageRepo.saveChat(newMessage.getFromID(), newMessage.getToID(), message);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
         });
     }
 
