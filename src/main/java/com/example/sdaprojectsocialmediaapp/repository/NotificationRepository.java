@@ -1,11 +1,9 @@
 package com.example.sdaprojectsocialmediaapp.repository;
 
+import com.example.sdaprojectsocialmediaapp.models.notification.Notification;
 import com.example.sdaprojectsocialmediaapp.utils.DatabaseConnector;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.time.Instant;
 import java.util.ArrayList;
 
@@ -33,6 +31,50 @@ public class NotificationRepository {
             System.out.println("error sending notification");
             e.printStackTrace();
         }
+    }
+
+    public void notificationReceived(int notificationID) {
+        String sql = "Delete from Notification where id = ?";
+
+        try (Connection conn = dbConnector.getConnection()){
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, notificationID);
+            pstmt.executeUpdate();
+            System.out.println("Notification received successfully");
+
+        } catch (SQLException e) {
+            System.out.println("error deleting notification");
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<Notification> getNotifications(int receiverID) {
+        ArrayList<Notification> notifications = new ArrayList<>();
+        String sql = "SELECT * FROM Notification where reciever_id = ?";
+
+        try (Connection conn = dbConnector.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, receiverID);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int senderID = rs.getInt("sender_id");
+                String postType = rs.getString("post_type");
+                Timestamp timeStamp = rs.getTimestamp("time_stamp");
+                Notification notification = new Notification(id, senderID, receiverID, postType, timeStamp);
+                notifications.add(notification);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("error getting notifications");
+            e.printStackTrace();
+        }
+
+        if(!notifications.isEmpty()) {
+            return notifications;
+        }
+        return null;
     }
 
 }
