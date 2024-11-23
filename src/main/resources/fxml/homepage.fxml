@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -169,18 +170,15 @@
             <VBox fx:id="container" prefHeight="500.0" prefWidth="731.0" spacing="20.0" />
          </content></ScrollPane>
       <ScrollPane layoutX="1049.0" layoutY="229.0" prefHeight="502.0" prefWidth="200.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <VBox fx:id="notificationBox" prefHeight="489.0" prefWidth="200.0" />
-               </children>
-            </AnchorPane>
-        </content>
+         <content>
+            <VBox fx:id="notificationBox" prefHeight="487.0" prefWidth="197.0" />
+         </content>
       </ScrollPane>
       <Label layoutX="1049.0" layoutY="194.0" prefHeight="24.0" prefWidth="126.0" text="Notifications">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
+      <Button layoutX="1199.0" layoutY="193.0" mnemonicParsing="false" onMouseClicked="#clearNotification" styleClass="postButton" stylesheets="@../css/post.css" text="Clear" />
    </children>
 </AnchorPane>

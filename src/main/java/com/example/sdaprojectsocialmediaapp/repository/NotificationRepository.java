@@ -71,10 +71,7 @@ public class NotificationRepository {
             e.printStackTrace();
         }
 
-        if(!notifications.isEmpty()) {
-            return notifications;
-        }
-        return null;
+        return notifications;
     }
 
 }

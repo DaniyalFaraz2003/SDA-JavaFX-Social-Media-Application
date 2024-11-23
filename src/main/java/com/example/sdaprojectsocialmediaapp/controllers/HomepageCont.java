@@ -1,12 +1,16 @@
 package com.example.sdaprojectsocialmediaapp.controllers;
 
+import com.example.sdaprojectsocialmediaapp.controllers.notification.NotificationCont;
 import com.example.sdaprojectsocialmediaapp.controllers.posts.ActivityPostCont;
 import com.example.sdaprojectsocialmediaapp.controllers.posts.QuestionCont;
 import com.example.sdaprojectsocialmediaapp.controllers.posts.SimplePostCont;
+import com.example.sdaprojectsocialmediaapp.models.notification.Notification;
 import com.example.sdaprojectsocialmediaapp.models.posts.ActivityPost;
 import com.example.sdaprojectsocialmediaapp.models.posts.Question;
 import com.example.sdaprojectsocialmediaapp.models.posts.SimplePost;
+import com.example.sdaprojectsocialmediaapp.repository.NotificationRepository;
 import com.example.sdaprojectsocialmediaapp.repository.PostRepository;
+import com.example.sdaprojectsocialmediaapp.services.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -21,6 +25,7 @@ import java.util.ArrayList;
 
 public class HomepageCont extends MainController {
     private PostRepository postRepo = new PostRepository();
+    private NotificationRepository notificationRepository  = new NotificationRepository();
 
 
     @FXML
@@ -44,7 +49,26 @@ public class HomepageCont extends MainController {
     @FXML
     private ToggleButton questionFilterBtn;
 
-    private void displayNotifications() {
+    private void displayNotifications() throws IOException {
+        notificationBox.getChildren().clear();
+        ArrayList<Notification> notifications = notificationRepository.getNotifications(Session.getSessionVariable().getId());
+        if (notifications.isEmpty()) {
+            Label label = new Label("No notifications found");
+            notificationBox.getChildren().add(label);
+        } else {
+            for (Notification notification : notifications) {
+                FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/notification/notification.fxml"));
+                Pane pane = loader.load();
+                NotificationCont controller = loader.getController();
+                controller.initializeNotification(notification);
+                notificationBox.getChildren().add(pane);
+            }
+        }
+
+    }
+
+    @FXML
+    void clearNotification(MouseEvent event) {
 
     }
 
@@ -133,6 +157,7 @@ public class HomepageCont extends MainController {
     @FXML
     public void initialize(Stage stage) throws IOException {
         displayPosts();
+        displayNotifications();
         this.stage = stage;
     }
 }
