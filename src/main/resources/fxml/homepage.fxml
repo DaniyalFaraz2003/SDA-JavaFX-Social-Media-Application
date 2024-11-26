@@ -154,7 +154,7 @@
                   <Image url="@../images/logo.png" />
                </image>
             </ImageView>
-            <Label id="username" stylesheets="@../css/homepage.css" text="Unsatisfying Prince" GridPane.columnIndex="1" />
+            <Label id="username" stylesheets="@../css/homepage.css" text="Made By Intellox" GridPane.columnIndex="1" />
          </children>
       </GridPane>
       <HBox layoutX="280.0" layoutY="163.0" prefHeight="31.0" prefWidth="358.0" spacing="10.0">

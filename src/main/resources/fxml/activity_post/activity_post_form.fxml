@@ -143,7 +143,7 @@
                   <Image url="@../../images/logo.png" />
                </image>
             </ImageView>
-            <Label id="username" stylesheets="@../../css/homepage.css" text="Unsatisfying Prince" GridPane.columnIndex="1" />
+            <Label id="username" stylesheets="@../../css/homepage.css" text="Made By Intellox" GridPane.columnIndex="1" />
          </children>
       </GridPane>
       <Button fx:id="submit" layoutX="548.0" layoutY="638.0" mnemonicParsing="false" onMouseClicked="#submit" stylesheets="@../../css/postpage.css" text="Submit" />

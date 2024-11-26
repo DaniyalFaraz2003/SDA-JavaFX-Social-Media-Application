@@ -141,7 +141,7 @@
                         <Image url="@../../images/logo.png" />
                     </image>
                 </ImageView>
-                <Label id="username" stylesheets="@../../css/homepage.css" text="Unsatisfying Prince" GridPane.columnIndex="1" />
+                <Label id="username" stylesheets="@../../css/homepage.css" text="Made By Intellox" GridPane.columnIndex="1" />
             </children>
         </GridPane>
         <Button layoutX="682.0" layoutY="415.0" mnemonicParsing="false" onMouseClicked="#updateProfile" stylesheets="@../../css/profile.css" text="Update Profile" />

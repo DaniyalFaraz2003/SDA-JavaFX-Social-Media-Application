@@ -142,7 +142,7 @@
                   <Image url="@../../images/logo.png" />
                </image>
             </ImageView>
-            <Label id="username" stylesheets="@../../css/homepage.css" text="Unsatisfying Prince" GridPane.columnIndex="1" />
+            <Label id="username" stylesheets="@../../css/homepage.css" text="Made By Intellox" GridPane.columnIndex="1" />
          </children>
       </GridPane>
       <GridPane layoutX="259.0" layoutY="100.0" prefHeight="641.0" prefWidth="1032.0" stylesheets="@../../css/chat.css">
