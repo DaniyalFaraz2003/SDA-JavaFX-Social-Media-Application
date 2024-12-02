@@ -812,7 +812,7 @@ public class PostRepository {
         int commentID = -1;
 
         try (Connection conn = dbConnector.getConnection()) {
-            PreparedStatement pstmt = conn.prepareStatement(sql);
+            PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setInt(1, postID);
             pstmt.setInt(2, studentID);
             pstmt.setString(3, text);
